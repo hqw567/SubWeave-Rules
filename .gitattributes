@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.ini text eol=lf
+*.py text eol=lf
+# Keep upstream snapshots byte-for-byte; derived INI keeps upstream formatting.
+vendor/** -text -whitespace
+dist/subconverter/*.ini -whitespace

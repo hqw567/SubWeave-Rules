@@ -1,0 +1,26 @@
+{
+  "repository": "Aethersailor/Custom_OpenClash_Rules",
+  "commit": "95e3724bdee8a7904e6361bcedb643599593f202",
+  "files": {
+    "Custom_Clash.ini": "1bb4f64365a4a0f311cfe645053ed1f0a045f31a0ee71df67079b3c968a8a970",
+    "Custom_Clash.yaml": "b0a72dccc8adf00b5f6e4180a2090d7a14f968e4ce2767f9e3f3687f8b47572d",
+    "Custom_Clash_Fallback.ini": "b2c757347792c46cffd19efd684600d406bcee92cd1b84106db0be1bb3c91aef",
+    "Custom_Clash_Fallback.yaml": "d2004e902d4528c4f8b7a012f13eda6a3399ee305a89429d8768140496b935db",
+    "Custom_Clash_Full.ini": "aeea0542a03d31c5105df6954f0f4fd7031b9e7fc72269fbff604746d6b1ef89",
+    "Custom_Clash_Full.yaml": "88c3ba3b6773f8f57f5577ea4bddc9d880596d2b6452718f1b598334539a87b9",
+    "Custom_Clash_Full_Fallback.ini": "7f725715f2726dc9191b73d72e848da62d13f3e124bd063d1ce4c67a7388ff20",
+    "Custom_Clash_Full_Fallback.yaml": "df554db00e6b546907486ac5e876abec4916dde1aad1eeb01736f0f4f49dc249",
+    "Custom_Clash_GFW.ini": "e6327808584da1285ef2ea89280dd75c973070ca4c05767973e2de7b69fde1aa",
+    "Custom_Clash_GFW.yaml": "c75100b52f1ef0292cd53b53cb8c96f12d341c9b545f313f25befe01d71495cf",
+    "Custom_Clash_GFW_Fallback.ini": "fe96bcd1e468ca4a0766d9b80aa4474cdedc8ecc954d731fa052b5fe714b2244",
+    "Custom_Clash_GFW_Fallback.yaml": "df8c188f588bd6193b8ace9fb2f0b548ebdfb849bfc509f21663982328c91155",
+    "Custom_Clash_Lite.ini": "23753309f3a5f473884269ab9f6c64b0b3011cd5f7da267516088fe7c827ed28",
+    "Custom_Clash_Lite.yaml": "46881444f42594a0f62213dd3211881b0218cc81f611fa48c98bebdad7189c36",
+    "Custom_Clash_Lite_Fallback.ini": "6ffce47f708e0107bf61789df4c71221ef9976886584cdc3b9095da7fb401b44",
+    "Custom_Clash_Lite_Fallback.yaml": "76800b86ee93059c39ac40ec36d4bd676e8071be4d01840adb749516d3ca920c",
+    "Custom_Clash_Mainland.ini": "1bb4f64365a4a0f311cfe645053ed1f0a045f31a0ee71df67079b3c968a8a970",
+    "Custom_Clash_Selfhosted_Manual_Fallback.yaml": "83daee15d934b252626b98cc06e85d845152af5f8cf157b768f10a9b8994f0ee",
+    "Custom_Clash_Selfhosted_Provider_Fallback.yaml": "b3335948bbed46bb7274c2c61d485a4e171a145d3d60f2c5491d2177da04b08a",
+    "LICENSE": "da89f9867822be4b8adb1e601d9e9226c195016c6508015eb7593e68ead0c98a"
+  }
+}

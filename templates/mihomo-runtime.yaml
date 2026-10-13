@@ -1,0 +1,68 @@
+# 独立 Mihomo 的运行设置，由生成器与所选上游策略组、规则合并。
+# OpenClash 构建不使用本文件；对应设置由 LuCI 管理。
+# 本文件只放运行参数，不放订阅凭据、策略组或分流规则。
+# 默认通过应用程序/客户端使用 127.0.0.1:7890，不自动设置系统代理。
+mixed-port: 7890
+allow-lan: false
+bind-address: "127.0.0.1"
+mode: rule
+log-level: info
+ipv6: true
+tcp-concurrent: true
+unified-delay: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 保留完整数据库以供上游业务分类引用；不要改用精简 GeoSite 文件。
+# 链接沿用上游完整参考模板。首次下载需网络可达。
+geodata-mode: true
+geodata-loader: memconservative
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
+
+# 默认不接管整个系统；实际启用 TUN 前，按客户端、操作系统配置路由与 DNS。
+tun:
+  enable: false
+
+# 控制器由图形客户端管理；直接运行内核时需要面板，可另配本机控制器。
+# 此处不启用外部控制器，也不绑定局域网监听。
+
+# DNS 仅影响经过 Mihomo 的解析；不自动接管浏览器 DoH 或系统 DNS。
+# 这里是本项目的独立 Mihomo 适配，不是上游 OpenClash 的 LuCI 设置。
+# URL 中的 #DIRECT / #策略组 显式指定 DNS 连接出口。
+# #@proxy 由生成器按版本替换为“🚀 手动选择”或“🚀 故障转移”。
+dns:
+  enable: true
+  listen: "127.0.0.1:1053"
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "localhost"
+    - "localhost.ptlogin2.qq.com"
+  respect-rules: false
+  # 使用 IP 形式的加密 DNS 启动；节点域名解析不依赖尚未建立的代理。
+  default-nameserver:
+    - "https://223.5.5.5/dns-query#DIRECT"
+    - "https://223.6.6.6/dns-query#DIRECT"
+  proxy-server-nameserver:
+    - "https://223.5.5.5/dns-query#DIRECT"
+    - "https://223.6.6.6/dns-query#DIRECT"
+  direct-nameserver:
+    - "https://223.5.5.5/dns-query#DIRECT"
+    - "https://223.6.6.6/dns-query#DIRECT"
+  nameserver-policy:
+    "geosite:cn":
+      - "https://223.5.5.5/dns-query#DIRECT"
+      - "https://223.6.6.6/dns-query#DIRECT"
+  nameserver:
+    - "https://1.1.1.1/dns-query#@proxy"
+    - "https://8.8.8.8/dns-query#@proxy"

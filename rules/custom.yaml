@@ -1,0 +1,22 @@
+# 这是个人规则的唯一入口；sync 不会覆盖此文件。
+# @proxy 自动适配普通版的“🚀 手动选择”和 Fallback 版的“🚀 故障转移”。
+# @direct = DIRECT；@reject = REJECT。请把示例域名换成自己的域名再启用。
+
+# 明确的误杀白名单/强制例外：优先于秋风。
+before_ads: []
+# before_ads:
+#   - DOMAIN,allow.example.com,@direct
+
+# 一般个人分流：先拦广告，再应用个人规则，最后进入 Aethersailor。
+after_ads: []
+# after_ads:
+#   - DOMAIN-SUFFIX,proxy.example.com,@proxy
+#   - DOMAIN,block.example.com,@reject
+#   - IP-CIDR,192.0.2.10/32,@direct,no-resolve
+
+# 可选：仅给某个模板追加规则，避免在 Lite 引用标准版独有的策略组。
+variants: {}
+# variants:
+#   standard:
+#     after_ads:
+#       - DOMAIN,ai.example.com,🤖 ChatGPT

@@ -1,0 +1,7 @@
+# 公共设置：不要在这里填写节点订阅、Token 或密码。
+ads:
+  enabled: true
+  name: awavenue-ads-only
+  group: 🛡️ 广告过滤
+  url: https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical-Only.Ads.yaml
+  interval: 86400
