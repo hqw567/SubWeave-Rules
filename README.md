@@ -37,7 +37,13 @@ python scripts/rules.py check
 
 Windows PowerShell 激活命令为 `.venv\Scripts\Activate.ps1`。公共 API 限流时，通过 `git ls-remote` 读取提交，因此本机需安装 Git。下载错误会重试；下载或生成失败时保留已有结果。
 
-仓库为私有，需要有权限的 GitHub 账号克隆。仓库中的 Raw 链接不能当作匿名公开订阅地址；在本机渲染后，将对应 YAML 导入客户端即可。
+仓库公开，模板可匿名获取。标准版订阅转换模板地址为：
+
+```text
+https://raw.githubusercontent.com/hqw567/personal-clash-rules/refs/heads/main/dist/subconverter/standard.ini
+```
+
+将该地址填入订阅转换服务的 `config` 参数即可使用最新生成的标准版模板。仓库仅保存规则与订阅占位符，真实订阅仍保留在本地 `.local/`；也可在本机渲染后，将对应 YAML 导入客户端。
 
 只处理日常使用的版本，也可选择格式与平台：
 
