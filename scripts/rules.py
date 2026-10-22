@@ -168,7 +168,9 @@ def build_config(upstream: dict, personal: dict, settings: dict, runtime: dict |
             raise ValueError('Advertising group collides with an upstream/built-in group')
         if ads['name'] in base.get('rule-providers', {}):
             raise ValueError('Advertising provider collides with an upstream provider')
-        base['proxy-groups'].insert(0, {'name': ads['group'], 'type': 'select', 'proxies': ['REJECT', 'PASS']})
+        # Stash has no PASS built-in. Use the existing primary policy as the
+        # explicit non-blocking choice and keep the utility group last in the UI.
+        base['proxy-groups'].append({'name': ads['group'], 'type': 'select', 'proxies': ['REJECT', primary]})
         base.setdefault('rule-providers', {})[ads['name']] = {
             'type': 'http', 'behavior': 'classical', 'format': 'yaml', 'url': ads['url'],
             'path': './rule_provider/' + ads['name'] + '.yaml', 'interval': ads['interval'],

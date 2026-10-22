@@ -95,8 +95,10 @@ class CompositionTests(unittest.TestCase):
         self.assertEqual(rules[-len(snapshot["rules"]):], snapshot["rules"])
         self.assertEqual(upstream, snapshot, "Generating one variant must not mutate its input")
 
-        for group in snapshot["proxy-groups"]:
-            self.assertIn(group, result["proxy-groups"])
+        self.assertEqual(result["proxy-groups"][:-1], snapshot["proxy-groups"])
+        self.assertEqual(result["proxy-groups"][-1], {
+            "name": "🛡️ 广告过滤", "type": "select", "proxies": ["REJECT", "🚀 手动选择"],
+        })
         self.assertEqual(result["rule-providers"]["upstream-cdn"], snapshot["rule-providers"]["upstream-cdn"])
         expected_metadata = {key: value for key, value in snapshot["proxy-providers"]["provider1"].items() if key not in {"url", "header"}}
         actual_metadata = {key: value for key, value in result["proxy-providers"]["provider1"].items() if key not in {"url", "header"}}
@@ -144,6 +146,10 @@ class CompositionTests(unittest.TestCase):
                 )
                 self.assertIn(f"DOMAIN,proxy.example,{policy}", result["rules"])
                 self.assertEqual(result["dns"]["nameserver-policy"]["example.com"], [f"https://dns.example/dns-query#{policy}"])
+                self.assertEqual(result["proxy-groups"][:-1], upstream["proxy-groups"])
+                self.assertEqual(result["proxy-groups"][-1], {
+                    "name": "🛡️ 广告过滤", "type": "select", "proxies": ["REJECT", policy],
+                })
 
 
 class InputSafetyTests(unittest.TestCase):
@@ -304,8 +310,11 @@ class ProjectOutputTests(unittest.TestCase):
                 original = sources[slug]
                 counts[slug] += 1
                 self.assertEqual(config["rules"][-len(original["rules"]):], original["rules"])
-                for group in original["proxy-groups"]:
-                    self.assertIn(group, config["proxy-groups"])
+                self.assertEqual(config["proxy-groups"][:-1], original["proxy-groups"])
+                primary = "🚀 故障转移" if slug.endswith("fallback") else "🚀 手动选择"
+                self.assertEqual(config["proxy-groups"][-1], {
+                    "name": "🛡️ 广告过滤", "type": "select", "proxies": ["REJECT", primary],
+                })
                 for name, provider in original.get("rule-providers", {}).items():
                     self.assertEqual(config["rule-providers"][name], provider)
         self.assertEqual(set(counts.values()), {2})

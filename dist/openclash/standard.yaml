@@ -17,11 +17,6 @@ proxy-providers:
     override:
       udp: true
 proxy-groups:
-- name: 🛡️ 广告过滤
-  type: select
-  proxies:
-  - REJECT
-  - PASS
 - name: 🚀 手动选择
   type: select
   url: https://www.gstatic.com/generate_204
@@ -484,6 +479,11 @@ proxy-groups:
   interval: 300
   proxies:
   - DIRECT
+- name: 🛡️ 广告过滤
+  type: select
+  proxies:
+  - REJECT
+  - 🚀 手动选择
 rules:
 - DOMAIN,qlxft.ourduda.com,DIRECT
 - DOMAIN-SUFFIX,neolive.kr,DIRECT

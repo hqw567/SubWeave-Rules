@@ -17,11 +17,6 @@ proxy-providers:
     override:
       udp: true
 proxy-groups:
-- name: 🛡️ 广告过滤
-  type: select
-  proxies:
-  - REJECT
-  - PASS
 - name: 🚀 故障转移
   type: fallback
   proxies:
@@ -271,6 +266,11 @@ proxy-groups:
   interval: 300
   proxies:
   - DIRECT
+- name: 🛡️ 广告过滤
+  type: select
+  proxies:
+  - REJECT
+  - 🚀 故障转移
 rule-providers:
   Nonstandard_Port_Direct:
     behavior: classical

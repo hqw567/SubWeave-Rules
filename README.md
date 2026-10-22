@@ -87,7 +87,7 @@ variants: {}
 
 每个阶段的合并顺序为：通用 → 格式专用 → 版本通用 → 版本格式专用。完整示例见 [使用说明](docs/usage.md)。私有渲染只处理 YAML，不调用 INI 转换器。
 
-秋风纯广告开关、URL 与更新周期在 `config/settings.yaml`；广告策略组可选 `REJECT` 或 `PASS`。`PASS` 继续后续原有分流，不强制直连。
+秋风纯广告开关、URL 与更新周期在 `config/settings.yaml`。广告策略组位于列表末尾，可选 `REJECT` 或当前版本的主代理组：普通版为 `🚀 手动选择`，Fallback 版为 `🚀 故障转移`。选择主代理组后，命中广告规则的流量交给该组处理；需要恢复后续原有分流时，将 `ads.enabled` 改为 `false` 并重建。
 
 ## 生成自己的可用配置
 

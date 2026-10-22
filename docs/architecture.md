@@ -31,7 +31,9 @@
 
 `@proxy` 映射为当前主代理组：普通版是 `🚀 手动选择`，Fallback 与自建版是 `🚀 故障转移`。`@direct`、`@reject` 分别为 `DIRECT`、`REJECT`。DNS 地址中的 `#@proxy` 也按版本替换。
 
-广告组的 `REJECT` 拦截请求，`PASS` 跳过当前广告规则继续后续分流。误杀放行放在 `before_ads`，普通路由放在 `after_ads` 可继续接受广告过滤。其他位置叠加的拦截不受这个开关控制。
+广告组追加到策略组列表末尾，候选项为 `REJECT` 和当前版本的主代理组。前者拦截命中请求；选择主代理组时，请求直接按该组出站，不再进入后续规则。将 `ads.enabled` 设为 `false` 后重建，才会移除本项目的广告注入并恢复后续原有分流。
+
+广告组显示位置不改变广告规则的匹配优先级。误杀放行仍放在 `before_ads`，普通路由放在 `after_ads`；其他位置叠加的拦截不受这个广告组控制。此次取消广告组的 `PASS` 依赖用于处理 Stash 已遇到的兼容问题，不代表新增了经过真机验证的 Stash 平台支持。
 
 ## 运行环境
 
@@ -73,6 +75,5 @@ OpenClash 保留上游最小 YAML 方式，由 LuCI 提供 DNS、端口、TUN、
 
 - [Aethersailor YAML 使用说明](https://github.com/Aethersailor/Custom_OpenClash_Rules/tree/main/cfg/yaml)
 - [Mihomo DNS 配置](https://wiki.metacubex.one/config/dns/)
-- [Mihomo PASS 策略](https://wiki.metacubex.one/config/proxies/built-in/)
 - [秋风纯广告规则](https://github.com/TG-Twilight/AWAvenue-Ads-Rule/blob/main/Filters/AWAvenue-Ads-Rule-Clash-Classical-Only.Ads.yaml)
 - [GitHub 定时工作流](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)

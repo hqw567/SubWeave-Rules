@@ -107,7 +107,11 @@ ads:
   group: "🛡️ 广告过滤"
 ```
 
-`enabled: false` 在重建后移除本项目的广告注入。运行时选广告组的 `REJECT` 表示拦截，`PASS` 表示跳过当前广告规则继续后续分流。不要用 `DIRECT` 代替关闭开关，也不要叠加同一套拦截规则。
+广告策略组放在策略组列表末尾，默认选择 `REJECT` 拦截。另一个选项是当前版本的主代理组：普通版为 `🚀 手动选择`，Fallback 及自建版为 `🚀 故障转移`。选择它后，命中广告规则的流量直接交给该组，不再继续匹配后面的个人规则或上游分流。
+
+需要移除广告匹配、完整恢复原有分流时，将 `enabled` 改为 `false`，重新构建并加载配置。不要另外叠加同一套广告拦截规则。广告组的显示位置调整不改变规则顺序：广告规则仍位于 `before_ads` 与 `after_ads` 之间。
+
+广告组选项已移除 `PASS`，处理本次在 Stash 中遇到的该策略兼容问题。本项目没有新增 Stash 专用平台输出，完整配置的 Stash 真机运行尚未验证。若继续使用原来的标准版 INI 地址，更新模板并重新转换订阅即可，无需因为此次调整切换模板地址。
 
 秋风使用包含关键词规则的 Classical 格式，每天更新；只启用纯广告分类，没有另外叠加隐私或“不受欢迎”分类。
 
@@ -244,4 +248,4 @@ python scripts/check_mihomo.py --download --config-dir dist
 
 导入模板不能单独证明全系统流量被接管、广告全部拦截或没有 DNS 绕过。结构说明见 [architecture.md](architecture.md)。
 
-参考：[GitHub 定时工作流](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)、[Mihomo DNS](https://wiki.metacubex.one/config/dns/)、[Mihomo PASS](https://wiki.metacubex.one/config/proxies/built-in/)。
+参考：[GitHub 定时工作流](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)、[Mihomo DNS](https://wiki.metacubex.one/config/dns/)。

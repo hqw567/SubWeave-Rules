@@ -110,7 +110,9 @@ def build_ini(source_text: str, personal: dict, settings: dict, proxy_group: str
             raise ValueError("The advertising interval must be a positive integer.")
         policies.add(name)
         ad_rule = [f"ruleset={name},clash-classic:{url},{interval}"]
-        ad_group = f"custom_proxy_group={name}`select`[]REJECT`[]PASS"
+        if proxy_group not in policies:
+            raise ValueError("The advertising alternative must reference an existing upstream policy.")
+        ad_group = f"custom_proxy_group={name}`select`[]REJECT`[]{proxy_group}"
 
     rule_parts: dict[str, list[str]] = {}
     for key in ("before_ads", "after_ads"):
@@ -126,15 +128,18 @@ def build_ini(source_text: str, personal: dict, settings: dict, proxy_group: str
     newline = newline_match[0] if newline_match else "\n"
     additions: list[tuple[int, str]] = []
     if ad_group is not None:
-        additions.append((offsets[group_indices[0]], ad_group + newline))
+        last_group = group_indices[-1]
+        line = lines[last_group]
+        separator = "" if line.endswith(("\r", "\n")) else newline
+        additions.append((offsets[last_group] + len(line), separator + ad_group + newline))
     if added_rules:
         header = lines[custom_index]
         header_end = offsets[custom_index] + len(header)
         separator = "" if header.endswith(("\r", "\n")) else newline
         additions.append((header_end, separator + newline.join(added_rules) + newline))
     result = source_text
-    # At equal offsets, group insertion happens first so prepended rules remain
-    # immediately after [custom], ahead of the new and existing groups.
+    # Insert from the end so source offsets remain valid. Display order of groups
+    # is independent from the matching order of the prepended rules.
     for offset, addition in sorted(additions, key=lambda item: item[0], reverse=True):
         result = result[:offset] + addition + result[offset:]
     return result
