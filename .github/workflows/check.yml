@@ -15,7 +15,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -38,6 +38,9 @@ jobs:
       # 允许只提交个人规则等源文件；默认分支的更新流程负责提交新产物。
       - name: Build templates from the committed upstream snapshot
         run: python scripts/rules.py build
+
+      - name: Validate public YAML with the pinned Mihomo core
+        run: python scripts/check_mihomo.py --download --config-dir dist
 
       - name: Check generated templates without fetching upstream
         run: python scripts/rules.py check

@@ -485,6 +485,12 @@ proxy-groups:
   proxies:
   - DIRECT
 rules:
+- DOMAIN,qlxft.ourduda.com,DIRECT
+- DOMAIN-SUFFIX,neolive.kr,DIRECT
+- DOMAIN-SUFFIX,pandalive.co.kr,DIRECT
+- DOMAIN,time.windows.com,DIRECT
+- DOMAIN,codexapp.agentsmirror.com,DIRECT
+- DOMAIN,www.wellcee.com,DIRECT
 - RULE-SET,awavenue-ads-only,🛡️ 广告过滤
 - GEOSITE,private,🎯 全球直连
 - GEOIP,private,🎯 全球直连,no-resolve

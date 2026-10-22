@@ -135,6 +135,8 @@ def _ads(settings: dict) -> dict:
         raise ValueError('settings.ads.enabled must be true or false')
     if set(ads) - {'enabled', 'name', 'group', 'url', 'interval'}:
         raise ValueError('Unknown advertising setting; use the documented ads fields')
+    if not ads['enabled']:
+        return ads
     validate_public_url(ads.get('url'))
     if not isinstance(ads.get('interval'), int) or ads['interval'] <= 0:
         raise ValueError('settings.ads.interval must be a positive integer')
@@ -208,20 +210,31 @@ def validate_config(config: dict) -> None:
         raise ValueError('Provider cache paths must be distinct')
 
 
-def _personal_for(personal: dict, slug: str) -> dict:
-    unknown = set(personal) - {'before_ads', 'after_ads', 'variants'}
+def _personal_for(personal: dict, slug: str, format_name: str = 'yaml') -> dict:
+    unknown = set(personal) - {'before_ads', 'after_ads', 'variants', 'formats'}
     variants = personal.get('variants', {})
     if unknown or not isinstance(variants, dict) or set(variants) - set(VARIANTS):
         raise ValueError('Unknown personal rule section or template variant')
     extra = variants.get(slug, {})
-    if not isinstance(extra, dict) or set(extra) - {'before_ads', 'after_ads'}:
+    if not isinstance(extra, dict) or set(extra) - {'before_ads', 'after_ads', 'formats'}:
         raise ValueError('Invalid variant-specific personal rule section')
+    def format_layer(block):
+        formats = block.get('formats', {})
+        if not isinstance(formats, dict) or set(formats) - {'yaml', 'ini'}:
+            raise ValueError('Personal formats must contain only yaml and ini sections')
+        selected = formats.get(format_name, {})
+        if not isinstance(selected, dict) or set(selected) - {'before_ads', 'after_ads'}:
+            raise ValueError('Invalid format-specific personal rule section')
+        return selected
+    layers = [personal, format_layer(personal), extra, format_layer(extra)]
     merged = {}
     for key in ['before_ads', 'after_ads']:
-        left, right = personal.get(key, []), extra.get(key, [])
-        if not isinstance(left, list) or not isinstance(right, list):
-            raise ValueError('Personal rule sections must be lists')
-        merged[key] = left + right
+        merged[key] = []
+        for layer in layers:
+            rules = layer.get(key, [])
+            if not isinstance(rules, list):
+                raise ValueError('Personal rule sections must be lists')
+            merged[key].extend(rules)
     return merged
 
 
@@ -233,39 +246,88 @@ def _header(commit: str, private=False) -> str:
                else '# PUBLIC TEMPLATE: fill provider URLs locally, or use the render command.\n'))
 
 
-def prepare_outputs(root: Path, vendor_dir: Path | None = None, subscription_url=None) -> dict[str, str]:
+def _selection(formats='all', platform='all', variants=None):
+    if formats not in {'all', 'yaml', 'ini'} or platform not in {'all', 'openclash', 'mihomo'}:
+        raise ValueError('Unknown output format or platform')
+    if platform != 'all' and formats != 'yaml':
+        raise ValueError('--platform requires --format yaml')
+    selected = set(variants) if variants is not None else set(VARIANTS) | {'mainland'}
+    if not selected or selected - (set(VARIANTS) | {'mainland'}):
+        raise ValueError('Unknown or empty variant selection')
+    if variants is not None and formats == 'yaml' and 'mainland' in selected:
+        raise ValueError('Mainland is an INI alias; select standard for YAML')
+    if variants is not None and formats == 'ini' and selected - set(INI_VARIANTS):
+        raise ValueError('Selected selfhosted variants do not have upstream INI templates')
+    yaml_variants = {k: v for k, v in VARIANTS.items() if k in selected and formats != 'ini'}
+    ini_variants = {k: v for k, v in INI_VARIANTS.items() if k in selected and formats != 'yaml'}
+    platforms = ['openclash', 'mihomo'] if platform == 'all' else [platform]
+    return yaml_variants, ini_variants, platforms
+
+
+def prepare_outputs(root: Path, vendor_dir: Path | None = None, subscription_url=None,
+                    *, formats='all', platform='all', variants=None) -> dict[str, str]:
     if subscription_url is not None:
         raise ValueError('Use render_private for credentials; public builds only contain placeholders')
     vendor = vendor_dir or root / 'vendor/aethersailor'
     meta = json.loads((vendor / 'upstream.json').read_text())
     settings = load_yaml(root / 'config/settings.yaml')
+    _ads(settings)
     personal = load_yaml(root / 'rules/custom.yaml')
-    runtime = load_yaml(root / 'templates/mihomo-runtime.yaml')
+    yaml_variants, ini_variants, platforms = _selection(formats, platform, variants)
+    runtime = load_yaml(root / 'templates/mihomo-runtime.yaml') if yaml_variants and 'mihomo' in platforms else None
     outputs = {}
-    from ini_support import build_ini
-    for slug, stem in VARIANTS.items():
+    for slug, stem in yaml_variants.items():
         upstream = load_yaml(vendor / (stem + '.yaml'))
-        rules = _personal_for(personal, slug)
-        for platform in ['openclash', 'mihomo']:
-            config = build_config(upstream, rules, settings, runtime if platform == 'mihomo' else None)
-            outputs[f'{platform}/{slug}.yaml'] = _header(meta['commit']) + yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=160)
-    for slug, stem in INI_VARIANTS.items():
+        rules = _personal_for(personal, slug, 'yaml')
+        for client in platforms:
+            config = build_config(upstream, rules, settings, runtime if client == 'mihomo' else None)
+            outputs[f'{client}/{slug}.yaml'] = _header(meta['commit']) + yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=160)
+    if ini_variants:
+        from ini_support import build_ini
+    for slug, stem in ini_variants.items():
         source_slug = 'standard' if slug == 'mainland' else slug
         base = load_yaml(vendor / (VARIANTS[source_slug] + '.yaml'))
         with (vendor / (stem + '.ini')).open(encoding='utf-8', newline='') as handle:
-            ini = build_ini(handle.read(), _personal_for(personal, source_slug), settings, _primary(base))
+            ini = build_ini(handle.read(), _personal_for(personal, source_slug, 'ini'), settings, _primary(base))
         outputs[f'subconverter/{slug}.ini'] = _header(meta['commit']).replace('# ', '; ') + ini
     return outputs
 
 
-def _write_outputs(directory: Path, outputs: dict[str, str], commit: str) -> None:
+def _write_outputs(directory: Path, outputs: dict, commit: str, file_commits=None) -> None:
     directory.mkdir(parents=True, exist_ok=True)
+    hashes = {}
     for filename, content in outputs.items():
         target = directory / filename
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(content, encoding='utf-8', newline='\n')
-    manifest = {'upstream_commit': commit, 'files': {k: hashlib.sha256(v.encode()).hexdigest() for k, v in sorted(outputs.items())}}
+        data = content if isinstance(content, bytes) else content.encode('utf-8')
+        target.write_bytes(data)
+        hashes[filename] = hashlib.sha256(data).hexdigest()
+    provenance = {k: (file_commits or {}).get(k, commit) for k in sorted(outputs)}
+    revisions = set(provenance.values())
+    manifest = {'upstream_commit': next(iter(revisions)) if len(revisions) == 1 else None,
+                'files': dict(sorted(hashes.items())), 'file_upstream_commits': provenance}
     (directory / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
+
+
+def _merge_existing(directory: Path, updates: dict[str, str], commit: str):
+    """Keep untouched bytes and their original revision; never follow existing links."""
+    merged, provenance = {}, {}
+    if directory.is_symlink() or (directory.exists() and not directory.is_dir()):
+        raise ValueError('Generated output target must be a regular directory')
+    if directory.exists():
+        paths = list(directory.rglob('*'))
+        if any(path.is_symlink() for path in paths):
+            raise ValueError('Existing generated output must not contain symlinks')
+        meta_path = directory / 'manifest.json'
+        meta = json.loads(meta_path.read_text(encoding='utf-8')) if meta_path.exists() else {}
+        for path in paths:
+            if path.is_file() and path != meta_path:
+                name = path.relative_to(directory).as_posix()
+                merged[name] = path.read_bytes()
+                provenance[name] = meta.get('file_upstream_commits', {}).get(name, meta.get('upstream_commit'))
+    merged.update(updates)
+    provenance.update({name: commit for name in updates})
+    return merged, provenance
 
 
 def _replace_trees(pairs) -> None:
@@ -292,29 +354,46 @@ def _replace_trees(pairs) -> None:
         shutil.rmtree(backup)
 
 
-def build(root: Path) -> None:
-    outputs = prepare_outputs(root)
+def build(root: Path, *, formats='all', platform='all', variants=None) -> None:
+    outputs = prepare_outputs(root, formats=formats, platform=platform, variants=variants)
     commit = json.loads((root / 'vendor/aethersailor/upstream.json').read_text())['commit']
+    partial = formats != 'all' or platform != 'all' or variants is not None
+    merged, provenance = _merge_existing(root / 'dist', outputs, commit) if partial else (outputs, None)
     with tempfile.TemporaryDirectory(prefix='.sync-', dir=root) as tmp:
         staged = Path(tmp) / 'generated'
-        _write_outputs(staged, outputs, commit)
+        _write_outputs(staged, merged, commit, provenance)
         _replace_trees([(staged, root / 'dist')])
     print(f'Built {len(outputs)} public templates (no subscription credentials).')
 
 
-def check(root: Path) -> None:
+def check(root: Path, *, formats='all', platform='all', variants=None) -> None:
     vendor = root / 'vendor/aethersailor'
     meta = json.loads((vendor / 'upstream.json').read_text())
-    for name in UPSTREAM_FILES:
+    yaml_variants, ini_variants, _ = _selection(formats, platform, variants)
+    required = {'LICENSE'} | {stem + '.yaml' for stem in yaml_variants.values()}
+    for slug, stem in ini_variants.items():
+        required.update({stem + '.ini', VARIANTS['standard' if slug == 'mainland' else slug] + '.yaml'})
+    for name in required:
         if hashlib.sha256((vendor / name).read_bytes()).hexdigest() != meta['files'].get(name):
             raise ValueError('Vendored source hash mismatch; sync upstream instead of editing snapshots')
-    outputs = prepare_outputs(root)
-    with tempfile.TemporaryDirectory() as tmp:
-        staged = Path(tmp)
-        _write_outputs(staged, outputs, meta['commit'])
-        expected = {p.relative_to(staged): p.read_bytes() for p in staged.rglob('*') if p.is_file()}
-        actual = {p.relative_to(root / 'dist'): p.read_bytes() for p in (root / 'dist').rglob('*') if p.is_file()}
-        if actual != expected:
+    outputs = prepare_outputs(root, formats=formats, platform=platform, variants=variants)
+    dist = root / 'dist'
+    manifest = json.loads((dist / 'manifest.json').read_text(encoding='utf-8'))
+    files = {p.relative_to(dist).as_posix(): p.read_bytes() for p in dist.rglob('*') if p.is_file() and p.name != 'manifest.json'}
+    hashes = {k: hashlib.sha256(v).hexdigest() for k, v in files.items()}
+    if hashes != manifest.get('files') or set(manifest.get('file_upstream_commits', {})) != set(files):
+        raise ValueError('Generated manifest does not match files; rebuild the affected outputs')
+    revisions = list(manifest['file_upstream_commits'].values())
+    if any(value is not None and not isinstance(value, str) for value in revisions):
+        raise ValueError('Generated manifest contains invalid source revisions')
+    unique_revisions = set(revisions)
+    summary = next(iter(unique_revisions)) if len(unique_revisions) == 1 else None
+    if manifest.get('upstream_commit') != summary:
+        raise ValueError('Generated manifest source summary does not match per-file revisions')
+    if formats == 'all' and platform == 'all' and variants is None and set(files) != set(outputs):
+        raise ValueError('Generated output set is stale; run python scripts/rules.py build')
+    for filename, content in outputs.items():
+        if files.get(filename) != content.encode('utf-8') or manifest['file_upstream_commits'][filename] != meta['commit']:
             raise ValueError('Generated output is stale; run python scripts/rules.py build')
     print(f'Checked hashes, YAML keys, references and reproducibility for {len(outputs)} templates.')
 
@@ -336,7 +415,7 @@ def render_private(root: Path, secrets_path: Path, output: Path, variants=None) 
             selected.append('selfhosted-manual-fallback')
     if set(selected) - set(VARIANTS):
         raise ValueError('Unknown variant')
-    public = prepare_outputs(root)
+    public = prepare_outputs(root, formats='yaml', variants=selected)
     private = {}
     for filename, content in public.items():
         if not filename.endswith('.yaml') or Path(filename).stem not in selected:
@@ -354,9 +433,11 @@ def render_private(root: Path, secrets_path: Path, output: Path, variants=None) 
         validate_config(config)
         private[filename] = '# PRIVATE: do not publish or commit.\n' + yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=160)
     local.mkdir(parents=True, exist_ok=True)
+    commit = json.loads((root / 'vendor/aethersailor/upstream.json').read_text())['commit']
+    merged, provenance = _merge_existing(resolved, private, commit)
     with tempfile.TemporaryDirectory(dir=local) as tmp:
         staged = Path(tmp) / 'rendered'
-        _write_outputs(staged, private, 'private-local')
+        _write_outputs(staged, merged, commit, provenance)
         for path in staged.rglob('*'):
             if path.is_file():
                 path.chmod(0o600)
@@ -381,7 +462,12 @@ def _fetch(url: str) -> bytes:
     return data
 
 
-def sync(root: Path, ref: str) -> None:
+def sync(root: Path, ref: str | None = None) -> None:
+    if ref is None:
+        upstream = load_yaml(root / 'config/upstream.yaml')
+        if set(upstream) != {'ref'} or not isinstance(upstream['ref'], str):
+            raise ValueError('config/upstream.yaml must contain a ref string (main or full commit SHA)')
+        ref = upstream['ref']
     if re.fullmatch(r'[0-9a-fA-F]{40}', ref):
         commit = ref.lower()
     elif ref == 'main':
@@ -424,10 +510,14 @@ def sync(root: Path, ref: str) -> None:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    commands.add_parser('build', help='Build all public templates offline')
-    commands.add_parser('check', help='Check snapshots and generated output without rewriting')
+    for name, help_text in [('build', 'Build selected public templates offline'),
+                            ('check', 'Check selected snapshots and generated output without rewriting')]:
+        command = commands.add_parser(name, help=help_text)
+        command.add_argument('--format', dest='formats', choices=['all', 'yaml', 'ini'], default='all')
+        command.add_argument('--platform', choices=['all', 'openclash', 'mihomo'], default='all')
+        command.add_argument('--variant', action='append', choices=list(VARIANTS) + ['mainland'])
     syncing = commands.add_parser('sync', help='Fetch a pinned upstream revision and rebuild all templates')
-    syncing.add_argument('--ref', default='main')
+    syncing.add_argument('--ref', help='One-shot override; otherwise use config/upstream.yaml')
     rendering = commands.add_parser('render', help='Render private configurations only into .local')
     rendering.add_argument('--secrets', default='.local/secrets.yaml')
     rendering.add_argument('--output', default='.local/rendered')
@@ -435,9 +525,9 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     try:
         if args.command == 'build':
-            build(ROOT)
+            build(ROOT, formats=args.formats, platform=args.platform, variants=args.variant)
         elif args.command == 'check':
-            check(ROOT)
+            check(ROOT, formats=args.formats, platform=args.platform, variants=args.variant)
         elif args.command == 'sync':
             sync(ROOT, args.ref)
         else:

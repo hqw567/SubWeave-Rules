@@ -3,9 +3,14 @@
 # @direct = DIRECT；@reject = REJECT。请把示例域名换成自己的域名再启用。
 
 # 明确的误杀白名单/强制例外：优先于秋风。
-before_ads: []
-# before_ads:
-#   - DOMAIN,allow.example.com,@direct
+before_ads:
+  # 具体服务域名精确匹配；站点根域同时覆盖其子域名。
+  - DOMAIN,qlxft.ourduda.com,@direct
+  - DOMAIN-SUFFIX,neolive.kr,@direct
+  - DOMAIN-SUFFIX,pandalive.co.kr,@direct
+  - DOMAIN,time.windows.com,@direct
+  - DOMAIN,codexapp.agentsmirror.com,@direct
+  - DOMAIN,www.wellcee.com,@direct
 
 # 一般个人分流：先拦广告，再应用个人规则，最后进入 Aethersailor。
 after_ads: []
@@ -14,9 +19,20 @@ after_ads: []
 #   - DOMAIN,block.example.com,@reject
 #   - IP-CIDR,192.0.2.10/32,@direct,no-resolve
 
+# 可选：某种格式独有的规则；YAML 高级规则不会送入 INI 转换器。
+formats: {}
+# formats:
+#   yaml:
+#     after_ads:
+#       - "AND,((DOMAIN,example.com),(NETWORK,TCP)),@proxy"
+
 # 可选：仅给某个模板追加规则，避免在 Lite 引用标准版独有的策略组。
 variants: {}
 # variants:
 #   standard:
 #     after_ads:
 #       - DOMAIN,ai.example.com,🤖 ChatGPT
+#     formats:
+#       yaml:
+#         after_ads:
+#           - "AND,((DOMAIN,example.com),(NETWORK,TCP)),@proxy"

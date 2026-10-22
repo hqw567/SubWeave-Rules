@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 from contextlib import redirect_stdout
+import hashlib
 import importlib.util
 import io
 import json
@@ -113,6 +114,15 @@ class CompositionTests(unittest.TestCase):
         self.assertNotIn("awavenue-ads-only", result.get("rule-providers", {}))
         self.assertFalse(any(group["name"] == settings["ads"]["group"] for group in result["proxy-groups"]))
 
+    def test_disabling_ads_does_not_require_unused_ad_settings(self):
+        upstream = upstream_fixture()
+        result = generator.build_config(
+            upstream, {"before_ads": [], "after_ads": []}, {"ads": {"enabled": False}}
+        )
+        self.assertEqual(result["rules"], upstream["rules"])
+        self.assertEqual(result["proxy-groups"], upstream["proxy-groups"])
+        self.assertEqual(result["rule-providers"], upstream["rule-providers"])
+
     def test_unknown_policy_and_rule_provider_are_rejected(self):
         for rule in ("DOMAIN,example.com,missing-policy", "RULE-SET,missing-provider,DIRECT"):
             with self.subTest(rule=rule), self.assertRaises(ValueError):
@@ -174,6 +184,111 @@ class ProjectOutputTests(unittest.TestCase):
         self.secrets = self.root / ".local" / "secrets.yaml"
         self.secrets.write_text(yaml.safe_dump({"subscription_url": self.secret_url}), encoding="utf-8")
 
+    def write_personal(self, personal):
+        (self.root / "rules" / "custom.yaml").write_text(
+            yaml.safe_dump(personal, allow_unicode=True), encoding="utf-8"
+        )
+
+    def tree_bytes(self, directory):
+        return {path.relative_to(directory): path.read_bytes() for path in directory.rglob("*") if path.is_file()}
+
+    def test_advanced_rule_builds_yaml_without_loading_ini_support(self):
+        rule = "AND,((NETWORK,udp),(DST-PORT,443)),REJECT"
+        self.write_personal({"before_ads": [rule], "after_ads": [], "variants": {}})
+        options = {"formats": "yaml", "platform": "mihomo", "variants": ["standard"]}
+        with patch.dict(sys.modules, {"ini_support": None}), redirect_stdout(io.StringIO()):
+            generated = generator.prepare_outputs(self.root, **options)
+            generator.build(self.root, **options)
+            generator.check(self.root, **options)
+        self.assertEqual(set(generated), {"mihomo/standard.yaml"})
+        self.assertIn(rule, yaml.safe_load(generated["mihomo/standard.yaml"])["rules"])
+        previous = self.tree_bytes(self.root / "dist")
+        with self.assertRaises(ValueError):
+            generator.build(self.root, formats="ini", variants=["standard"])
+        self.assertEqual(self.tree_bytes(self.root / "dist"), previous)
+
+    def test_yaml_only_rule_section_keeps_default_all_formats_build_working(self):
+        rule = "AND,((NETWORK,udp),(DST-PORT,443)),REJECT"
+        self.write_personal({
+            "before_ads": [], "after_ads": [], "variants": {},
+            "formats": {"yaml": {"before_ads": [rule], "after_ads": []}},
+        })
+        generated = generator.prepare_outputs(self.root)
+        yaml_files = {name: text for name, text in generated.items() if name.endswith(".yaml")}
+        ini_files = {name: text for name, text in generated.items() if name.endswith(".ini")}
+        self.assertEqual(len(yaml_files), len(generator.VARIANTS) * 2)
+        self.assertEqual(len(ini_files), len(generator.INI_VARIANTS))
+        for filename, text in yaml_files.items():
+            with self.subTest(filename=filename):
+                self.assertIn(rule, yaml.safe_load(text)["rules"])
+        for filename, text in ini_files.items():
+            with self.subTest(filename=filename):
+                self.assertNotIn(rule, text)
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root)
+            generator.check(self.root)
+
+    def test_selected_private_variant_ignores_unrelated_invalid_rules(self):
+        self.write_personal({
+            "before_ads": [],
+            "after_ads": [],
+            "variants": {
+                "standard": {"after_ads": ["DOMAIN,selected.example,@proxy"]},
+                "lite": {"after_ads": ["DOMAIN,unrelated.example,missing-policy"]},
+            },
+        })
+        output = self.root / ".local" / "rendered"
+        rendered = generator.render_private(self.root, self.secrets, output, variants=["standard"])
+        self.assertEqual({path.relative_to(output).as_posix() for path in rendered}, {
+            "mihomo/standard.yaml", "openclash/standard.yaml",
+        })
+        for path in rendered:
+            self.assertIn("DOMAIN,selected.example,🚀 手动选择", yaml.safe_load(path.read_text())["rules"])
+
+    def test_sequential_private_renders_retain_other_variants_and_manifest_hashes(self):
+        output = self.root / ".local" / "rendered"
+        metadata_path = self.root / "vendor" / "aethersailor" / "upstream.json"
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        original_commit = metadata["commit"]
+        first = generator.render_private(self.root, self.secrets, output, variants=["standard"])
+        original = {path: path.read_bytes() for path in first}
+        updated_url = "https://subscription.example/subscribe?token=synthetic-second-render"
+        self.secrets.write_text(yaml.safe_dump({"subscription_url": updated_url}), encoding="utf-8")
+        updated_commit = "d" * 40
+        self.assertNotEqual(original_commit, updated_commit)
+        metadata["commit"] = updated_commit
+        metadata_path.write_text(json.dumps(metadata), encoding="utf-8")
+
+        second = generator.render_private(self.root, self.secrets, output, variants=["lite"])
+        for path, content in original.items():
+            self.assertEqual(path.read_bytes(), content)
+        self.assertEqual({path.relative_to(output).as_posix() for path in second}, {
+            "mihomo/lite.yaml", "openclash/lite.yaml",
+        })
+        for path in second:
+            config = yaml.safe_load(path.read_text(encoding="utf-8"))
+            self.assertEqual(config["proxy-providers"]["provider1"]["url"], updated_url)
+        actual = {path.relative_to(output).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest() for path in output.rglob("*.yaml")}
+        manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(actual), 4)
+        self.assertEqual(manifest["files"], actual)
+        expected_commits = {path.relative_to(output).as_posix(): original_commit for path in first}
+        expected_commits.update({path.relative_to(output).as_posix(): updated_commit for path in second})
+        self.assertEqual(manifest["file_upstream_commits"], expected_commits)
+        self.assertIsNone(manifest["upstream_commit"], "Mixed snapshots must not be labelled as one upstream version")
+
+    def test_failed_selected_render_preserves_existing_private_files(self):
+        output = self.root / ".local" / "rendered"
+        generator.render_private(self.root, self.secrets, output, variants=["standard"])
+        previous = self.tree_bytes(output)
+        self.write_personal({
+            "before_ads": [], "after_ads": [],
+            "variants": {"lite": {"after_ads": ["DOMAIN,broken.example,missing-policy"]}},
+        })
+        with self.assertRaises(ValueError):
+            generator.render_private(self.root, self.secrets, output, variants=["lite"])
+        self.assertEqual(self.tree_bytes(output), previous)
+
     def test_all_yaml_outputs_preserve_their_vendored_variant(self):
         sources = {
             slug: generator.load_yaml(self.root / "vendor" / "aethersailor" / f"{stem}.yaml")
@@ -194,6 +309,17 @@ class ProjectOutputTests(unittest.TestCase):
                 for name, provider in original.get("rule-providers", {}).items():
                     self.assertEqual(config["rule-providers"][name], provider)
         self.assertEqual(set(counts.values()), {2})
+
+    def test_check_rejects_manifest_with_tampered_upstream_summary(self):
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root)
+        path = self.root / "dist" / "manifest.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        original = manifest["upstream_commit"]
+        manifest["upstream_commit"] = "0" * 40 if original != "0" * 40 else "1" * 40
+        path.write_text(json.dumps(manifest), encoding="utf-8")
+        with self.assertRaises(ValueError):
+            generator.check(self.root)
 
     def test_private_render_does_not_modify_public_outputs(self):
         public = generator.prepare_outputs(self.root)
@@ -322,6 +448,24 @@ class ProjectOutputTests(unittest.TestCase):
         self.assertEqual(len(manifest["files"]), len(generator.VARIANTS) * 2 + len(generator.INI_VARIANTS))
         with redirect_stdout(io.StringIO()):
             generator.check(self.root)
+
+    def test_sync_uses_persisted_sha_without_resolving_main(self):
+        commit = "c" * 40
+        config = self.root / "config" / "upstream.yaml"
+        config.write_text(yaml.safe_dump({"ref": commit}), encoding="utf-8")
+        saved_settings = config.read_bytes()
+        vendor = self.root / "vendor" / "aethersailor"
+        downloads = {
+            f"https://raw.githubusercontent.com/{generator.REPOSITORY}/{commit}/{remote}": (vendor / name).read_bytes()
+            for name, remote in generator.UPSTREAM_FILES.items()
+        }
+        with patch.object(generator, "_fetch", side_effect=lambda url: downloads[url]) as fetch:
+            with patch.object(generator.subprocess, "run", side_effect=AssertionError("Pinned SHA must not resolve Git refs")):
+                with redirect_stdout(io.StringIO()):
+                    generator.sync(self.root)
+        self.assertEqual({call.args[0] for call in fetch.call_args_list}, set(downloads))
+        self.assertEqual(json.loads((vendor / "upstream.json").read_text())["commit"], commit)
+        self.assertEqual(config.read_bytes(), saved_settings)
 
 
 if __name__ == "__main__":
