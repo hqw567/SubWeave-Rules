@@ -281,13 +281,25 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--download', action='store_true', help='Download the checksum-pinned official core into .local/tools')
     parser.add_argument('--binary', type=Path, help='Use an existing binary matching config/mihomo-version.txt')
+    parser.add_argument('--prepare-only', action='store_true', help='Verify/install the pinned core without fetching rules or validating configs')
+    parser.add_argument('--github-output', type=Path, help='Append binary_path to a GitHub Actions output file (prepare-only)')
     parser.add_argument('--config-dir', type=Path, default=ROOT / 'dist')
     parser.add_argument('--timeout', type=int, default=120, help='Maximum seconds per native parse')
     args = parser.parse_args(argv)
     try:
         if args.timeout <= 0:
             raise NativeCheckError('Native validation timeout must be positive')
+        if args.github_output and not args.prepare_only:
+            raise NativeCheckError('--github-output requires --prepare-only')
         binary = locate_binary(ROOT, args.download, args.binary)
+        if args.prepare_only:
+            if args.github_output:
+                if any(character in str(binary) for character in '\r\n'):
+                    raise NativeCheckError('Prepared binary path contains an invalid newline')
+                with args.github_output.open('a', encoding='utf-8') as output:
+                    output.write(f'binary_path={binary}\n')
+            print(f'Prepared checksum-pinned Mihomo {PIN}.')
+            return 0
         count = check_all(ROOT, args.config_dir.resolve(), binary, args.timeout)
         print(f'Validated {count} public YAML templates with Mihomo {PIN}, real public rules/GeoData and placeholder nodes; no tunnels or subscriptions started.')
     except NativeCheckError as exc:

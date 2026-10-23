@@ -6,3 +6,4 @@
 # Keep upstream snapshots byte-for-byte; derived INI keeps upstream formatting.
 vendor/** -text -whitespace
 dist/subconverter/*.ini -whitespace
+dist/subconverter-stash/*.ini -whitespace

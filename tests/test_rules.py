@@ -198,6 +198,12 @@ class ProjectOutputTests(unittest.TestCase):
     def tree_bytes(self, directory):
         return {path.relative_to(directory): path.read_bytes() for path in directory.rglob("*") if path.is_file()}
 
+    def tree_identity(self, directory):
+        return {
+            path.relative_to(directory): (path.stat().st_ino, path.stat().st_mtime_ns)
+            for path in [directory, *directory.rglob("*")]
+        }
+
     def test_advanced_rule_builds_yaml_without_loading_ini_support(self):
         rule = "AND,((NETWORK,udp),(DST-PORT,443)),REJECT"
         self.write_personal({"before_ads": [rule], "after_ads": [], "variants": {}})
@@ -223,7 +229,7 @@ class ProjectOutputTests(unittest.TestCase):
         yaml_files = {name: text for name, text in generated.items() if name.endswith(".yaml")}
         ini_files = {name: text for name, text in generated.items() if name.endswith(".ini")}
         self.assertEqual(len(yaml_files), len(generator.VARIANTS) * 2)
-        self.assertEqual(len(ini_files), len(generator.INI_VARIANTS))
+        self.assertEqual(len(ini_files), len(generator.INI_VARIANTS) + len(generator.STASH_INI_VARIANTS))
         for filename, text in yaml_files.items():
             with self.subTest(filename=filename):
                 self.assertIn(rule, yaml.safe_load(text)["rules"])
@@ -454,7 +460,7 @@ class ProjectOutputTests(unittest.TestCase):
             self.assertEqual((vendor / name).read_bytes(), original)
         manifest = json.loads((self.root / "dist" / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["upstream_commit"], commit)
-        self.assertEqual(len(manifest["files"]), len(generator.VARIANTS) * 2 + len(generator.INI_VARIANTS))
+        self.assertEqual(len(manifest["files"]), len(generator.VARIANTS) * 2 + len(generator.INI_VARIANTS) + len(generator.STASH_INI_VARIANTS))
         with redirect_stdout(io.StringIO()):
             generator.check(self.root)
 
@@ -475,6 +481,103 @@ class ProjectOutputTests(unittest.TestCase):
         self.assertEqual({call.args[0] for call in fetch.call_args_list}, set(downloads))
         self.assertEqual(json.loads((vendor / "upstream.json").read_text())["commit"], commit)
         self.assertEqual(config.read_bytes(), saved_settings)
+
+    def test_unchanged_sync_resolves_main_without_fetching_or_rewriting_sources_and_outputs(self):
+        (self.root / "config" / "upstream.yaml").write_text("ref: main\n", encoding="utf-8")
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root)
+        vendor = self.root / "vendor" / "aethersailor"
+        dist = self.root / "dist"
+        commit = json.loads((vendor / "upstream.json").read_text())["commit"]
+        previous_bytes = {"vendor": self.tree_bytes(vendor), "dist": self.tree_bytes(dist)}
+        previous_identity = {"vendor": self.tree_identity(vendor), "dist": self.tree_identity(dist)}
+        api_url = f"https://api.github.com/repos/{generator.REPOSITORY}/commits/main"
+
+        def resolve_only(url):
+            self.assertEqual(url, api_url, "Valid unchanged snapshots must not be downloaded again")
+            return json.dumps({"sha": commit}).encode()
+
+        with patch.object(generator, "_fetch", side_effect=resolve_only) as fetch:
+            with redirect_stdout(io.StringIO()):
+                generator.sync(self.root)
+        fetch.assert_called_once_with(api_url)
+        self.assertEqual({"vendor": self.tree_bytes(vendor), "dist": self.tree_bytes(dist)}, previous_bytes)
+        self.assertEqual({"vendor": self.tree_identity(vendor), "dist": self.tree_identity(dist)}, previous_identity)
+
+    def test_same_revision_rebuilds_changed_personal_rules_without_source_downloads(self):
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root)
+        vendor = self.root / "vendor" / "aethersailor"
+        commit = json.loads((vendor / "upstream.json").read_text())["commit"]
+        (self.root / "config" / "upstream.yaml").write_text(f"ref: {commit}\n", encoding="utf-8")
+        previous_vendor = (self.tree_bytes(vendor), self.tree_identity(vendor))
+        previous_output = self.tree_bytes(self.root / "dist")
+        personal_path = self.root / "rules" / "custom.yaml"
+        personal = generator.load_yaml(personal_path)
+        personal.setdefault("before_ads", []).append("DOMAIN,rebuilt.example,@direct")
+        self.write_personal(personal)
+        saved_personal = personal_path.read_bytes()
+
+        with patch.object(generator, "_fetch", side_effect=AssertionError("Pinned valid source must be reused")) as fetch:
+            with redirect_stdout(io.StringIO()):
+                generator.sync(self.root)
+                generator.check(self.root)
+        fetch.assert_not_called()
+        self.assertEqual((self.tree_bytes(vendor), self.tree_identity(vendor)), previous_vendor)
+        self.assertEqual(personal_path.read_bytes(), saved_personal)
+        self.assertNotEqual(self.tree_bytes(self.root / "dist"), previous_output)
+        native = yaml.safe_load((self.root / "dist" / "mihomo" / "standard.yaml").read_text())
+        self.assertIn("DOMAIN,rebuilt.example,DIRECT", native["rules"])
+        self.assertIn("ruleset=DIRECT,[]DOMAIN,rebuilt.example", (self.root / "dist" / "subconverter" / "standard.ini").read_text())
+
+    def test_same_revision_repairs_corrupt_missing_or_unverified_vendor_file(self):
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root)
+        vendor = self.root / "vendor" / "aethersailor"
+        metadata_path = vendor / "upstream.json"
+        commit = json.loads(metadata_path.read_text())["commit"]
+        (self.root / "config" / "upstream.yaml").write_text(f"ref: {commit}\n", encoding="utf-8")
+        blobs = {name: (vendor / name).read_bytes() for name in generator.UPSTREAM_FILES}
+        downloads = {
+            f"https://raw.githubusercontent.com/{generator.REPOSITORY}/{commit}/{remote}": blobs[name]
+            for name, remote in generator.UPSTREAM_FILES.items()
+        }
+        damaged_name = generator.VARIANTS["standard"] + ".yaml"
+        personal_before = (self.root / "rules" / "custom.yaml").read_bytes()
+        for damage in ("corrupt-file", "missing-file", "missing-hash"):
+            with self.subTest(damage=damage):
+                if damage == "corrupt-file":
+                    (vendor / damaged_name).write_bytes(b"corrupt snapshot\n")
+                elif damage == "missing-file":
+                    (vendor / damaged_name).unlink()
+                else:
+                    metadata = json.loads(metadata_path.read_text())
+                    del metadata["files"][damaged_name]
+                    metadata_path.write_text(json.dumps(metadata), encoding="utf-8")
+                with patch.object(generator, "_fetch", side_effect=lambda url: downloads[url]) as fetch:
+                    with redirect_stdout(io.StringIO()):
+                        generator.sync(self.root)
+                        generator.check(self.root)
+                self.assertTrue(fetch.called, "A matching commit alone does not establish snapshot integrity")
+                self.assertTrue(all(call.args[0] in downloads for call in fetch.call_args_list))
+                for name, content in blobs.items():
+                    self.assertEqual((vendor / name).read_bytes(), content)
+                self.assertEqual((self.root / "rules" / "custom.yaml").read_bytes(), personal_before)
+
+    def test_failed_repair_at_same_revision_preserves_existing_tree(self):
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root)
+        vendor = self.root / "vendor" / "aethersailor"
+        commit = json.loads((vendor / "upstream.json").read_text())["commit"]
+        damaged = vendor / (generator.VARIANTS["standard"] + ".yaml")
+        damaged.write_bytes(b"corrupt snapshot kept until a complete replacement is ready\n")
+        previous = {name: self.tree_bytes(self.root / name) for name in ("vendor", "dist", "rules", "config", "templates")}
+        with patch.object(generator, "_fetch", side_effect=ValueError("Simulated repair download failure")) as fetch:
+            with self.assertRaisesRegex(ValueError, "Simulated repair"):
+                generator.sync(self.root, commit)
+        self.assertTrue(fetch.called)
+        self.assertEqual({name: self.tree_bytes(self.root / name) for name in previous}, previous)
+        self.assertEqual(list(self.root.glob(".sync-*")), [])
 
 
 if __name__ == "__main__":

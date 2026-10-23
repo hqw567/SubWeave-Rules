@@ -6,26 +6,28 @@
 
 | 文件或目录 | 内容 | 公开构建用途 |
 | --- | --- | --- |
-| `vendor/` | 已记录提交的正式模板、兼容入口与许可证 | 保留上游原始分流结构 |
+| `vendor/` | 已记录提交的正式模板、兼容入口、所需规则源与许可证 | 保留并适配上游分流结构 |
 | `config/upstream.yaml` | 持续跟踪的上游分支或完整提交 SHA | 显式同步时选择上游版本 |
 | `config/mihomo-version.txt` | 内核配置检查使用的版本 | 发布前验证公开 YAML |
+| `config/converter-version.txt` | 本地订阅转换器版本 | 验证 INI 的 Clash/Stash 转换 |
 | `config/settings.yaml` | 秋风广告源、更新周期与广告组 | 注入广告配置 |
 | `rules/custom.yaml` | 通用、按格式和按版本的 `before_ads`、`after_ads` | 注入个人规则 |
 | `templates/mihomo-runtime.yaml` | 独立 Mihomo 的运行参数 | 仅用于独立 YAML |
 | `dist/openclash/` | 10 个正式版本 YAML | 运行参数由 LuCI 管理 |
 | `dist/mihomo/` | 10 个正式版本 YAML | 附加独立运行设置 |
 | `dist/subconverter/` | 8 个正式 INI 与 Mainland 兼容入口 | 订阅转换模板 |
+| `dist/subconverter-stash/` | 对应的 9 个附加 Stash INI | 当前转换后端的 Stash 目标模板 |
 | `.local/` | 私有订阅、自建参数与渲染结果 | 不参与公开构建，Git 忽略 |
 
 正式范围为标准、Lite、GFW、Full 及各自 Fallback，共 8 组 INI/YAML，再加 2 组 YAML 自建版本。Mainland 为兼容入口，测试、归档和完整教学模板不作为正式版本生成。
 
-默认公开构建输出 29 份配置，不读取私有参数。`build`、`check` 可按格式、YAML 平台和版本选择范围；部分构建保留其他产物，清单分别记录文件哈希与来源提交，允许结果暂时包含不同快照版本。
+默认公开构建输出 38 份配置，不读取私有参数：原有 20 份 YAML、9 份 Clash INI 保留，另加 9 份 Stash INI。`build`、`check` 可按格式、平台和版本选择；`--format ini --platform stash` 只处理附加模板，`--format ini` 默认处理两套 INI。部分构建保留其他产物，清单分别记录文件哈希与来源提交，允许结果暂时包含不同快照版本。
 
 默认私有渲染处理 16 份常规 YAML；提供自建参数后增加对应版本的两份，也可按 `--variant` 选择。私有渲染只读取 YAML，不运行 INI 转换，未选中的已渲染文件继续保留。
 
 ## 规则与别名
 
-整体顺序为 `before_ads` → 广告过滤 → `after_ads` → 上游原有规则及 `MATCH`。每个个人规则阶段分别按“通用 → 格式专用 → 版本通用 → 版本格式专用”拼接，前面的规则先匹配。格式设置位于 `formats.yaml/ini`，也可位于 `variants.<版本>.formats.yaml/ini`。
+整体顺序为 `before_ads` → 广告过滤 → `after_ads` → 上游原有规则及 `MATCH`。每个个人规则阶段分别按“通用 → 格式专用 → 版本通用 → 版本格式专用”拼接，前面的规则先匹配。格式设置分别为 `formats.yaml`、`formats.ini`、`formats.stash`，也可放在 `variants.<版本>` 下。通用规则共享，格式专用规则只进入对应产物。
 
 将高级 YAML 规则限定在 `formats.yaml` 后，全量构建仍可生成所有 INI；通用规则必须满足跨格式转换范围。原有上游规则之间的相对顺序保持不变。
 
@@ -55,11 +57,15 @@ OpenClash 保留上游最小 YAML 方式，由 LuCI 提供 DNS、端口、TUN、
 
 `sync` 默认读取 `config/upstream.yaml` 的 `ref`：`main` 表示跟踪最新提交，完整 SHA 表示持续冻结。`--ref` 仅覆盖当前调用，不改写配置。同步从确定提交下载允许的模板与许可证，验证后更新 `vendor/` 并重建 `dist/`，不运行上游脚本、不改写个人规则或私有参数。
 
+解析到同一提交且现有快照哈希完整时，复用快照并按当前个人输入离线构建，跳过重复上游下载。工作流随后比较实际产物；无变化的定时/手动任务不进入发布重验证，源代码 push 则始终验证。
+
 更新工作流每天计划于北京时间 06:15 同步，也可手动同步；手动 `ref` 留空时遵守持久配置。默认分支的个人规则等源文件变更只触发当前快照的重新构建，不引入上游变更。修改持久引用后，须主动同步或等待定时任务才会切换快照。
 
-更新任务共用一个并发组，始终操作默认分支；单元测试、结构检查、固定内核配置校验全部通过且内容变化后，仅提交 `vendor/`、`dist/`。使用内置令牌，无需订阅 Secret。失败时工作流不发布新产物。
+更新任务共用一个并发组，始终操作默认分支；含真实内核用例的单元测试、结构检查、20 份 YAML 内核校验和 18 份 INI 的对应目标转换检查全部通过且内容变化后，仅提交 `vendor/`、`dist/`。使用内置令牌，无需订阅 Secret。失败时工作流不发布新产物。
 
-只读工作流在 push/PR 上从现有快照离线构建，再执行内核与一致性检查；内核检查所需的公开数据可能联网下载，但不升级模板、不推送结果。它允许仅修改源文件的 PR，由默认分支更新任务提交产物。
+默认分支 push 仅由更新工作流执行重验证；只读工作流验证其他分支 push、PR 和手动请求。纯文档修改通过路径过滤跳过重门禁。两条流程共用 `.github/actions/validate-templates`，统一内核准备、测试和验证顺序；检查流程不升级模板、不推送结果。
+
+缓存仅覆盖 `.local/tools` 下经过 SHA256 校验的 Mihomo、SubConverter-Extended 归档，两者分别按操作系统、架构及版本/检查器哈希区分。命中缓存后仍验证归档并重新解压，不直接信任缓存的可执行文件。规则和 GeoData 每次真正执行内核检查时刷新；无变更任务的快速结束不充当远程规则每日巡检。
 
 远程执行需要 GitHub 仓库、默认分支上的工作流、已启用的 Actions 和允许更新的仓库策略。调度可能延迟，分支保护可能拒绝推送。文件准备、离线验证和远程执行是不同状态。
 
@@ -67,7 +73,19 @@ OpenClash 保留上游最小 YAML 方式，由 LuCI 提供 DNS、端口、TUN、
 
 固定上游提交只固定模板。客户端仍按各自间隔更新节点、Rule Providers 和 GeoData，远程内容不随模板 SHA 冻结；排查时应查看当时实际加载的数据。
 
-`check_mihomo.py` 使用固定内核，在隔离目录将节点订阅替换为临时 Provider，再执行 `mihomo -t`。它校验公开 YAML 的内核语义、规则及 GeoData 分类，不启动监听、TUN 或真实节点连接；INI 不经过内核验证。
+`check_mihomo.py` 使用固定内核，在隔离目录将节点订阅替换为临时 Provider，再执行 `mihomo -t`。它校验公开 YAML 的内核语义、规则及 GeoData 分类，不启动监听、TUN 或真实节点连接。CI 在运行单元测试前准备内核并设置 `MIHOMO_TEST_BINARY`，启用真实内核反例。
+
+`check_conversion.py` 用固定版本转换器在本机回环地址启动临时服务，原有 9 份 INI 执行 `target=clash`，附加 9 份执行 `target=stash`。输入是虚拟节点，转换服务不承载真实订阅。转换结果校验补充了原先只检查 INI 文本的边界，但不代表 Stash 真机运行已经验证。
+
+附加模板是转换目标适配层，不替换原有模板。Stash 本身兼容 Clash 配置并支持 MRS 与 `tolerance`；后端对规则、字段或目标格式的投影限制，应与客户端实际支持范围区分。两条转换链路均保留，具体链接见使用说明。
+
+Stash 适配层把 GEOSITE 与非国家 GEOIP 转为域名/IP MRS，保留国家 GEOIP；混合规则转纯 IP 集合时，读取固定提交的 `Custom_Direct.list` 补回目标端口规则。已知 `SRC-PORT,41641` 仅在附加模板中省略，并显式写入产物注释。未知的上游规则、个人规则或无法映射的选择表达式会报错，不静默删除。
+
+Stash INI 保留原有 `url-test`/`fallback` 测速 URL 和完整时间参数后缀，包括 tolerance，便于后续转换器版本继续使用。当前固定 v1.10.5 的 `target=stash` 导出可能未投影其中的字段，实测 tolerance 未写出；这不代表 Stash 客户端不支持。`select` 组中已知的伪测速 URL 单独清理。
+
+部分复杂节点排除表达式采用可投影的匹配或已有自动组，因此节点成员不保证与原模板完全相同。显式添加的 `Proxy` 入口引用原主代理组，避免转换器在广告组后自动追加入口。
+
+转换门禁还会下载并检查 Stash 输出的公开 Rule Provider，以固定 Mihomo 解码 MRS 和解析规则内容。此步骤验证资源可获取、格式可解析，不能推导 Stash 的真机行为。
 
 结构检查和内核配置校验不能证明节点可用、流量已接管、广告命中、DNS 没有绕过或服务已解锁。导入后仍需观察实际客户端上的 Provider 加载与连接命中。
 
@@ -75,5 +93,8 @@ OpenClash 保留上游最小 YAML 方式，由 LuCI 提供 DNS、端口、TUN、
 
 - [Aethersailor YAML 使用说明](https://github.com/Aethersailor/Custom_OpenClash_Rules/tree/main/cfg/yaml)
 - [Mihomo DNS 配置](https://wiki.metacubex.one/config/dns/)
+- [Stash 规则类型](https://stash.wiki/en/rules/rule-types)
+- [Stash MRS 规则集](https://stash.wiki/en/rules/rule-set)
+- [Stash 策略组与 tolerance](https://stash.wiki/en/proxy-protocols/proxy-groups)
 - [秋风纯广告规则](https://github.com/TG-Twilight/AWAvenue-Ads-Rule/blob/main/Filters/AWAvenue-Ads-Rule-Clash-Classical-Only.Ads.yaml)
 - [GitHub 定时工作流](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)

@@ -10,6 +10,11 @@ on:
       - "rules/**"
       - "templates/**"
       - "scripts/**"
+      - "tests/**"
+      - "vendor/**"
+      - "dist/**"
+      - ".github/actions/**"
+      - ".github/workflows/**"
       - "requirements.txt"
   workflow_dispatch:
     inputs:
@@ -70,16 +75,30 @@ jobs:
             python scripts/rules.py sync
           fi
 
-      - name: Run unit tests
-        run: python -m unittest discover -s tests -v
+      - name: Detect changes before publication checks
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! git diff --quiet HEAD -- vendor/ dist/ || [[ -n "$(git ls-files --others --exclude-standard -- vendor/ dist/)" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Check generated templates
-        run: python scripts/rules.py check
+      # 源代码 push 即使未改变产物，也要检查代码；定时/手动无产物变化则跳过重验证。
+      - name: Validate changed templates and source updates
+        if: github.event_name == 'push' || steps.changes.outputs.changed == 'true'
+        uses: ./.github/actions/validate-templates
+        with:
+          build: "false"
 
-      - name: Validate public YAML with the pinned Mihomo core
-        run: python scripts/check_mihomo.py --download --config-dir dist
+      - name: Report unchanged scheduled or manual update
+        if: github.event_name != 'push' && steps.changes.outputs.changed != 'true'
+        run: echo "No snapshot or template changes; publication checks and commit are unnecessary."
 
       - name: Commit changed snapshots and public templates
+        if: steps.changes.outputs.changed == 'true'
         shell: bash
         run: |
           set -euo pipefail

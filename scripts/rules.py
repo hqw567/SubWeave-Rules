@@ -37,12 +37,14 @@ VARIANTS = {
 }
 INI_VARIANTS = {k: v for k, v in VARIANTS.items() if not k.startswith('selfhosted-')}
 INI_VARIANTS['mainland'] = 'Custom_Clash_Mainland'
+STASH_INI_VARIANTS = dict(INI_VARIANTS)
 BUILTINS = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'PASS-RULE', 'COMPATIBLE'}
 PLACEHOLDER = 'https://example.com/REPLACE_WITH_YOUR_SUBSCRIPTION_URL'
 SELFHOST_PLACEHOLDER = 'https://example.com/REPLACE_WITH_YOUR_SELFHOST_SUBSCRIPTION_URL'
 UPSTREAM_FILES = {v + '.yaml': 'cfg/yaml/' + v + '.yaml' for v in VARIANTS.values()}
 UPSTREAM_FILES.update({v + '.ini': 'cfg/' + v + '.ini' for v in INI_VARIANTS.values()})
 UPSTREAM_FILES['LICENSE'] = 'LICENCE'
+UPSTREAM_FILES['Custom_Direct.list'] = 'rule/Custom_Direct.list'
 
 
 class UniqueLoader(yaml.SafeLoader):
@@ -222,8 +224,8 @@ def _personal_for(personal: dict, slug: str, format_name: str = 'yaml') -> dict:
         raise ValueError('Invalid variant-specific personal rule section')
     def format_layer(block):
         formats = block.get('formats', {})
-        if not isinstance(formats, dict) or set(formats) - {'yaml', 'ini'}:
-            raise ValueError('Personal formats must contain only yaml and ini sections')
+        if not isinstance(formats, dict) or set(formats) - {'yaml', 'ini', 'stash'}:
+            raise ValueError('Personal formats must contain only yaml, ini and stash sections')
         selected = formats.get(format_name, {})
         if not isinstance(selected, dict) or set(selected) - {'before_ads', 'after_ads'}:
             raise ValueError('Invalid format-specific personal rule section')
@@ -249,9 +251,11 @@ def _header(commit: str, private=False) -> str:
 
 
 def _selection(formats='all', platform='all', variants=None):
-    if formats not in {'all', 'yaml', 'ini'} or platform not in {'all', 'openclash', 'mihomo'}:
+    if formats not in {'all', 'yaml', 'ini'} or platform not in {'all', 'openclash', 'mihomo', 'stash'}:
         raise ValueError('Unknown output format or platform')
-    if platform != 'all' and formats != 'yaml':
+    if platform == 'stash' and formats != 'ini':
+        raise ValueError('Stash conversion templates require --format ini --platform stash')
+    if platform not in {'all', 'stash'} and formats != 'yaml':
         raise ValueError('--platform requires --format yaml')
     selected = set(variants) if variants is not None else set(VARIANTS) | {'mainland'}
     if not selected or selected - (set(VARIANTS) | {'mainland'}):
@@ -261,9 +265,10 @@ def _selection(formats='all', platform='all', variants=None):
     if variants is not None and formats == 'ini' and selected - set(INI_VARIANTS):
         raise ValueError('Selected selfhosted variants do not have upstream INI templates')
     yaml_variants = {k: v for k, v in VARIANTS.items() if k in selected and formats != 'ini'}
-    ini_variants = {k: v for k, v in INI_VARIANTS.items() if k in selected and formats != 'yaml'}
+    ini_variants = {k: v for k, v in INI_VARIANTS.items() if k in selected and formats != 'yaml' and platform != 'stash'}
+    stash_variants = {k: v for k, v in STASH_INI_VARIANTS.items() if k in selected and formats != 'yaml' and platform in {'all', 'stash'}}
     platforms = ['openclash', 'mihomo'] if platform == 'all' else [platform]
-    return yaml_variants, ini_variants, platforms
+    return yaml_variants, ini_variants, stash_variants, platforms
 
 
 def prepare_outputs(root: Path, vendor_dir: Path | None = None, subscription_url=None,
@@ -275,7 +280,7 @@ def prepare_outputs(root: Path, vendor_dir: Path | None = None, subscription_url
     settings = load_yaml(root / 'config/settings.yaml')
     _ads(settings)
     personal = load_yaml(root / 'rules/custom.yaml')
-    yaml_variants, ini_variants, platforms = _selection(formats, platform, variants)
+    yaml_variants, ini_variants, stash_variants, platforms = _selection(formats, platform, variants)
     runtime = load_yaml(root / 'templates/mihomo-runtime.yaml') if yaml_variants and 'mihomo' in platforms else None
     outputs = {}
     for slug, stem in yaml_variants.items():
@@ -292,6 +297,15 @@ def prepare_outputs(root: Path, vendor_dir: Path | None = None, subscription_url
         with (vendor / (stem + '.ini')).open(encoding='utf-8', newline='') as handle:
             ini = build_ini(handle.read(), _personal_for(personal, source_slug, 'ini'), settings, _primary(base))
         outputs[f'subconverter/{slug}.ini'] = _header(meta['commit']).replace('# ', '; ') + ini
+    if stash_variants:
+        from stash_support import build_stash_ini
+        direct_source = (vendor / 'Custom_Direct.list').read_text(encoding='utf-8')
+        for slug, stem in stash_variants.items():
+            source_slug = 'standard' if slug == 'mainland' else slug
+            base = load_yaml(vendor / (VARIANTS[source_slug] + '.yaml'))
+            with (vendor / (stem + '.ini')).open(encoding='utf-8', newline='') as handle:
+                ini = build_stash_ini(handle.read(), _personal_for(personal, source_slug, 'stash'), settings, _primary(base), direct_source)
+            outputs[f'subconverter-stash/{slug}.ini'] = _header(meta['commit']).replace('# ', '; ') + ini
     return outputs
 
 
@@ -356,25 +370,47 @@ def _replace_trees(pairs) -> None:
         shutil.rmtree(backup)
 
 
+def _same_tree(left: Path, right: Path) -> bool:
+    """Compare generated trees without touching existing timestamps or links."""
+    if not right.is_dir() or right.is_symlink():
+        return False
+    expected = {p.relative_to(left): p for p in left.rglob('*') if p.is_file()}
+    paths = list(right.rglob('*'))
+    if any(p.is_symlink() for p in paths):
+        return False
+    actual = {p.relative_to(right): p for p in paths if p.is_file()}
+    return expected.keys() == actual.keys() and all(expected[name].read_bytes() == actual[name].read_bytes() for name in expected)
+
+
+def _publish_outputs(root: Path, outputs: dict, commit: str, provenance=None) -> bool:
+    with tempfile.TemporaryDirectory(prefix='.sync-', dir=root) as tmp:
+        staged = Path(tmp) / 'generated'
+        _write_outputs(staged, outputs, commit, provenance)
+        if _same_tree(staged, root / 'dist'):
+            return False
+        _replace_trees([(staged, root / 'dist')])
+    return True
+
+
 def build(root: Path, *, formats='all', platform='all', variants=None) -> None:
     outputs = prepare_outputs(root, formats=formats, platform=platform, variants=variants)
     commit = json.loads((root / 'vendor/aethersailor/upstream.json').read_text())['commit']
     partial = formats != 'all' or platform != 'all' or variants is not None
     merged, provenance = _merge_existing(root / 'dist', outputs, commit) if partial else (outputs, None)
-    with tempfile.TemporaryDirectory(prefix='.sync-', dir=root) as tmp:
-        staged = Path(tmp) / 'generated'
-        _write_outputs(staged, merged, commit, provenance)
-        _replace_trees([(staged, root / 'dist')])
-    print(f'Built {len(outputs)} public templates (no subscription credentials).')
+    changed = _publish_outputs(root, merged, commit, provenance)
+    state = 'updated' if changed else 'unchanged'
+    print(f'Built {len(outputs)} public templates: {state} (no subscription credentials).')
 
 
 def check(root: Path, *, formats='all', platform='all', variants=None) -> None:
     vendor = root / 'vendor/aethersailor'
     meta = json.loads((vendor / 'upstream.json').read_text())
-    yaml_variants, ini_variants, _ = _selection(formats, platform, variants)
+    yaml_variants, ini_variants, stash_variants, _ = _selection(formats, platform, variants)
     required = {'LICENSE'} | {stem + '.yaml' for stem in yaml_variants.values()}
-    for slug, stem in ini_variants.items():
+    for slug, stem in {**ini_variants, **stash_variants}.items():
         required.update({stem + '.ini', VARIANTS['standard' if slug == 'mainland' else slug] + '.yaml'})
+    if stash_variants:
+        required.add('Custom_Direct.list')
     for name in required:
         if hashlib.sha256((vendor / name).read_bytes()).hexdigest() != meta['files'].get(name):
             raise ValueError('Vendored source hash mismatch; sync upstream instead of editing snapshots')
@@ -464,6 +500,21 @@ def _fetch(url: str) -> bytes:
     return data
 
 
+def _snapshot_matches(vendor: Path, commit: str) -> bool:
+    """Reuse only a complete, integrity-checked snapshot of this exact revision."""
+    try:
+        meta = json.loads((vendor / 'upstream.json').read_text(encoding='utf-8'))
+        if (not isinstance(meta, dict) or meta.get('repository') != REPOSITORY
+                or meta.get('commit') != commit or not isinstance(meta.get('files'), dict)
+                or set(meta['files']) != set(UPSTREAM_FILES)):
+            return False
+        return all((vendor / name).is_file() and not (vendor / name).is_symlink()
+                   and hashlib.sha256((vendor / name).read_bytes()).hexdigest() == meta['files'][name]
+                   for name in UPSTREAM_FILES)
+    except (OSError, ValueError, TypeError):
+        return False
+
+
 def sync(root: Path, ref: str | None = None) -> None:
     if ref is None:
         upstream = load_yaml(root / 'config/upstream.yaml')
@@ -491,6 +542,14 @@ def sync(root: Path, ref: str | None = None) -> None:
             raise ValueError('Unable to resolve upstream commit')
     else:
         raise ValueError('--ref must be main or a full 40-character commit SHA')
+    if _snapshot_matches(root / 'vendor/aethersailor', commit):
+        # Personal rules, runtime settings or generator code may have changed,
+        # even when upstream has not. Recompose locally before checking outputs.
+        outputs = prepare_outputs(root)
+        changed = _publish_outputs(root, outputs, commit)
+        state = 'updated from local inputs' if changed else 'unchanged'
+        print(f'Upstream {commit} is unchanged; verified cached sources reused, outputs {state}.')
+        return
     # Fetch fixed paths from one immutable commit; never execute code from upstream.
     with ThreadPoolExecutor(max_workers=4) as pool:
         names = list(UPSTREAM_FILES)
@@ -505,7 +564,10 @@ def sync(root: Path, ref: str | None = None) -> None:
         outputs = prepare_outputs(root, vendor_dir=vendor)
         staged = Path(tmp) / 'generated'
         _write_outputs(staged, outputs, commit)
-        _replace_trees([(vendor, root / 'vendor/aethersailor'), (staged, root / 'dist')])
+        replacements = [(vendor, root / 'vendor/aethersailor')]
+        if not _same_tree(staged, root / 'dist'):
+            replacements.append((staged, root / 'dist'))
+        _replace_trees(replacements)
     print(f'Synced upstream {commit}; regenerated {len(outputs)} templates. Personal rules preserved.')
 
 
@@ -516,7 +578,7 @@ def main(argv=None) -> int:
                             ('check', 'Check selected snapshots and generated output without rewriting')]:
         command = commands.add_parser(name, help=help_text)
         command.add_argument('--format', dest='formats', choices=['all', 'yaml', 'ini'], default='all')
-        command.add_argument('--platform', choices=['all', 'openclash', 'mihomo'], default='all')
+        command.add_argument('--platform', choices=['all', 'openclash', 'mihomo', 'stash'], default='all')
         command.add_argument('--variant', action='append', choices=list(VARIANTS) + ['mainland'])
     syncing = commands.add_parser('sync', help='Fetch a pinned upstream revision and rebuild all templates')
     syncing.add_argument('--ref', help='One-shot override; otherwise use config/upstream.yaml')

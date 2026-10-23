@@ -31,6 +31,18 @@ def minimal_config() -> dict:
 
 
 class NativeBoundaryTests(unittest.TestCase):
+    def test_prepare_only_exports_binary_without_running_config_checks(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / 'github-output'
+            output.write_text('existing=value\n', encoding='utf-8')
+            binary = Path(temporary) / 'verified-mihomo'
+            with patch.object(checker, 'locate_binary', return_value=binary) as locate:
+                with patch.object(checker, 'check_all') as check:
+                    self.assertEqual(checker.main(['--prepare-only', '--download', '--github-output', str(output)]), 0)
+            self.assertTrue(locate.call_args.args[1])
+            check.assert_not_called()
+            self.assertEqual(output.read_text(encoding='utf-8'), f'existing=value\nbinary_path={binary}\n')
+
     def test_fixtures_preserve_original_and_group_routing(self):
         source = minimal_config()
         snapshot = copy.deepcopy(source)

@@ -19,12 +19,15 @@ after_ads: []
 #   - DOMAIN,block.example.com,@reject
 #   - IP-CIDR,192.0.2.10/32,@direct,no-resolve
 
-# 可选：某种格式独有的规则；YAML 高级规则不会送入 INI 转换器。
+# 可选：yaml、ini（共享 Clash）或 stash（附加 Stash）独有的规则。
 formats: {}
 # formats:
 #   yaml:
 #     after_ads:
 #       - "AND,((DOMAIN,example.com),(NETWORK,TCP)),@proxy"
+#   stash:
+#     after_ads:
+#       - "DOMAIN,stash-only.example.com,@proxy"
 
 # 可选：仅给某个模板追加规则，避免在 Lite 引用标准版独有的策略组。
 variants: {}

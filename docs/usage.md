@@ -13,11 +13,12 @@
 
 另外包含 `selfhosted-provider-fallback`、`selfhosted-manual-fallback` 两个自建节点优先版本，分别用 HTTP Provider 和完整静态节点定义加载自建节点。
 
-公开构建共生成 **29 份配置**：
+公开构建共生成 **38 份配置**，保留原有 29 份并附加 9 份 Stash INI：
 
 - `dist/openclash/<版本>.yaml`：10 个正式 YAML 版本，运行参数由 LuCI 管理。
 - `dist/mihomo/<版本>.yaml`：上述 10 个版本加上独立运行设置。
 - `dist/subconverter/<版本>.ini`：8 个正式 INI 版本，加上 Mainland 兼容入口。
+- `dist/subconverter-stash/<版本>.ini`：上述 9 个 INI 对应的附加 Stash 转换模板。
 
 Mainland 是上游生成的兼容入口，不是第九套独立分流方案。测试目录、归档模板和完整教学 YAML 不作为正式配置发布。
 
@@ -40,7 +41,14 @@ python scripts/rules.py build --format yaml --platform mihomo --variant lite
 python scripts/rules.py check --format yaml --platform mihomo --variant lite
 ```
 
-`--format` 支持 `all`、`yaml`、`ini`；`--platform` 支持 `all`、`openclash`、`mihomo`，单个平台必须搭配 `--format yaml`；`--variant` 可重复。部分构建保留未选中的产物，清单记录每个文件的哈希和来源提交；因此未选中的旧版本不会被误标为已经更新。默认不加参数仍处理全部 29 份。
+`--format` 支持 `all`、`yaml`、`ini`。YAML 可选择 `--platform openclash` 或 `mihomo`；附加 Stash INI 使用：
+
+```bash
+python scripts/rules.py build --format ini --platform stash --variant standard
+python scripts/rules.py check --format ini --platform stash --variant standard
+```
+
+`--format ini` 默认处理 Clash、Stash 两套共 18 份；`--format yaml --platform stash` 无效。`--variant` 可重复。部分构建保留未选中的产物，清单记录各文件哈希和来源提交，不把保留的旧产物误标为新版本。默认不加参数仍处理全部 38 份。
 
 ## 添加个人规则
 
@@ -85,10 +93,13 @@ formats:
   ini:
     before_ads: []
     after_ads: []
+  stash:
+    before_ads: []
+    after_ads: []
 variants: {}
 ```
 
-`variants.<版本>` 下也可以放相同的 `formats.yaml`、`formats.ini`。每个阶段按“通用 → 格式专用 → 版本通用 → 版本格式专用”拼接；前面的规则优先匹配，并非后写的规则覆盖前面的规则。
+`formats.yaml` 用于 YAML，`formats.ini` 用于现有 Clash INI，`formats.stash` 用于附加 Stash INI；顶层通用规则由三类产物共享。`variants.<版本>` 下也支持相同格式块。每个阶段按“通用 → 格式专用 → 版本通用 → 版本格式专用”拼接，前面的规则先匹配，不是后写覆盖前写。
 
 整体顺序仍是 `before_ads` → 秋风广告 → `after_ads` → 上游全部规则及 `MATCH`。`before_ads` 适合误杀白名单，优先用 `DOMAIN` 精确放行；`after_ads` 适合仍应接受广告过滤的普通路由调整。放在 `after_ads` 的规则不能解除前面已命中的广告拦截。
 
@@ -111,7 +122,7 @@ ads:
 
 需要移除广告匹配、完整恢复原有分流时，将 `enabled` 改为 `false`，重新构建并加载配置。不要另外叠加同一套广告拦截规则。广告组的显示位置调整不改变规则顺序：广告规则仍位于 `before_ads` 与 `after_ads` 之间。
 
-广告组选项已移除 `PASS`，处理本次在 Stash 中遇到的该策略兼容问题。本项目没有新增 Stash 专用平台输出，完整配置的 Stash 真机运行尚未验证。若继续使用原来的标准版 INI 地址，更新模板并重新转换订阅即可，无需因为此次调整切换模板地址。
+广告组选项已移除 `PASS`。原来的标准版 INI 地址继续保留，更新模板并重新转换订阅即可；新增 Stash INI 是额外选项，使用方式见下文。完整配置的 Stash 真机运行尚未验证。
 
 秋风使用包含关键词规则的 Classical 格式，每天更新；只启用纯广告分类，没有另外叠加隐私或“不受欢迎”分类。
 
@@ -196,6 +207,8 @@ ref: main
 
 `python scripts/rules.py sync --ref 40位提交SHA` 仅覆盖本次同步，不改写持久配置；下一次无参数同步仍使用配置文件。同步会从一个确定提交下载允许的模板和许可证，验证后更新快照、重建公开配置。修改 `config/upstream.yaml` 后须主动同步或等定时任务，快照才会切换。
 
+解析到的 SHA 与已有快照一致且文件哈希完整时，同步复用本地快照，不再重复下载那些上游文件。个人规则、设置或运行模板变化仍会参与离线构建，不会因为上游未变而被忽略。
+
 同步后查看 Git diff；需要最新私有配置时，再运行 `render`。公开构建不会自动刷新旧的私有渲染结果。
 
 ## GitHub Actions 自动更新
@@ -208,9 +221,15 @@ ref: main
 - Actions 页面手动运行 **Update upstream templates**，`ref` 留空遵守持久配置；填写 `main` 或 40 位 SHA 只覆盖这一次。
 - 默认分支的 `config/`、`rules/`、`templates/`、`scripts/` 或依赖文件变化时，只从当前快照重建，支持通过 GitHub 编辑个人规则且不会顺带升级上游。
 
-工作流从默认分支当前内容开始，按触发原因选择同步或构建，然后运行单元测试、生成结果检查和固定版本的 Mihomo 内核配置校验。全部通过且 `vendor/` 或 `dist/` 有变化时，才以 `github-actions[bot]` 提交并推送这两个目录；它不读取私有订阅、不执行私有渲染。首次上传后建议手动执行一次，确认权限与网络条件。
+工作流从默认分支当前内容开始，按触发原因同步或构建，再提前检查 `vendor/`、`dist/` 是否变化。定时与手动更新无变化时，跳过后面的重验证和提交；源代码 push 即使没有产物变化，也会执行门禁。
 
-只读检查工作流在 push、PR 或手动触发时，从现有快照离线构建，再执行内核校验和一致性检查。内核及公开校验数据可能需要下载，但不会同步上游模板或推送提交。这样可以只提交源文件，在合入默认分支后由更新流程提交正式产物。
+需要验证时，共享 action 准备固定内核、运行单元测试与一致性检查，验证全部 20 份 YAML，再将原有 9 份 INI 转为 Clash、附加 9 份 INI 转为 Stash。全部通过且产物变化时，才以 `github-actions[bot]` 提交并推送这两个目录；它不读取私有订阅、不执行私有渲染。
+
+默认分支 push 的重验证由更新流程负责，只读检查跳过这类事件。其他分支 push、PR 和手动检查从已有快照构建并调用同一套验证步骤，不同步上游、不推送结果。只涉及 README、docs 等文档的 push/PR 不运行完整门禁；配置、脚本、测试、工作流和产物变化仍会触发检查。
+
+需要在产物未变化时也重新验证远程规则和转换结果，可手动运行 **Check rule templates** 工作流。
+
+内核归档与转换器归档分别通过 Actions 缓存复用，缓存键包含系统、架构及各自版本配置和检查器哈希；每次使用都验证归档 SHA256 后重新解压。只有归档进入缓存，私有订阅、已解压程序、动态规则和 GeoData 不进入该缓存。
 
 GitHub 定时触发可能延迟；工作流必须位于默认分支，公开仓库长期无活动时调度也可能被暂停。Fork 按 GitHub 的 Actions 启用规则处理。分支保护若拒绝机器人推送，任务会失败，不会绕过保护。当前文件准备完成不等于远程流程已经运行成功。
 
@@ -230,15 +249,44 @@ DNS 地址中的 `#@proxy` 按版本替换为主代理组。节点与直连解�
 
 修改运行模板后重新构建、渲染；这不会影响 OpenClash。图形客户端可能覆盖部分设置，以最终运行配置为准。
 
-## 内核配置校验
+## Stash 订阅转换
+
+原有 [标准版 INI](https://raw.githubusercontent.com/hqw567/personal-clash-rules/refs/heads/main/dist/subconverter/standard.ini) 及 `target=clash` 用法继续保留。附加 Stash 标准版在转换服务中使用以下参数：
+
+```text
+target=stash
+config=https://raw.githubusercontent.com/hqw567/personal-clash-rules/refs/heads/main/dist/subconverter-stash/standard.ini
+```
+
+节点订阅仍由转换服务原来的订阅参数传入，不填进公开模板；手工拼接完整请求地址时应对参数值进行 URL 编码。其他版本将 `standard.ini` 换成对应的版本文件名即可。转换完成后，将服务返回的配置链接导入 Stash；INI 本身不是客户端运行 YAML。
+
+Stash 官方说明其兼容 [Clash 配置标准](https://stash.wiki/en)，并支持 `domain`/`ipcidr` 的 [MRS 规则集](https://stash.wiki/en/rules/rule-set)和 [`url-test.tolerance`](https://stash.wiki/en/proxy-protocols/proxy-groups)。本项目的附加 INI 适配当前固定转换器的 `target=stash` 输出约束。转换后端拒绝某类输入，不代表 Stash 客户端不能读取所有包含同类能力的配置。
+
+两套 INI 分别验证各自目标，原有 `target=clash` 链路仍可用于兼容该配置的客户端。附加 Stash 模板的转换测试不等于 Stash 真机导入、节点连通或流量命中验证。
+
+附加 Stash 版有以下具体适配，原有 29 份产物不受影响：
+
+- 域名分类及非国家 GEOIP 分类改用对应 MRS Rule Provider，保留路由目标；国家 GEOIP 规则保留原形式。
+- 混合 IP 规则转换为纯 IP 集合时，从固定的上游 `Custom_Direct.list` 补回目标端口规则。已知的 `SRC-PORT,41641` 在这套转换模板中省略，并在产物注释中注明；[Stash 官方将 `SRC-PORT` 列为部分版本的 beta 能力](https://stash.wiki/en/rules/rule-types)，不能理解为客户端永远不支持。
+- 附加 INI 保留 `url-test`/`fallback` 原有测速 URL 和完整时间参数，例如 `300,,50`。固定转换器 v1.10.5 的 `target=stash` 导出仍可能不投影 URL、timeout、tolerance 等字段，实测 tolerance 未写出；这属于转换器输出边界。Stash 自身支持 tolerance，需要时应核对最终配置并在客户端中补充。
+- 为适应转换器的节点选择表达式，部分复杂排除匹配会简化或经原自动组选择。特别是 Full 版，应确认转换后的地区和低倍率组包含预期节点。
+
+## 内核与订阅转换校验
 
 ```bash
 python scripts/check_mihomo.py --download --config-dir dist
+python scripts/check_conversion.py --download --config-dir dist
 ```
 
-版本由 `config/mihomo-version.txt` 固定。检查器验证官方内核归档的 SHA256 后缓存二进制；规则和 GeoData 每次重新下载，在同次检查中共享，结束后删除。它在隔离目录执行 `mihomo -t`，校验公开 YAML 的内核语法、规则和 GeoData 分类，不启动监听或 TUN，也不会连接真实订阅。订阅在校验目录中替换为临时节点 Provider；已下载的真实规则内容也会交给内核解析。
+版本由 `config/mihomo-version.txt` 固定。检查器验证官方内核归档 SHA256 后重新解压；规则和 GeoData 每次重新下载，在同次检查中共享，结束后删除。它在隔离目录执行 `mihomo -t`，校验公开 YAML 的内核语法、规则和 GeoData 分类，不启动监听或 TUN，也不会连接真实订阅。订阅在校验目录中替换为临时节点 Provider；已下载的真实规则内容也会交给内核解析。
 
-默认完整构建对应 20 个 YAML 校验样本。INI 由转换器结构检查负责，未在这里提交给第三方转换后端。内核校验通过也不证明节点连通、客户端实际接管、广告覆盖、DNS 路径或服务解锁。
+CI 先准备内核，再通过 `MIHOMO_TEST_BINARY` 将其传给单元测试，避免真实内核拒绝非法规则的用例因缺少二进制而跳过。默认完整构建对应 20 个 YAML 校验样本。
+
+INI 检查器使用 `config/converter-version.txt` 固定的本地转换器，在隔离目录启动仅监听回环地址的临时服务，以虚拟节点将 `dist/subconverter/` 中的 9 份 INI 转为 Clash，将 `dist/subconverter-stash/` 中的 9 份 INI 转为 Stash，共 18 次转换，不提交真实订阅或凭据给公共服务。此处的 Stash 是转换目标检查，尚不等于 Stash 真机验证。
+
+转换检查还会抓取并去重检查 Stash 输出引用的公开规则资源，以固定 Mihomo 内核解码 MRS、检查规则内容，防止新增链接不可用或格式错误。这是资源格式检查，不是使用 Mihomo 冒充 Stash 客户端运行验证。
+
+内核和转换校验通过都不能证明节点连通、客户端实际接管、广告覆盖、DNS 路径或服务解锁。
 
 ## 验证与更新边界
 

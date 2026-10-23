@@ -1,0 +1,56 @@
+name: Validate rule templates
+description: Validate generated templates with real pinned tools and public test data
+
+inputs:
+  build:
+    description: Rebuild all public templates before validating
+    required: false
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Cache the verified Mihomo archive
+      uses: actions/cache@v6
+      with:
+        # 只缓存内核归档；不缓存私有数据、已解压程序或动态规则/GeoData。
+        path: .local/tools/mihomo-*.gz
+        key: mihomo-archive-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('config/mihomo-version.txt', 'scripts/check_mihomo.py') }}
+
+    - name: Prepare and verify the pinned Mihomo binary
+      id: mihomo
+      shell: bash
+      run: python scripts/check_mihomo.py --prepare-only --download --github-output "$GITHUB_OUTPUT"
+
+    - name: Cache the verified converter archive
+      uses: actions/cache@v6
+      with:
+        path: .local/tools/SubConverter-Extended-*.tar.gz
+        key: converter-archive-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('config/converter-version.txt', 'scripts/check_conversion.py') }}
+
+    - name: Run unit tests including real-core rejection cases
+      shell: bash
+      env:
+        MIHOMO_TEST_BINARY: ${{ steps.mihomo.outputs.binary_path }}
+      run: python -m unittest discover -s tests -v
+
+    - name: Build all public templates from the current snapshot
+      if: inputs.build == 'true'
+      shell: bash
+      run: python scripts/rules.py build
+
+    - name: Check generated template consistency
+      shell: bash
+      run: python scripts/rules.py check
+
+    - name: Validate all public YAML with Mihomo
+      shell: bash
+      env:
+        MIHOMO_BINARY: ${{ steps.mihomo.outputs.binary_path }}
+      run: python scripts/check_mihomo.py --binary "$MIHOMO_BINARY" --config-dir dist
+
+    - name: Check actual INI conversion for Clash and Stash
+      shell: bash
+      env:
+        MIHOMO_BINARY: ${{ steps.mihomo.outputs.binary_path }}
+      run: python scripts/check_conversion.py --download --config-dir dist
