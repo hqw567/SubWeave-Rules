@@ -1,0 +1,3 @@
+# Public publication endpoint; forks can change these two values.
+repository: hqw567/personal-clash-rules
+ref: main

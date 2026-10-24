@@ -6,6 +6,6 @@
 
 实际转换回归使用 [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) 的固定官方发布版；内核校验使用 [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)。检查工具下载到被忽略的 `.local/`，不随本仓库提交；各工具遵循其自身许可证。
 
-广告规则引用 [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule) 的纯广告 Classical YAML，由运行客户端按周期获取。本仓库未复制广告名单；它独立遵循其项目的 GPL-3.0 许可。
+广告规则引用 [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule) 的四种方案的 Classical YAML（纯广告、完整防护、广告＋隐私、广告＋不受欢迎），由运行客户端按周期获取。本仓库未复制广告名单；它独立遵循其项目的 GPL-3.0 许可。
 
 本项目与上述维护者及 Mihomo/OpenClash 官方不存在官方支持或背书关系。

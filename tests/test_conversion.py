@@ -22,7 +22,7 @@ import check_conversion as checker
 AD = '🛡️ 广告过滤'
 PRIMARY = '🚀 手动选择'
 AD_URL = 'https://example.org/ads.yaml'
-SETTINGS = {'ads': {'enabled': True, 'group': AD, 'url': AD_URL}}
+SETTINGS = {'filter': {'enabled': True, 'group': AD, 'url': AD_URL}}
 DIRECT_RULES = [f'DOMAIN,service-{number}.example,DIRECT' for number in range(6)]
 
 

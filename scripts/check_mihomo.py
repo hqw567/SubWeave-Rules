@@ -22,9 +22,11 @@ import tempfile
 import time
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+from urllib.parse import urlsplit
 
 import yaml
 
+from filter_profiles import FILTER_PROFILES
 from rules import ROOT, VARIANTS, PLACEHOLDER, SELFHOST_PLACEHOLDER, load_yaml, validate_public_url
 
 
@@ -58,20 +60,36 @@ def clean_environment() -> dict[str, str]:
             if not key.startswith(('CLASH_', 'MIHOMO_'))}
 
 
+def public_resource_urls(url: str) -> list[str]:
+    """Known GitHub CDN aliases may fall back to the same repository/path."""
+    parts = urlsplit(url)
+    hosts = {'cdn.jsdelivr.net', 'testingcf.jsdelivr.net', 'fastly.jsdelivr.net', 'gcore.jsdelivr.net'}
+    match = re.fullmatch(r'/gh/([^/]+)/([^/@]+)@([^/]+)/(.+)', parts.path)
+    if parts.scheme == 'https' and parts.hostname in hosts and parts.port in (None, 443) and match:
+        owner, repo, ref, path = match.groups()
+        return [url, f'https://raw.githubusercontent.com/{owner}/{repo}/{ref}/{path}']
+    return [url]
+
+
 def fetch_public(url: str) -> bytes:
     validate_public_url(url)
+    candidates = public_resource_urls(url)
     for attempt in range(3):
-        try:
-            with urlopen(Request(url, headers={'User-Agent': 'personal-clash-rules-native-check/1'}), timeout=60) as response:
-                data = response.read(LIMIT + 1)
-            if not data or len(data) > LIMIT:
-                raise NativeCheckError('Public validation resource is empty or exceeds the size limit')
-            return data
-        except (OSError, HTTPError):
-            if attempt == 2:
-                raise NativeCheckError('Public validation resource download failed; publication must stop') from None
+        for candidate in candidates:
+            try:
+                with urlopen(Request(candidate, headers={'User-Agent': 'personal-clash-rules-native-check/2'}), timeout=60) as response:
+                    data = response.read(LIMIT + 1)
+            except (OSError, HTTPError):
+                continue
+            if len(data) > LIMIT:
+                raise NativeCheckError('Public validation resource exceeds the size limit')
+            if data:
+                if candidate != url:
+                    print('Public CDN resource fetched from its GitHub origin.', flush=True)
+                return data
+        if attempt < 2:
             time.sleep(attempt + 1)
-    raise AssertionError('unreachable')
+    raise NativeCheckError('Public validation resource download failed; publication must stop')
 
 
 def _atomic_write(path: Path, data: bytes) -> None:
@@ -173,7 +191,7 @@ def run_native(binary: Path, home: Path, config: Path, label: str = 'configurati
 
 
 class PublicResources:
-    """Fresh public resources per invocation, shared across all twenty templates."""
+    """Fresh public resources per invocation, shared across all templates."""
     def __init__(self, binary: Path, home: Path):
         self.binary, self.home = binary, home
         self.downloads: dict[str, Path] = {}
@@ -257,9 +275,9 @@ class PublicResources:
 
 
 def check_all(root: Path, directory: Path, binary: Path, timeout: int = 120) -> int:
-    expected = [Path(f'{platform_name}/{slug}.yaml') for platform_name in ('openclash', 'mihomo') for slug in VARIANTS]
+    expected = [Path(f'{profile}/{platform_name}/{slug}.yaml') for profile in FILTER_PROFILES for platform_name in ('openclash', 'mihomo') for slug in VARIANTS]
     if not all((directory / path).is_file() for path in expected):
-        raise NativeCheckError('Native validation requires all twenty generated public YAML templates')
+        raise NativeCheckError('Native validation requires all generated public YAML templates across filter profiles')
     # Validate the privacy boundary for every input before downloading or running.
     configs = [(path, public_config(directory / path)) for path in expected]
     local = root / '.local/native-check'

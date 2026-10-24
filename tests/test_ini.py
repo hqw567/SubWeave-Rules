@@ -12,7 +12,7 @@ from ini_support import build_ini
 
 AD_GROUP = "🛡️ 广告过滤"
 AD_URL = "https://rules.example/only-ads.yaml"
-SETTINGS = {"ads": {
+SETTINGS = {"filter": {
     "enabled": True, "name": "awavenue-ads-only", "group": AD_GROUP,
     "url": AD_URL, "interval": 86400,
 }}
@@ -37,8 +37,8 @@ class IniCompositionTests(unittest.TestCase):
                     "untouched=value"
                 )
                 personal = {
-                    "before_ads": ["DOMAIN,allowed.example,@direct"],
-                    "after_ads": ["DOMAIN,proxied.example,@proxy"],
+                    "before_filter": ["DOMAIN,allowed.example,@direct"],
+                    "after_filter": ["DOMAIN,proxied.example,@proxy"],
                 }
                 result = build_ini(source, personal, SETTINGS, primary)
                 group_line = f"custom_proxy_group={AD_GROUP}`select`[]REJECT`[]{primary}"
@@ -66,7 +66,7 @@ class IniCompositionTests(unittest.TestCase):
         primary = "🚀 手动选择"
         original_group = f"custom_proxy_group={primary}`select`[]DIRECT"
         source = f"; keep CRLF\r\n[custom]\r\nruleset={primary},[]FINAL\r\n{original_group}"
-        result = build_ini(source, {"before_ads": [], "after_ads": []}, SETTINGS, primary)
+        result = build_ini(source, {"before_filter": [], "after_filter": []}, SETTINGS, primary)
         ad_group = f"custom_proxy_group={AD_GROUP}`select`[]REJECT`[]{primary}"
         ad_rule = f"ruleset={AD_GROUP},clash-classic:{AD_URL},86400\r\n"
         self.assertIn(original_group + "\r\n" + ad_group, result)

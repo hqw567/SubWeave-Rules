@@ -32,7 +32,7 @@ _IP_FILES = {
 
 
 def _personal_supported(personal: dict) -> None:
-    for key in ("before_ads", "after_ads"):
+    for key in ("before_filter", "after_filter"):
         for rule in personal.get(key, []):
             if not isinstance(rule, str):
                 raise ValueError("Stash personal rules must be strings")
@@ -217,8 +217,8 @@ def build_stash_ini(source_text: str, personal: dict, settings: dict, proxy_grou
     """Inject personal/ad policy, then render explicit Stash compatibility mappings."""
     _personal_supported(personal)
     composed = build_ini(source_text, personal, settings, proxy_group)
-    ads_url = settings.get("ads", {}).get("url") if settings.get("ads", {}).get("enabled") else None
-    ad_name = settings.get("ads", {}).get("group") if settings.get("ads", {}).get("enabled") else None
+    ads_url = settings.get("filter", {}).get("url") if settings.get("filter", {}).get("enabled") else None
+    ad_name = settings.get("filter", {}).get("group") if settings.get("filter", {}).get("enabled") else None
     composed = _proxy_entry(composed, proxy_group, ad_name)
     newline_match = re.search(r"\r\n|\n|\r", composed)
     newline = newline_match[0] if newline_match else "\n"

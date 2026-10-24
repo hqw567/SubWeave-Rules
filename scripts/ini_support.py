@@ -91,7 +91,7 @@ def build_ini(source_text: str, personal: dict, settings: dict, proxy_group: str
             group_indices.append(index)
             policies.add(group[1].strip())
 
-    ads = settings.get("ads", {})
+    ads = settings.get("filter", {})
     if not isinstance(ads, dict) or not isinstance(ads.get("enabled", False), bool):
         raise ValueError("Advertising settings must contain a boolean enabled flag.")
     ad_rule: list[str] = []
@@ -115,12 +115,12 @@ def build_ini(source_text: str, personal: dict, settings: dict, proxy_group: str
         ad_group = f"custom_proxy_group={name}`select`[]REJECT`[]{proxy_group}"
 
     rule_parts: dict[str, list[str]] = {}
-    for key in ("before_ads", "after_ads"):
+    for key in ("before_filter", "after_filter"):
         rules = personal.get(key, [])
         if not isinstance(rules, list):
-            raise ValueError("Personal before_ads and after_ads values must be lists.")
+            raise ValueError("Personal before_filter and after_filter values must be lists.")
         rule_parts[key] = [_convert_rule(rule, policies, proxy_group) for rule in rules]
-    added_rules = rule_parts["before_ads"] + ad_rule + rule_parts["after_ads"]
+    added_rules = rule_parts["before_filter"] + ad_rule + rule_parts["after_filter"]
     if not added_rules and ad_group is None:
         return source_text
 

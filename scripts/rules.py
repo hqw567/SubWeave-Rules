@@ -20,6 +20,8 @@ from urllib.parse import quote, urlsplit
 from urllib.request import Request, urlopen
 
 import yaml
+from catalog_support import catalog_text
+from filter_profiles import DEFAULT_PROFILE, FILTER_PROFILES, select_profiles, profile_settings
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = 'Aethersailor/Custom_OpenClash_Rules'
@@ -36,7 +38,6 @@ VARIANTS = {
     'selfhosted-manual-fallback': 'Custom_Clash_Selfhosted_Manual_Fallback',
 }
 INI_VARIANTS = {k: v for k, v in VARIANTS.items() if not k.startswith('selfhosted-')}
-INI_VARIANTS['mainland'] = 'Custom_Clash_Mainland'
 STASH_INI_VARIANTS = dict(INI_VARIANTS)
 BUILTINS = {'DIRECT', 'REJECT', 'REJECT-DROP', 'PASS', 'PASS-RULE', 'COMPATIBLE'}
 PLACEHOLDER = 'https://example.com/REPLACE_WITH_YOUR_SUBSCRIPTION_URL'
@@ -131,17 +132,17 @@ def _personal_rules(personal: dict, key: str, primary: str) -> list[str]:
     return result
 
 
-def _ads(settings: dict) -> dict:
-    ads = settings.get('ads', {})
+def _filter_config(settings: dict) -> dict:
+    ads = settings.get('filter', {})
     if not isinstance(ads, dict) or not isinstance(ads.get('enabled'), bool):
-        raise ValueError('settings.ads.enabled must be true or false')
+        raise ValueError('effective filter.enabled must be true or false')
     if set(ads) - {'enabled', 'name', 'group', 'url', 'interval'}:
         raise ValueError('Unknown advertising setting; use the documented ads fields')
     if not ads['enabled']:
         return ads
     validate_public_url(ads.get('url'))
     if not isinstance(ads.get('interval'), int) or ads['interval'] <= 0:
-        raise ValueError('settings.ads.interval must be a positive integer')
+        raise ValueError('effective filter.interval must be a positive integer')
     for key in ['name', 'group']:
         value = ads.get(key)
         if not isinstance(value, str) or not value or any(c in value for c in ',\n`@'):
@@ -152,7 +153,7 @@ def _ads(settings: dict) -> dict:
 def build_config(upstream: dict, personal: dict, settings: dict, runtime: dict | None = None) -> dict:
     base = copy.deepcopy(upstream)
     primary = _primary(base)
-    ads = _ads(settings)
+    ads = _filter_config(settings)
     if runtime:
         if set(runtime) & {'proxy-providers', 'proxy-groups', 'rule-providers', 'rules', 'proxies'}:
             raise ValueError('Runtime template may not replace routing or node sections')
@@ -162,8 +163,8 @@ def build_config(upstream: dict, personal: dict, settings: dict, runtime: dict |
             provider['url'] = SELFHOST_PLACEHOLDER if name == 'selfhost' else PLACEHOLDER
         if provider.get('header') is None:
             provider.pop('header', None)
-    before = _personal_rules(personal, 'before_ads', primary)
-    after = _personal_rules(personal, 'after_ads', primary)
+    before = _personal_rules(personal, 'before_filter', primary)
+    after = _personal_rules(personal, 'after_filter', primary)
     added = []
     if ads['enabled']:
         if ads['group'] in {g['name'] for g in base['proxy-groups']} or ads['group'] in BUILTINS:
@@ -215,24 +216,24 @@ def validate_config(config: dict) -> None:
 
 
 def _personal_for(personal: dict, slug: str, format_name: str = 'yaml') -> dict:
-    unknown = set(personal) - {'before_ads', 'after_ads', 'variants', 'formats'}
+    unknown = set(personal) - {'before_filter', 'after_filter', 'variants', 'formats'}
     variants = personal.get('variants', {})
     if unknown or not isinstance(variants, dict) or set(variants) - set(VARIANTS):
         raise ValueError('Unknown personal rule section or template variant')
     extra = variants.get(slug, {})
-    if not isinstance(extra, dict) or set(extra) - {'before_ads', 'after_ads', 'formats'}:
+    if not isinstance(extra, dict) or set(extra) - {'before_filter', 'after_filter', 'formats'}:
         raise ValueError('Invalid variant-specific personal rule section')
     def format_layer(block):
         formats = block.get('formats', {})
         if not isinstance(formats, dict) or set(formats) - {'yaml', 'ini', 'stash'}:
             raise ValueError('Personal formats must contain only yaml, ini and stash sections')
         selected = formats.get(format_name, {})
-        if not isinstance(selected, dict) or set(selected) - {'before_ads', 'after_ads'}:
+        if not isinstance(selected, dict) or set(selected) - {'before_filter', 'after_filter'}:
             raise ValueError('Invalid format-specific personal rule section')
         return selected
     layers = [personal, format_layer(personal), extra, format_layer(extra)]
     merged = {}
-    for key in ['before_ads', 'after_ads']:
+    for key in ['before_filter', 'after_filter']:
         merged[key] = []
         for layer in layers:
             rules = layer.get(key, [])
@@ -257,11 +258,9 @@ def _selection(formats='all', platform='all', variants=None):
         raise ValueError('Stash conversion templates require --format ini --platform stash')
     if platform not in {'all', 'stash'} and formats != 'yaml':
         raise ValueError('--platform requires --format yaml')
-    selected = set(variants) if variants is not None else set(VARIANTS) | {'mainland'}
-    if not selected or selected - (set(VARIANTS) | {'mainland'}):
+    selected = set(variants) if variants is not None else set(VARIANTS)
+    if not selected or selected - (set(VARIANTS)):
         raise ValueError('Unknown or empty variant selection')
-    if variants is not None and formats == 'yaml' and 'mainland' in selected:
-        raise ValueError('Mainland is an INI alias; select standard for YAML')
     if variants is not None and formats == 'ini' and selected - set(INI_VARIANTS):
         raise ValueError('Selected selfhosted variants do not have upstream INI templates')
     yaml_variants = {k: v for k, v in VARIANTS.items() if k in selected and formats != 'ini'}
@@ -272,44 +271,48 @@ def _selection(formats='all', platform='all', variants=None):
 
 
 def prepare_outputs(root: Path, vendor_dir: Path | None = None, subscription_url=None,
-                    *, formats='all', platform='all', variants=None) -> dict[str, str]:
+                    *, formats='all', platform='all', variants=None, profiles=None) -> dict[str, str]:
     if subscription_url is not None:
         raise ValueError('Use render_private for credentials; public builds only contain placeholders')
     vendor = vendor_dir or root / 'vendor/aethersailor'
     meta = json.loads((vendor / 'upstream.json').read_text())
     settings = load_yaml(root / 'config/settings.yaml')
-    _ads(settings)
+    selected_profiles = select_profiles(profiles)
+    configured = {profile: profile_settings(settings, profile) for profile in selected_profiles}
+    for options in configured.values():
+        _filter_config(options)
     personal = load_yaml(root / 'rules/custom.yaml')
     yaml_variants, ini_variants, stash_variants, platforms = _selection(formats, platform, variants)
     runtime = load_yaml(root / 'templates/mihomo-runtime.yaml') if yaml_variants and 'mihomo' in platforms else None
-    outputs = {}
-    for slug, stem in yaml_variants.items():
-        upstream = load_yaml(vendor / (stem + '.yaml'))
-        rules = _personal_for(personal, slug, 'yaml')
-        for client in platforms:
-            config = build_config(upstream, rules, settings, runtime if client == 'mihomo' else None)
-            outputs[f'{client}/{slug}.yaml'] = _header(meta['commit']) + yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=160)
+    needed = set(yaml_variants) | set(ini_variants) | set(stash_variants)
+    upstreams = {slug: load_yaml(vendor / (VARIANTS[slug] + '.yaml')) for slug in needed}
+    ini_sources = {}
+    for slug, stem in {**ini_variants, **stash_variants}.items():
+        with (vendor / (stem + '.ini')).open(encoding='utf-8', newline='') as handle:
+            ini_sources[slug] = handle.read()
     if ini_variants:
         from ini_support import build_ini
-    for slug, stem in ini_variants.items():
-        source_slug = 'standard' if slug == 'mainland' else slug
-        base = load_yaml(vendor / (VARIANTS[source_slug] + '.yaml'))
-        with (vendor / (stem + '.ini')).open(encoding='utf-8', newline='') as handle:
-            ini = build_ini(handle.read(), _personal_for(personal, source_slug, 'ini'), settings, _primary(base))
-        outputs[f'subconverter/{slug}.ini'] = _header(meta['commit']).replace('# ', '; ') + ini
     if stash_variants:
         from stash_support import build_stash_ini
         direct_source = (vendor / 'Custom_Direct.list').read_text(encoding='utf-8')
-        for slug, stem in stash_variants.items():
-            source_slug = 'standard' if slug == 'mainland' else slug
-            base = load_yaml(vendor / (VARIANTS[source_slug] + '.yaml'))
-            with (vendor / (stem + '.ini')).open(encoding='utf-8', newline='') as handle:
-                ini = build_stash_ini(handle.read(), _personal_for(personal, source_slug, 'stash'), settings, _primary(base), direct_source)
-            outputs[f'subconverter-stash/{slug}.ini'] = _header(meta['commit']).replace('# ', '; ') + ini
+    outputs = {}
+    for profile, options in configured.items():
+        header = _header(meta['commit']) + f'# Filter profile: {profile}\n'
+        for slug in yaml_variants:
+            rules = _personal_for(personal, slug, 'yaml')
+            for client in platforms:
+                config = build_config(upstreams[slug], rules, options, runtime if client == 'mihomo' else None)
+                outputs[f'{profile}/{client}/{slug}.yaml'] = header + yaml.safe_dump(config, allow_unicode=True, sort_keys=False, width=160)
+        for slug in ini_variants:
+            ini = build_ini(ini_sources[slug], _personal_for(personal, slug, 'ini'), options, _primary(upstreams[slug]))
+            outputs[f'{profile}/subconverter/{slug}.ini'] = header.replace('# ', '; ') + ini
+        for slug in stash_variants:
+            ini = build_stash_ini(ini_sources[slug], _personal_for(personal, slug, 'stash'), options, _primary(upstreams[slug]), direct_source)
+            outputs[f'{profile}/subconverter-stash/{slug}.ini'] = header.replace('# ', '; ') + ini
     return outputs
 
 
-def _write_outputs(directory: Path, outputs: dict, commit: str, file_commits=None) -> None:
+def _write_outputs(directory: Path, outputs: dict, commit: str, file_commits=None, *, public_root=None) -> None:
     directory.mkdir(parents=True, exist_ok=True)
     hashes = {}
     for filename, content in outputs.items():
@@ -323,6 +326,8 @@ def _write_outputs(directory: Path, outputs: dict, commit: str, file_commits=Non
     manifest = {'upstream_commit': next(iter(revisions)) if len(revisions) == 1 else None,
                 'files': dict(sorted(hashes.items())), 'file_upstream_commits': provenance}
     (directory / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
+    if public_root is not None:
+        (directory / 'catalog.json').write_text(catalog_text(public_root, manifest, outputs), encoding='utf-8', newline='\n')
 
 
 def _merge_existing(directory: Path, updates: dict[str, str], commit: str):
@@ -337,7 +342,7 @@ def _merge_existing(directory: Path, updates: dict[str, str], commit: str):
         meta_path = directory / 'manifest.json'
         meta = json.loads(meta_path.read_text(encoding='utf-8')) if meta_path.exists() else {}
         for path in paths:
-            if path.is_file() and path != meta_path:
+            if path.is_file() and path != meta_path and path != directory / 'catalog.json':
                 name = path.relative_to(directory).as_posix()
                 merged[name] = path.read_bytes()
                 provenance[name] = meta.get('file_upstream_commits', {}).get(name, meta.get('upstream_commit'))
@@ -385,39 +390,40 @@ def _same_tree(left: Path, right: Path) -> bool:
 def _publish_outputs(root: Path, outputs: dict, commit: str, provenance=None) -> bool:
     with tempfile.TemporaryDirectory(prefix='.sync-', dir=root) as tmp:
         staged = Path(tmp) / 'generated'
-        _write_outputs(staged, outputs, commit, provenance)
+        _write_outputs(staged, outputs, commit, provenance, public_root=root)
         if _same_tree(staged, root / 'dist'):
             return False
         _replace_trees([(staged, root / 'dist')])
     return True
 
 
-def build(root: Path, *, formats='all', platform='all', variants=None) -> None:
-    outputs = prepare_outputs(root, formats=formats, platform=platform, variants=variants)
+def build(root: Path, *, formats='all', platform='all', variants=None, profiles=None) -> None:
+    outputs = prepare_outputs(root, formats=formats, platform=platform, variants=variants, profiles=profiles)
     commit = json.loads((root / 'vendor/aethersailor/upstream.json').read_text())['commit']
-    partial = formats != 'all' or platform != 'all' or variants is not None
+    partial = formats != 'all' or platform != 'all' or variants is not None or profiles is not None
     merged, provenance = _merge_existing(root / 'dist', outputs, commit) if partial else (outputs, None)
     changed = _publish_outputs(root, merged, commit, provenance)
     state = 'updated' if changed else 'unchanged'
     print(f'Built {len(outputs)} public templates: {state} (no subscription credentials).')
 
 
-def check(root: Path, *, formats='all', platform='all', variants=None) -> None:
+def check(root: Path, *, formats='all', platform='all', variants=None, profiles=None) -> None:
     vendor = root / 'vendor/aethersailor'
     meta = json.loads((vendor / 'upstream.json').read_text())
     yaml_variants, ini_variants, stash_variants, _ = _selection(formats, platform, variants)
     required = {'LICENSE'} | {stem + '.yaml' for stem in yaml_variants.values()}
     for slug, stem in {**ini_variants, **stash_variants}.items():
-        required.update({stem + '.ini', VARIANTS['standard' if slug == 'mainland' else slug] + '.yaml'})
+        required.update({stem + '.ini', VARIANTS[slug] + '.yaml'})
     if stash_variants:
         required.add('Custom_Direct.list')
     for name in required:
         if hashlib.sha256((vendor / name).read_bytes()).hexdigest() != meta['files'].get(name):
             raise ValueError('Vendored source hash mismatch; sync upstream instead of editing snapshots')
-    outputs = prepare_outputs(root, formats=formats, platform=platform, variants=variants)
+    outputs = prepare_outputs(root, formats=formats, platform=platform, variants=variants, profiles=profiles)
     dist = root / 'dist'
     manifest = json.loads((dist / 'manifest.json').read_text(encoding='utf-8'))
-    files = {p.relative_to(dist).as_posix(): p.read_bytes() for p in dist.rglob('*') if p.is_file() and p.name != 'manifest.json'}
+    files = {p.relative_to(dist).as_posix(): p.read_bytes() for p in dist.rglob('*')
+             if p.is_file() and p not in {dist / 'manifest.json', dist / 'catalog.json'}}
     hashes = {k: hashlib.sha256(v).hexdigest() for k, v in files.items()}
     if hashes != manifest.get('files') or set(manifest.get('file_upstream_commits', {})) != set(files):
         raise ValueError('Generated manifest does not match files; rebuild the affected outputs')
@@ -428,7 +434,9 @@ def check(root: Path, *, formats='all', platform='all', variants=None) -> None:
     summary = next(iter(unique_revisions)) if len(unique_revisions) == 1 else None
     if manifest.get('upstream_commit') != summary:
         raise ValueError('Generated manifest source summary does not match per-file revisions')
-    if formats == 'all' and platform == 'all' and variants is None and set(files) != set(outputs):
+    if (dist / 'catalog.json').read_text(encoding='utf-8') != catalog_text(root, manifest, files):
+        raise ValueError('Generated template catalog is stale; run python scripts/rules.py build')
+    if formats == 'all' and platform == 'all' and variants is None and profiles is None and set(files) != set(outputs):
         raise ValueError('Generated output set is stale; run python scripts/rules.py build')
     for filename, content in outputs.items():
         if files.get(filename) != content.encode('utf-8') or manifest['file_upstream_commits'][filename] != meta['commit']:
@@ -436,7 +444,7 @@ def check(root: Path, *, formats='all', platform='all', variants=None) -> None:
     print(f'Checked hashes, YAML keys, references and reproducibility for {len(outputs)} templates.')
 
 
-def render_private(root: Path, secrets_path: Path, output: Path, variants=None) -> list[Path]:
+def render_private(root: Path, secrets_path: Path, output: Path, variants=None, profile=DEFAULT_PROFILE) -> list[Path]:
     local = root.resolve() / '.local'
     resolved = output.resolve()
     if not resolved.is_relative_to(local) or resolved == local:
@@ -453,7 +461,7 @@ def render_private(root: Path, secrets_path: Path, output: Path, variants=None) 
             selected.append('selfhosted-manual-fallback')
     if set(selected) - set(VARIANTS):
         raise ValueError('Unknown variant')
-    public = prepare_outputs(root, formats='yaml', variants=selected)
+    public = prepare_outputs(root, formats='yaml', variants=selected, profiles=[profile])
     private = {}
     for filename, content in public.items():
         if not filename.endswith('.yaml') or Path(filename).stem not in selected:
@@ -563,12 +571,12 @@ def sync(root: Path, ref: str | None = None) -> None:
         (vendor / 'upstream.json').write_text(json.dumps(meta, indent=2) + '\n', encoding='utf-8', newline='\n')
         outputs = prepare_outputs(root, vendor_dir=vendor)
         staged = Path(tmp) / 'generated'
-        _write_outputs(staged, outputs, commit)
+        _write_outputs(staged, outputs, commit, public_root=root)
         replacements = [(vendor, root / 'vendor/aethersailor')]
         if not _same_tree(staged, root / 'dist'):
             replacements.append((staged, root / 'dist'))
         _replace_trees(replacements)
-    print(f'Synced upstream {commit}; regenerated {len(outputs)} templates. Personal rules preserved.')
+    print(f'Synced upstream {commit}; regenerated {len(outputs)} templates. Custom extensions preserved.')
 
 
 def main(argv=None) -> int:
@@ -579,23 +587,25 @@ def main(argv=None) -> int:
         command = commands.add_parser(name, help=help_text)
         command.add_argument('--format', dest='formats', choices=['all', 'yaml', 'ini'], default='all')
         command.add_argument('--platform', choices=['all', 'openclash', 'mihomo', 'stash'], default='all')
-        command.add_argument('--variant', action='append', choices=list(VARIANTS) + ['mainland'])
+        command.add_argument('--variant', action='append', choices=list(VARIANTS))
+        command.add_argument('--profile', action='append', choices=list(FILTER_PROFILES))
     syncing = commands.add_parser('sync', help='Fetch a pinned upstream revision and rebuild all templates')
     syncing.add_argument('--ref', help='One-shot override; otherwise use config/upstream.yaml')
     rendering = commands.add_parser('render', help='Render private configurations only into .local')
     rendering.add_argument('--secrets', default='.local/secrets.yaml')
     rendering.add_argument('--output', default='.local/rendered')
     rendering.add_argument('--variant', action='append', choices=VARIANTS)
+    rendering.add_argument('--profile', choices=list(FILTER_PROFILES), default=DEFAULT_PROFILE)
     args = parser.parse_args(argv)
     try:
         if args.command == 'build':
-            build(ROOT, formats=args.formats, platform=args.platform, variants=args.variant)
+            build(ROOT, formats=args.formats, platform=args.platform, variants=args.variant, profiles=args.profile)
         elif args.command == 'check':
-            check(ROOT, formats=args.formats, platform=args.platform, variants=args.variant)
+            check(ROOT, formats=args.formats, platform=args.platform, variants=args.variant, profiles=args.profile)
         elif args.command == 'sync':
             sync(ROOT, args.ref)
         else:
-            paths = render_private(ROOT, ROOT / args.secrets, ROOT / args.output, args.variant)
+            paths = render_private(ROOT, ROOT / args.secrets, ROOT / args.output, args.variant, args.profile)
             print(f'Rendered {len(paths)} private YAML files inside .local (credentials not printed).')
     except (ValueError, OSError, KeyError, TypeError) as exc:
         # Never include YAML excerpts or URL values in diagnostics.

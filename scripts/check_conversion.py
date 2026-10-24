@@ -32,6 +32,7 @@ from urllib.request import ProxyHandler, build_opener
 import yaml
 
 from check_mihomo import PublicResources, fetch_public, locate_binary, run_native
+from filter_profiles import FILTER_PROFILES, profile_settings
 from rules import ROOT, INI_VARIANTS, load_yaml, validate_public_url
 
 
@@ -326,7 +327,7 @@ def validate_converted(config: dict, source: str, target: str, settings: dict) -
         if node.get('server') not in {f'192.0.2.{index}' for index in range(1, 7)}:
             raise ConversionError('Converted output unexpectedly contains a non-fixture node')
     primary = next((name for name in ('🚀 手动选择', '🚀 故障转移') if name in names), None)
-    ads = settings.get('ads', {})
+    ads = settings.get('filter', {})
     if ads.get('enabled'):
         ad = groups[-1]
         if ad.get('name') != ads.get('group') or ad.get('type') != 'select' or ad.get('proxies') != ['REJECT', primary]:
@@ -403,23 +404,26 @@ def validate_resources(root: Path, configs: list[dict], binary: Path) -> int:
 
 def check_all(root: Path, directory: Path, archive: Path, binary: Path | None = None) -> int:
     settings = load_yaml(root / 'config/settings.yaml')
-    inputs = [(target, slug, directory / folder / f'{slug}.ini')
+    inputs = [(profile, target, slug, directory / profile / folder / f'{slug}.ini')
+              for profile in FILTER_PROFILES
               for target, folder in (('clash', 'subconverter'), ('stash', 'subconverter-stash'))
               for slug in INI_VARIANTS]
-    if not all(path.is_file() for _, _, path in inputs):
-        raise ConversionError('Conversion regression needs nine shared and nine additional Stash candidate INI files')
-    sources = [(target, slug, path.read_text(encoding='utf-8')) for target, slug, path in inputs]
-    for _, _, source in sources:
+    if not all(path.is_file() for _, _, _, path in inputs):
+        raise ConversionError('Conversion regression requires all profile/target candidate INI files')
+    sources = [(profile, target, slug, path.read_text(encoding='utf-8')) for profile, target, slug, path in inputs]
+    for _, _, _, source in sources:
         parse_template(source)
     stash_configs = []
     with local_converter(root, archive) as converter:
-        for target, slug, source in sources:
+        for profile, target, slug, source in sources:
             try:
                 config = converter.convert(source, target)
-                validate_converted(config, source, target, settings)
+                validate_converted(config, source, target, profile_settings(settings, profile))
+                if profile == 'custom-only' and any('AWAvenue-Ads-Rule' in str(p.get('url', '')) for p in config.get('rule-providers', {}).values()):
+                    raise ConversionError('Custom-only profile unexpectedly includes AWAvenue')
             except ConversionError as error:
-                raise ConversionError(f'{target}/{slug}: {error}') from None
-            print(f'Conversion check passed: {target}/{slug}', flush=True)
+                raise ConversionError(f'{profile}/{target}/{slug}: {error}') from None
+            print(f'Conversion check passed: {profile}/{target}/{slug}', flush=True)
             if target == 'stash':
                 stash_configs.append(config)
     if binary is None:

@@ -64,7 +64,7 @@ def upstream_fixture() -> dict:
 
 def settings_fixture() -> dict:
     return {
-        "ads": {
+        "filter": {
             "enabled": True,
             "name": "awavenue-ads-only",
             "url": "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical-Only.Ads.yaml",
@@ -82,7 +82,7 @@ class CompositionTests(unittest.TestCase):
         after = "IP-CIDR,192.0.2.0/24,🚀 手动选择,no-resolve"
         result = generator.build_config(
             upstream,
-            {"before_ads": [before], "after_ads": [after]},
+            {"before_filter": [before], "after_filter": [after]},
             settings_fixture(),
         )
         generator.validate_config(result)
@@ -109,17 +109,17 @@ class CompositionTests(unittest.TestCase):
     def test_disabling_ads_keeps_personal_rules_and_upstream(self):
         upstream = upstream_fixture()
         settings = settings_fixture()
-        settings["ads"]["enabled"] = False
-        personal = {"before_ads": ["DOMAIN,allowed.example,DIRECT"], "after_ads": ["DOMAIN,other.example,DIRECT"]}
+        settings["filter"]["enabled"] = False
+        personal = {"before_filter": ["DOMAIN,allowed.example,DIRECT"], "after_filter": ["DOMAIN,other.example,DIRECT"]}
         result = generator.build_config(upstream, personal, settings)
-        self.assertEqual(result["rules"], personal["before_ads"] + personal["after_ads"] + upstream["rules"])
+        self.assertEqual(result["rules"], personal["before_filter"] + personal["after_filter"] + upstream["rules"])
         self.assertNotIn("awavenue-ads-only", result.get("rule-providers", {}))
-        self.assertFalse(any(group["name"] == settings["ads"]["group"] for group in result["proxy-groups"]))
+        self.assertFalse(any(group["name"] == settings["filter"]["group"] for group in result["proxy-groups"]))
 
     def test_disabling_ads_does_not_require_unused_ad_settings(self):
         upstream = upstream_fixture()
         result = generator.build_config(
-            upstream, {"before_ads": [], "after_ads": []}, {"ads": {"enabled": False}}
+            upstream, {"before_filter": [], "after_filter": []}, {"filter": {"enabled": False}}
         )
         self.assertEqual(result["rules"], upstream["rules"])
         self.assertEqual(result["proxy-groups"], upstream["proxy-groups"])
@@ -128,7 +128,7 @@ class CompositionTests(unittest.TestCase):
     def test_unknown_policy_and_rule_provider_are_rejected(self):
         for rule in ("DOMAIN,example.com,missing-policy", "RULE-SET,missing-provider,DIRECT"):
             with self.subTest(rule=rule), self.assertRaises(ValueError):
-                config = generator.build_config(upstream_fixture(), {"before_ads": [rule], "after_ads": []}, settings_fixture())
+                config = generator.build_config(upstream_fixture(), {"before_filter": [rule], "after_filter": []}, settings_fixture())
                 generator.validate_config(config)
 
     def test_proxy_alias_follows_the_variant_in_rules_and_runtime(self):
@@ -140,7 +140,7 @@ class CompositionTests(unittest.TestCase):
                 runtime = {"dns": {"nameserver-policy": {"example.com": ["https://dns.example/dns-query#@proxy"]}}}
                 result = generator.build_config(
                     upstream,
-                    {"before_ads": ["DOMAIN,proxy.example,@proxy"], "after_ads": []},
+                    {"before_filter": ["DOMAIN,proxy.example,@proxy"], "after_filter": []},
                     settings_fixture(),
                     runtime,
                 )
@@ -174,7 +174,7 @@ class InputSafetyTests(unittest.TestCase):
                 with self.assertRaises(ValueError) as raised:
                     generator.validate_public_url(url)
                 self.assertNotIn(marker, str(raised.exception))
-        generator.validate_public_url(settings_fixture()["ads"]["url"])
+        generator.validate_public_url(settings_fixture()["filter"]["url"])
 
 
 class ProjectOutputTests(unittest.TestCase):
@@ -204,16 +204,51 @@ class ProjectOutputTests(unittest.TestCase):
             for path in [directory, *directory.rglob("*")]
         }
 
+    def test_catalog_tracks_targets_hashes_partial_builds_and_private_boundary(self):
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root)
+            generator.check(self.root)
+        catalog_path = self.root / "dist/catalog.json"
+        catalog = json.loads(catalog_path.read_text())
+        manifest = json.loads((self.root / "dist/manifest.json").read_text())
+        self.assertEqual(catalog["schemaVersion"], 2)
+        self.assertEqual(len(catalog["templates"]), 180)
+        for entry in catalog["templates"]:
+            self.assertEqual(entry["sha256"], manifest["files"][entry["path"]])
+            self.assertEqual(entry["upstreamCommit"], manifest["file_upstream_commits"][entry["path"]])
+            self.assertEqual(entry["kind"] == "conversion-template", entry["target"] in {"clash", "stash"})
+            if entry["target"] == "stash":
+                self.assertNotIn("geosite", entry["capabilities"])
+                self.assertNotIn("new_name", entry["requiredFlags"])
+        from catalog_support import catalog_text
+        source = "ruleset=Proxy,[]GEOSITE,geolocation-!cn\n"
+        fixture = {"files": {"ads-only/subconverter/gfw.ini": hashlib.sha256(source.encode()).hexdigest()},
+                   "file_upstream_commits": {"ads-only/subconverter/gfw.ini": "a" * 40}}
+        entry = json.loads(catalog_text(self.root, fixture, {"ads-only/subconverter/gfw.ini": source}))["templates"][0]
+        self.assertEqual(entry["capabilities"], ["geosite"])
+        first = catalog_path.read_bytes()
+        with redirect_stdout(io.StringIO()):
+            generator.build(self.root, formats="ini", platform="stash", variants=["lite"])
+            generator.check(self.root)
+        self.assertEqual(catalog_path.read_bytes(), first)
+        catalog["templates"][0]["target"] = "stash"
+        catalog_path.write_text(json.dumps(catalog))
+        with self.assertRaisesRegex(ValueError, "catalog"):
+            generator.check(self.root)
+        output = self.root / ".local/rendered"
+        generator.render_private(self.root, self.secrets, output, variants=["standard"])
+        self.assertFalse((output / "catalog.json").exists())
+
     def test_advanced_rule_builds_yaml_without_loading_ini_support(self):
         rule = "AND,((NETWORK,udp),(DST-PORT,443)),REJECT"
-        self.write_personal({"before_ads": [rule], "after_ads": [], "variants": {}})
-        options = {"formats": "yaml", "platform": "mihomo", "variants": ["standard"]}
+        self.write_personal({"before_filter": [rule], "after_filter": [], "variants": {}})
+        options = {"formats": "yaml", "platform": "mihomo", "variants": ["standard"], "profiles": ["ads-only"]}
         with patch.dict(sys.modules, {"ini_support": None}), redirect_stdout(io.StringIO()):
             generated = generator.prepare_outputs(self.root, **options)
             generator.build(self.root, **options)
             generator.check(self.root, **options)
-        self.assertEqual(set(generated), {"mihomo/standard.yaml"})
-        self.assertIn(rule, yaml.safe_load(generated["mihomo/standard.yaml"])["rules"])
+        self.assertEqual(set(generated), {"ads-only/mihomo/standard.yaml"})
+        self.assertIn(rule, yaml.safe_load(generated["ads-only/mihomo/standard.yaml"])["rules"])
         previous = self.tree_bytes(self.root / "dist")
         with self.assertRaises(ValueError):
             generator.build(self.root, formats="ini", variants=["standard"])
@@ -222,10 +257,10 @@ class ProjectOutputTests(unittest.TestCase):
     def test_yaml_only_rule_section_keeps_default_all_formats_build_working(self):
         rule = "AND,((NETWORK,udp),(DST-PORT,443)),REJECT"
         self.write_personal({
-            "before_ads": [], "after_ads": [], "variants": {},
-            "formats": {"yaml": {"before_ads": [rule], "after_ads": []}},
+            "before_filter": [], "after_filter": [], "variants": {},
+            "formats": {"yaml": {"before_filter": [rule], "after_filter": []}},
         })
-        generated = generator.prepare_outputs(self.root)
+        generated = generator.prepare_outputs(self.root, profiles=["ads-only"])
         yaml_files = {name: text for name, text in generated.items() if name.endswith(".yaml")}
         ini_files = {name: text for name, text in generated.items() if name.endswith(".ini")}
         self.assertEqual(len(yaml_files), len(generator.VARIANTS) * 2)
@@ -242,17 +277,17 @@ class ProjectOutputTests(unittest.TestCase):
 
     def test_selected_private_variant_ignores_unrelated_invalid_rules(self):
         self.write_personal({
-            "before_ads": [],
-            "after_ads": [],
+            "before_filter": [],
+            "after_filter": [],
             "variants": {
-                "standard": {"after_ads": ["DOMAIN,selected.example,@proxy"]},
-                "lite": {"after_ads": ["DOMAIN,unrelated.example,missing-policy"]},
+                "standard": {"after_filter": ["DOMAIN,selected.example,@proxy"]},
+                "lite": {"after_filter": ["DOMAIN,unrelated.example,missing-policy"]},
             },
         })
         output = self.root / ".local" / "rendered"
         rendered = generator.render_private(self.root, self.secrets, output, variants=["standard"])
         self.assertEqual({path.relative_to(output).as_posix() for path in rendered}, {
-            "mihomo/standard.yaml", "openclash/standard.yaml",
+            "ads-only/mihomo/standard.yaml", "ads-only/openclash/standard.yaml",
         })
         for path in rendered:
             self.assertIn("DOMAIN,selected.example,🚀 手动选择", yaml.safe_load(path.read_text())["rules"])
@@ -275,7 +310,7 @@ class ProjectOutputTests(unittest.TestCase):
         for path, content in original.items():
             self.assertEqual(path.read_bytes(), content)
         self.assertEqual({path.relative_to(output).as_posix() for path in second}, {
-            "mihomo/lite.yaml", "openclash/lite.yaml",
+            "ads-only/mihomo/lite.yaml", "ads-only/openclash/lite.yaml",
         })
         for path in second:
             config = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -294,8 +329,8 @@ class ProjectOutputTests(unittest.TestCase):
         generator.render_private(self.root, self.secrets, output, variants=["standard"])
         previous = self.tree_bytes(output)
         self.write_personal({
-            "before_ads": [], "after_ads": [],
-            "variants": {"lite": {"after_ads": ["DOMAIN,broken.example,missing-policy"]}},
+            "before_filter": [], "after_filter": [],
+            "variants": {"lite": {"after_filter": ["DOMAIN,broken.example,missing-policy"]}},
         })
         with self.assertRaises(ValueError):
             generator.render_private(self.root, self.secrets, output, variants=["lite"])
@@ -307,7 +342,7 @@ class ProjectOutputTests(unittest.TestCase):
             for slug, stem in generator.VARIANTS.items()
         }
         counts = {slug: 0 for slug in sources}
-        for filename, text in generator.prepare_outputs(self.root).items():
+        for filename, text in generator.prepare_outputs(self.root, profiles=["ads-only"]).items():
             if not filename.endswith(".yaml"):
                 continue
             with self.subTest(filename=filename):
@@ -319,7 +354,7 @@ class ProjectOutputTests(unittest.TestCase):
                 self.assertEqual(config["proxy-groups"][:-1], original["proxy-groups"])
                 primary = "🚀 故障转移" if slug.endswith("fallback") else "🚀 手动选择"
                 self.assertEqual(config["proxy-groups"][-1], {
-                    "name": "🛡️ 广告过滤", "type": "select", "proxies": ["REJECT", primary],
+                    "name": "🛡️ 秋风过滤", "type": "select", "proxies": ["REJECT", primary],
                 })
                 for name, provider in original.get("rule-providers", {}).items():
                     self.assertEqual(config["rule-providers"][name], provider)
@@ -337,7 +372,7 @@ class ProjectOutputTests(unittest.TestCase):
             generator.check(self.root)
 
     def test_private_render_does_not_modify_public_outputs(self):
-        public = generator.prepare_outputs(self.root)
+        public = generator.prepare_outputs(self.root, profiles=["ads-only"])
         self.assertEqual(sum(name.endswith(".yaml") for name in public), len(generator.VARIANTS) * 2)
         dist = self.root / "dist"
         dist.mkdir()
@@ -359,24 +394,24 @@ class ProjectOutputTests(unittest.TestCase):
             self.assertEqual(content["proxy-providers"]["provider1"]["url"], self.secret_url)
         current = {path.relative_to(dist): path.read_bytes() for path in dist.rglob("*") if path.is_file()}
         self.assertEqual(current, previous)
-        self.assertEqual(generator.prepare_outputs(self.root), public)
+        self.assertEqual(generator.prepare_outputs(self.root, profiles=["ads-only"]), public)
 
     def test_public_build_rejects_tokenized_rule_url(self):
         path = self.root / "config" / "settings.yaml"
         settings = generator.load_yaml(path)
-        settings["ads"]["url"] += "?token=synthetic-public-leak"
+        settings["filter"]["url"] = "https://example.org/rules.yaml?token=synthetic-public-leak"
         path.write_text(yaml.safe_dump(settings, allow_unicode=True), encoding="utf-8")
         with self.assertRaises(ValueError) as raised:
-            generator.prepare_outputs(self.root)
+            generator.prepare_outputs(self.root, profiles=["ads-only"])
         self.assertNotIn("synthetic-public-leak", str(raised.exception))
 
     def test_undocumented_ini_url_cannot_bypass_public_url_validation(self):
         path = self.root / "config" / "settings.yaml"
         settings = generator.load_yaml(path)
-        settings["ads"]["ini_url"] = "https://rules.example/private?token=synthetic-ini-secret"
+        settings["filter"]["ini_url"] = "https://rules.example/private?token=synthetic-ini-secret"
         path.write_text(yaml.safe_dump(settings, allow_unicode=True), encoding="utf-8")
         with self.assertRaises(ValueError) as raised:
-            generator.prepare_outputs(self.root)
+            generator.prepare_outputs(self.root, profiles=["ads-only"])
         self.assertNotIn("synthetic-ini-secret", str(raised.exception))
 
     def test_private_output_outside_local_is_rejected_before_writing(self):
@@ -436,7 +471,7 @@ class ProjectOutputTests(unittest.TestCase):
         }
         personal_path = self.root / "rules" / "custom.yaml"
         personal = generator.load_yaml(personal_path)
-        personal["before_ads"] = ["DOMAIN,preserved.example,DIRECT"]
+        personal["before_filter"] = ["DOMAIN,preserved.example,DIRECT"]
         personal_path.write_text(yaml.safe_dump(personal, allow_unicode=True), encoding="utf-8")
         previous_personal = personal_path.read_bytes()
 
@@ -460,7 +495,7 @@ class ProjectOutputTests(unittest.TestCase):
             self.assertEqual((vendor / name).read_bytes(), original)
         manifest = json.loads((self.root / "dist" / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["upstream_commit"], commit)
-        self.assertEqual(len(manifest["files"]), len(generator.VARIANTS) * 2 + len(generator.INI_VARIANTS) + len(generator.STASH_INI_VARIANTS))
+        self.assertEqual(len(manifest["files"]), len(generator.FILTER_PROFILES) * (len(generator.VARIANTS) * 2 + len(generator.INI_VARIANTS) + len(generator.STASH_INI_VARIANTS)))
         with redirect_stdout(io.StringIO()):
             generator.check(self.root)
 
@@ -514,7 +549,7 @@ class ProjectOutputTests(unittest.TestCase):
         previous_output = self.tree_bytes(self.root / "dist")
         personal_path = self.root / "rules" / "custom.yaml"
         personal = generator.load_yaml(personal_path)
-        personal.setdefault("before_ads", []).append("DOMAIN,rebuilt.example,@direct")
+        personal.setdefault("before_filter", []).append("DOMAIN,rebuilt.example,@direct")
         self.write_personal(personal)
         saved_personal = personal_path.read_bytes()
 
@@ -526,9 +561,9 @@ class ProjectOutputTests(unittest.TestCase):
         self.assertEqual((self.tree_bytes(vendor), self.tree_identity(vendor)), previous_vendor)
         self.assertEqual(personal_path.read_bytes(), saved_personal)
         self.assertNotEqual(self.tree_bytes(self.root / "dist"), previous_output)
-        native = yaml.safe_load((self.root / "dist" / "mihomo" / "standard.yaml").read_text())
+        native = yaml.safe_load((self.root / "dist" / "ads-only" / "mihomo" / "standard.yaml").read_text())
         self.assertIn("DOMAIN,rebuilt.example,DIRECT", native["rules"])
-        self.assertIn("ruleset=DIRECT,[]DOMAIN,rebuilt.example", (self.root / "dist" / "subconverter" / "standard.ini").read_text())
+        self.assertIn("ruleset=DIRECT,[]DOMAIN,rebuilt.example", (self.root / "dist" / "ads-only" / "subconverter" / "standard.ini").read_text())
 
     def test_same_revision_repairs_corrupt_missing_or_unverified_vendor_file(self):
         with redirect_stdout(io.StringIO()):

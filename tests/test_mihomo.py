@@ -6,6 +6,8 @@ test suite does not download binaries/data or start listeners.
 from __future__ import annotations
 
 import copy
+import io
+from urllib.error import URLError
 import os
 from pathlib import Path
 import subprocess
@@ -31,6 +33,18 @@ def minimal_config() -> dict:
 
 
 class NativeBoundaryTests(unittest.TestCase):
+    def test_known_cdn_failure_falls_back_to_same_origin_without_changing_provider_identity(self):
+        url = 'https://cdn.jsdelivr.net/gh/owner/rules@release/geo/site.mrs'
+        expected = 'https://raw.githubusercontent.com/owner/rules/release/geo/site.mrs'
+        with patch.object(checker, 'urlopen', side_effect=[URLError('unavailable'), io.BytesIO(b'public-rule-data')]) as request:
+            self.assertEqual(checker.fetch_public(url), b'public-rule-data')
+        self.assertEqual([call.args[0].full_url for call in request.call_args_list], [url, expected])
+        self.assertEqual(checker.public_resource_urls('https://cdn.jsdelivr.net.evil.example/gh/owner/rules@release/site.mrs'), ['https://cdn.jsdelivr.net.evil.example/gh/owner/rules@release/site.mrs'])
+
+    def test_empty_cdn_response_is_not_accepted_as_valid_rule_data(self):
+        with patch.object(checker, 'urlopen', side_effect=[io.BytesIO(b''), io.BytesIO(b'nonempty')]):
+            self.assertEqual(checker.fetch_public('https://testingcf.jsdelivr.net/gh/owner/rules@release/geosite.dat'), b'nonempty')
+
     def test_prepare_only_exports_binary_without_running_config_checks(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / 'github-output'

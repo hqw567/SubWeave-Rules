@@ -1,0 +1,3333 @@
+{
+  "schemaVersion": 2,
+  "defaultProfile": "ads-only",
+  "profiles": [
+    {
+      "id": "custom-only",
+      "name": "仅自定义扩展",
+      "description": "基础分流加自定义规则，不附加秋风过滤。",
+      "categories": [],
+      "ruleUrl": null
+    },
+    {
+      "id": "ads-only",
+      "name": "纯广告",
+      "description": "过滤广告，尽量减少对其他功能的影响。",
+      "categories": [
+        "ads"
+      ],
+      "ruleUrl": "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical-Only.Ads.yaml"
+    },
+    {
+      "id": "full-protection",
+      "name": "完整防护",
+      "description": "同时过滤广告、追踪及更新、推送等不受欢迎的连接。",
+      "categories": [
+        "ads",
+        "privacy",
+        "unwanted"
+      ],
+      "ruleUrl": "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical.yaml"
+    },
+    {
+      "id": "ads-unwanted",
+      "name": "广告＋不受欢迎",
+      "description": "保留统计与遥测，过滤广告及更新、推送等连接。",
+      "categories": [
+        "ads",
+        "unwanted"
+      ],
+      "ruleUrl": "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical-No.Privacy.yaml"
+    },
+    {
+      "id": "ads-privacy",
+      "name": "广告＋隐私",
+      "description": "过滤广告与追踪，保留更新、推送等功能连接。",
+      "categories": [
+        "ads",
+        "privacy"
+      ],
+      "ruleUrl": "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical-No.Unwelcome.yaml"
+    }
+  ],
+  "repository": "hqw567/personal-clash-rules",
+  "ref": "main",
+  "license": "CC-BY-SA-4.0",
+  "source": "https://github.com/Aethersailor/Custom_OpenClash_Rules",
+  "testedWith": {
+    "converter": "v1.10.5",
+    "mihomo": "v1.19.32"
+  },
+  "templates": [
+    {
+      "id": "ads-only/mihomo/full-fallback",
+      "profile": "ads-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/full-fallback.yaml",
+      "sha256": "bd73eb79f56efe1568ad85b18ad3ee616940eb48e9816b3db8ea9d83a1c4ccc9",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/full",
+      "profile": "ads-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/full.yaml",
+      "sha256": "8bcd475677a2aa0aee3a7959ad7526a0443ab4de478a86bb51ca39fed971fc43",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/gfw-fallback",
+      "profile": "ads-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/gfw-fallback.yaml",
+      "sha256": "0e714e128b8e9836bf304e775a3b97252b2cc071f69d3cf4cf85dd94917ac688",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/gfw",
+      "profile": "ads-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/gfw.yaml",
+      "sha256": "0bc8762b4328986fc8f7cda9315b6683cf3c991a569eeec4e3ea79859d2441eb",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/lite-fallback",
+      "profile": "ads-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/lite-fallback.yaml",
+      "sha256": "12419b291d9f7f35ea851e12c970b8825d625fdb95ab864ca00b819dc54e5a6b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/lite",
+      "profile": "ads-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/lite.yaml",
+      "sha256": "c914c1f397dabb7799f4e0dfb0b1b3a434e071f25266923f93d9dadc533484d4",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/selfhosted-manual-fallback",
+      "profile": "ads-only",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/selfhosted-manual-fallback.yaml",
+      "sha256": "658db1fd120d3efc25e745f58785da6332226c784499d3316f387f2d464bc918",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/selfhosted-provider-fallback",
+      "profile": "ads-only",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/selfhosted-provider-fallback.yaml",
+      "sha256": "b0018885022b6f9551b5d577089e3c0a2c76c5e6dd8bc5abf054a13e83abd3c9",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/standard-fallback",
+      "profile": "ads-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/standard-fallback.yaml",
+      "sha256": "65917b0c9bd156a7994e6cc4c151b0671f418e20deb8a8e171a93a2ad1c200fa",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/mihomo/standard",
+      "profile": "ads-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-only/mihomo/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/mihomo/standard.yaml",
+      "sha256": "95d9f8e78c33e92299b58642065f1ba63fdb53ab8515880075b513a97dc28b36",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/full-fallback",
+      "profile": "ads-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/full-fallback.yaml",
+      "sha256": "06a326a9d44e8028bbe4550ada914e41f0ae6ff845e840e929ca23781c9ca4d0",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/full",
+      "profile": "ads-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/full.yaml",
+      "sha256": "786f61b1a096d8b9f0be6ca56439a4e3d7349329ae76203b3fa7284964a962ee",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/gfw-fallback",
+      "profile": "ads-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/gfw-fallback.yaml",
+      "sha256": "55f66427ea0267df235a544cde02a9124ac1813d42ceb8b01757fddcbd3a6cf6",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/gfw",
+      "profile": "ads-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/gfw.yaml",
+      "sha256": "71595f037afba27eaa1d43461f74f49d2662cfdddd390651764211b947457d0f",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/lite-fallback",
+      "profile": "ads-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/lite-fallback.yaml",
+      "sha256": "dada9c78191ba984d9362f1759a4a22ab698a997766d3b9cfdffe97c7293a995",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/lite",
+      "profile": "ads-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/lite.yaml",
+      "sha256": "c6c8ed8ce6591e831a0b6a18a4da9844a0b21035eb4aab7aa54b21104783d34c",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/selfhosted-manual-fallback",
+      "profile": "ads-only",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/selfhosted-manual-fallback.yaml",
+      "sha256": "15751585f31cff11801f1bfdee93ecde3ea0c14b84aa387aa4d5568d0a9a7316",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/selfhosted-provider-fallback",
+      "profile": "ads-only",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/selfhosted-provider-fallback.yaml",
+      "sha256": "33a156fe51c66c29c88192682d532fb9e14bd8f3d5fd9ccf2568b7e47354b46c",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/standard-fallback",
+      "profile": "ads-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/standard-fallback.yaml",
+      "sha256": "39f3a10731d4b87287716e4988af94683623e1367a84eb6c1e1968c98f148fee",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/openclash/standard",
+      "profile": "ads-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-only/openclash/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/openclash/standard.yaml",
+      "sha256": "bc3c80106a73dd348b4cb3684a2aecb2af293560570b88318b22c6f81eabf0a2",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/stash/full-fallback",
+      "profile": "ads-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/full-fallback.ini",
+      "sha256": "cb438a83d0398993e0c8b88099455e9338121dbbade5820d53ca3b3317056f8c",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/stash/full",
+      "profile": "ads-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/full.ini",
+      "sha256": "f37fff6bf0e7389249daa1d0ff4d8dd2dcfea655cef15105ce68d420167e6c20",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/stash/gfw-fallback",
+      "profile": "ads-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/gfw-fallback.ini",
+      "sha256": "461174e3c371baadcad0790c19e57cb4b9900f3dc944d90d25546d5116082c8a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/stash/gfw",
+      "profile": "ads-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/gfw.ini",
+      "sha256": "0341a8a90d1417be2090b7457d7b0081b3d4e1f56b862db97be08e02cb55d308",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/stash/lite-fallback",
+      "profile": "ads-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/lite-fallback.ini",
+      "sha256": "2c243e6651c95a9269082b5d908dd6e1b6bf586403a02cfbf45ed7dc92bae2de",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/stash/lite",
+      "profile": "ads-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/lite.ini",
+      "sha256": "23419d409d57987298d8a48e2e02f1e394e95fe91475523019a17bcbaa448427",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/stash/standard-fallback",
+      "profile": "ads-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/standard-fallback.ini",
+      "sha256": "4f21273cf60c3592a4137477e3619bcab15be9a133b034ab1d5729b4fbc94dba",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/stash/standard",
+      "profile": "ads-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-only/subconverter-stash/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter-stash/standard.ini",
+      "sha256": "d7b75e8b805e2c7cc1de5ade02ea722425bc0fff3609cc4cdb8517ef414d00c2",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-only/clash/full-fallback",
+      "profile": "ads-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/full-fallback.ini",
+      "sha256": "79d4f3056d207c1ce42be69357d543cbf4d848994f2e9e5912da61bae3c9930a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/clash/full",
+      "profile": "ads-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/full.ini",
+      "sha256": "1d2ae7f7c4f5f36a0a5a1d36906541c109af3fde9b87b7e3d689e07b8ca86132",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/clash/gfw-fallback",
+      "profile": "ads-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/gfw-fallback.ini",
+      "sha256": "74a6967bcaca85b0fb64f1d3bc0b6f037983a47244cbf945ecd19d1ddf49ead4",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/clash/gfw",
+      "profile": "ads-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/gfw.ini",
+      "sha256": "2e74832a94034b2a42a92ea44c7e57d24e553a0b6729ef76d2ae5b1b7f3849f7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/clash/lite-fallback",
+      "profile": "ads-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/lite-fallback.ini",
+      "sha256": "5d339fe4fbb8d20ce52a4ba970e023511cfe5c100dca5dbbfc66067364a89c91",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/clash/lite",
+      "profile": "ads-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/lite.ini",
+      "sha256": "c4eb28645df4cc1b82659b97bbf6d92052cd564b2e5d32dbae6fb341aa178f7d",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/clash/standard-fallback",
+      "profile": "ads-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/standard-fallback.ini",
+      "sha256": "c4b6eb31fc5d3e959b15da85a762dac5dc35b37b944b522dbb774cf2bc9756ad",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-only/clash/standard",
+      "profile": "ads-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-only/subconverter/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/standard.ini",
+      "sha256": "7a78674c623b0751c92f4d8e28706127d1ced313f8b4569f1688574bb4684458",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/full-fallback",
+      "profile": "ads-privacy",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/full-fallback.yaml",
+      "sha256": "c6dac8b3a32d9429b6d34331f47b1e6e5c1adfd244aff1a3aa733ef7c612c9cc",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/full",
+      "profile": "ads-privacy",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/full.yaml",
+      "sha256": "603b7c767b077f3ccf0c334d3d27f32ceb939a83a09f034976e4c905b3835fa2",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/gfw-fallback",
+      "profile": "ads-privacy",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/gfw-fallback.yaml",
+      "sha256": "93c2da23bd3ccfa22635c8e4f777e8250c8eaae81fd3078cc34bf938724f64b7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/gfw",
+      "profile": "ads-privacy",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/gfw.yaml",
+      "sha256": "e04d569319042283987865a1220e8a26ab0c964a3b6081f5fe5ed2d95d9f12d7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/lite-fallback",
+      "profile": "ads-privacy",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/lite-fallback.yaml",
+      "sha256": "e41f5b2d7c13efba511a039a3a9cac1e29585cab911956d78fda452615a15033",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/lite",
+      "profile": "ads-privacy",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/lite.yaml",
+      "sha256": "755982b1cc20c3a1c392295ec90228c2e29e3b76cf1e59225263db6ce37a9d26",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/selfhosted-manual-fallback",
+      "profile": "ads-privacy",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/selfhosted-manual-fallback.yaml",
+      "sha256": "f70fcf9b94cd703c2b8947ddee7d45293a4940ca412335177cbc0f27d4bd4710",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/selfhosted-provider-fallback",
+      "profile": "ads-privacy",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/selfhosted-provider-fallback.yaml",
+      "sha256": "109884918780489372e27172e0c786ff946da5e75f2030dd3fca48843afe5832",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/standard-fallback",
+      "profile": "ads-privacy",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/standard-fallback.yaml",
+      "sha256": "9eb744a1320429e5b6bdb550a9e7464d9451b2d80fb594037dc9732b0755281b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/mihomo/standard",
+      "profile": "ads-privacy",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-privacy/mihomo/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/mihomo/standard.yaml",
+      "sha256": "d6a91baa82270fd2c6584755db5f985624d12e9eac3a7ed71dfa5e823a6f42c2",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/full-fallback",
+      "profile": "ads-privacy",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/full-fallback.yaml",
+      "sha256": "cc81eb14a741febc087e6e490f4c46b1fa6fdf5b41181f91886e61662a9544d2",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/full",
+      "profile": "ads-privacy",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/full.yaml",
+      "sha256": "4bc4a45c72820ec069822c9398f63211442a92ceba88eaae75fbdbfebe32f91a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/gfw-fallback",
+      "profile": "ads-privacy",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/gfw-fallback.yaml",
+      "sha256": "ea008b3b33e565d1493c196c8295d2c13db5b4e700d50e3f592d1891c1ac51b0",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/gfw",
+      "profile": "ads-privacy",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/gfw.yaml",
+      "sha256": "1cfc2df9c1e2b032e14ea837ecde945bb0dd583d74641be532ad80fbae38cfad",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/lite-fallback",
+      "profile": "ads-privacy",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/lite-fallback.yaml",
+      "sha256": "172fed60aa35f7b117775d59cb86b88b5309e3f00f53337271f25bf1965084be",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/lite",
+      "profile": "ads-privacy",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/lite.yaml",
+      "sha256": "50573b64019954eb75d37e92c6fcc588b9e145caabd01427af1bb31e8a219ffa",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/selfhosted-manual-fallback",
+      "profile": "ads-privacy",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/selfhosted-manual-fallback.yaml",
+      "sha256": "aef33e376d957cab96af03ee30ed8cdbd62d4e62720d5c7b671307f5d4fdd5c7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/selfhosted-provider-fallback",
+      "profile": "ads-privacy",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/selfhosted-provider-fallback.yaml",
+      "sha256": "8e17dea1016e5be5478df77bc791a979ff458935989603f27ecaef6d7bc36a4d",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/standard-fallback",
+      "profile": "ads-privacy",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/standard-fallback.yaml",
+      "sha256": "32f6983abc678eab19130f4c3a1b81701c3b5064bf7048f8941381c708eb9e98",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/openclash/standard",
+      "profile": "ads-privacy",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-privacy/openclash/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/openclash/standard.yaml",
+      "sha256": "056028fb7ccde429e05b2bd4e8432803e6aecfcc0d7bb919a18ac803bed6dc0a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/full-fallback",
+      "profile": "ads-privacy",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/full-fallback.ini",
+      "sha256": "3857e72400a62b1e07bfc31b06d088aae33ca29616a79e76adc865e71478d818",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/full",
+      "profile": "ads-privacy",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/full.ini",
+      "sha256": "9a3bc2ac586cb058530286a6e6bd10e698d218487514d4da3c9641608218159e",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/gfw-fallback",
+      "profile": "ads-privacy",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/gfw-fallback.ini",
+      "sha256": "947e08f079d47b0917dfd9afc2f6010879d8c4c500bbc9f6bc5ee15f4ac44359",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/gfw",
+      "profile": "ads-privacy",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/gfw.ini",
+      "sha256": "230d39f16274a22079d80715dd4be73b0e9d4b44b38811a493451f79314cbf2f",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/lite-fallback",
+      "profile": "ads-privacy",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/lite-fallback.ini",
+      "sha256": "2967e704750d22eb2e381e1c7fb1a6aa57da7ac3bbd9ae84b4441ab800fad93f",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/lite",
+      "profile": "ads-privacy",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/lite.ini",
+      "sha256": "e2bb4751769a6c74369f6b66d2af9f6f934fe4bd45c812d9f09bb7d6e3afc1f2",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/standard-fallback",
+      "profile": "ads-privacy",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/standard-fallback.ini",
+      "sha256": "9d64cfc6e0601ef608403795fcfb6732f15ba6878805f54478daa3bf26d71629",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/stash/standard",
+      "profile": "ads-privacy",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-privacy/subconverter-stash/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter-stash/standard.ini",
+      "sha256": "ad4ddfcdf6fcee533a723ed3f29ceea2094a36c6e38e25f0572c5df2915398b7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/full-fallback",
+      "profile": "ads-privacy",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/full-fallback.ini",
+      "sha256": "24148e54fd451e2c1c5cb56fa423d3f874b183b7bca027bb286a23c8ef609145",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/full",
+      "profile": "ads-privacy",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/full.ini",
+      "sha256": "7af51eb2f3f42ef8fecd4d903144fe39018f47ed5512bf04c8d3a73d48a73ba1",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/gfw-fallback",
+      "profile": "ads-privacy",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/gfw-fallback.ini",
+      "sha256": "036e4073a04240f4f7d1b8cb07594f3e6b27403e02aa6683d4fd0237a0d94969",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/gfw",
+      "profile": "ads-privacy",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/gfw.ini",
+      "sha256": "c554d8e9e44d8af303c07a2fa04e9c329649226de06c53af1e58ca514fd2161b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/lite-fallback",
+      "profile": "ads-privacy",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/lite-fallback.ini",
+      "sha256": "abd0dd4d244368ca006da9740b98cfe4df90757fa675e8ba8066600009f1ef4e",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/lite",
+      "profile": "ads-privacy",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/lite.ini",
+      "sha256": "f51f9313936f16020615776c02c118b3b2ee14718371dc21b5e80c87de5e06ba",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/standard-fallback",
+      "profile": "ads-privacy",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/standard-fallback.ini",
+      "sha256": "4a03a7673b677c4e4381adfb7079754b88e255923f9fcdbccff4a08412cc8d78",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-privacy/clash/standard",
+      "profile": "ads-privacy",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-privacy/subconverter/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-privacy/subconverter/standard.ini",
+      "sha256": "1a39143dad66504549bb65153c5c09a95a1ef03c07ff2c24ea5297f75d4f886d",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/full-fallback",
+      "profile": "ads-unwanted",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/full-fallback.yaml",
+      "sha256": "11efc9e3af0077910822e40a1a4c79c8d503e36739d5f27896061aa7d3d2c958",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/full",
+      "profile": "ads-unwanted",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/full.yaml",
+      "sha256": "31722fc5ecc8e7044b7a6ace9f2ad738703041a49da7bad8d1dbec2a2064c38f",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/gfw-fallback",
+      "profile": "ads-unwanted",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/gfw-fallback.yaml",
+      "sha256": "2cd769cb72104dffaedf41e21aea3e08d542ead3d0cbc8bec84548225ba86e1d",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/gfw",
+      "profile": "ads-unwanted",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/gfw.yaml",
+      "sha256": "cdb27d0c08cd3eb9a61152136db24048c5a9f132b1c38fcb353b65a1fba36102",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/lite-fallback",
+      "profile": "ads-unwanted",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/lite-fallback.yaml",
+      "sha256": "b74d5704caf551e82d045a6f157ffabf48005c15c1163488b1863f9541783227",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/lite",
+      "profile": "ads-unwanted",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/lite.yaml",
+      "sha256": "23b3eb222aa969f19f39651171a04c44a0453a077700d833b3e2c6b3fb2bd877",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/selfhosted-manual-fallback",
+      "profile": "ads-unwanted",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/selfhosted-manual-fallback.yaml",
+      "sha256": "74f5332e1ca242f31eb2cf040c7e16a3c3f18545e5f41bf1f74f3f493e990086",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/selfhosted-provider-fallback",
+      "profile": "ads-unwanted",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/selfhosted-provider-fallback.yaml",
+      "sha256": "0c7e254913c36dea7d3ea34f6ccba6f7c5bf021f64d5e53163b953e315af411b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/standard-fallback",
+      "profile": "ads-unwanted",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/standard-fallback.yaml",
+      "sha256": "6e3bcaad2120394698d475bf35149db885e50c29b22c0be65b2e33a712682c93",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/mihomo/standard",
+      "profile": "ads-unwanted",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "ads-unwanted/mihomo/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/mihomo/standard.yaml",
+      "sha256": "94bacd5d3f3ef490aae761f7f2f491ec7d5214452a0403b9154f051a594cccbf",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/full-fallback",
+      "profile": "ads-unwanted",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/full-fallback.yaml",
+      "sha256": "bf58a1b69fdc0058bd641a8d2032229fa3ba8dc50676e23866470319b3af6247",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/full",
+      "profile": "ads-unwanted",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/full.yaml",
+      "sha256": "9d9a9e96f6bf636483ce51df9712dc51ced2b9bcfdc3850ba572e1166060f0b7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/gfw-fallback",
+      "profile": "ads-unwanted",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/gfw-fallback.yaml",
+      "sha256": "e3de3666595331a8f3cab9df29e6c7d04434207128ca3f36c6a156d78b5a50ec",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/gfw",
+      "profile": "ads-unwanted",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/gfw.yaml",
+      "sha256": "c840200536e87620358cba6eebe9b434141ea321f31a0ce7b8958f01186152eb",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/lite-fallback",
+      "profile": "ads-unwanted",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/lite-fallback.yaml",
+      "sha256": "a7646f188d28f64d121962ae37cb077657ba4fc4455db67d00f8238546688863",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/lite",
+      "profile": "ads-unwanted",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/lite.yaml",
+      "sha256": "7ebf20bb743be94ce981422ef8e33f3d3acc7abe829ed593b6147716330c88df",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/selfhosted-manual-fallback",
+      "profile": "ads-unwanted",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/selfhosted-manual-fallback.yaml",
+      "sha256": "c47a53a272ec431784079c94d343e67c8cefebc7cb176eba2e129f5a12e9ccf3",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/selfhosted-provider-fallback",
+      "profile": "ads-unwanted",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/selfhosted-provider-fallback.yaml",
+      "sha256": "4fe5e807b7e4de3ab1594c0c51ea4b52c1aab5b637e37e7c9d5873479edf5643",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/standard-fallback",
+      "profile": "ads-unwanted",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/standard-fallback.yaml",
+      "sha256": "5f16e00a210f4e9a4f4d6a7f8e6ae2f6d052da7caf2a4f81472618f8581d7038",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/openclash/standard",
+      "profile": "ads-unwanted",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "ads-unwanted/openclash/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/openclash/standard.yaml",
+      "sha256": "4e2d8d38abe94d8d3f8bd6d585f55a88b777db87c926cd3eba08c850a2a8f894",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/full-fallback",
+      "profile": "ads-unwanted",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/full-fallback.ini",
+      "sha256": "7e0da39eb5ffaf85ea4d00411305b67786899087cc9cadc452a4512f8a4e99f1",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/full",
+      "profile": "ads-unwanted",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/full.ini",
+      "sha256": "83cc9fcdba5abc27469736c8b2b91fe75b0c040b513cb0154a2b7fb93b4ad546",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/gfw-fallback",
+      "profile": "ads-unwanted",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/gfw-fallback.ini",
+      "sha256": "fc1adbb0f4ba11f4bac2d592c6bf936fe6b1141be771baed19ff62a7a46644eb",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/gfw",
+      "profile": "ads-unwanted",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/gfw.ini",
+      "sha256": "68c4de4d026f74632c6273fb95c73d3e34ad283b20d3ae033a1d54594133d785",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/lite-fallback",
+      "profile": "ads-unwanted",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/lite-fallback.ini",
+      "sha256": "73e8c0ccff4dee6e0a4d3a0301e8906f3c40aa822023752a8b933c71ace9f13f",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/lite",
+      "profile": "ads-unwanted",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/lite.ini",
+      "sha256": "4cb398ce321cdd33f76a6596d70a457ee7f855abda39c50aba9f2c507f401dc3",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/standard-fallback",
+      "profile": "ads-unwanted",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/standard-fallback.ini",
+      "sha256": "5f9ec943327868f98bd80db625de5d4f14bfdce5c56ec649d51e792db97e67e8",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/stash/standard",
+      "profile": "ads-unwanted",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "ads-unwanted/subconverter-stash/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter-stash/standard.ini",
+      "sha256": "3d9e67c23f605dfee3c320e451002f4a4b310c80defbfa13130755e52b0fa8a8",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/full-fallback",
+      "profile": "ads-unwanted",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/full-fallback.ini",
+      "sha256": "8d7593c05776ab79b7e44ccc8fa778e14fbf5cc05ad99d7267373c960847f7de",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/full",
+      "profile": "ads-unwanted",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/full.ini",
+      "sha256": "7556cd319ec1d25248baa952a376d484734d36424de581ff1636f8e5821bc1f3",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/gfw-fallback",
+      "profile": "ads-unwanted",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/gfw-fallback.ini",
+      "sha256": "275cf03fc2117a91566d6ad8d2f76c1e8db3f2aef839b8ed331ddd3de9f0f3d1",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/gfw",
+      "profile": "ads-unwanted",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/gfw.ini",
+      "sha256": "62478a616a93e610406f8efff2fc2f100062d899eca1f52cf6adf230fcebb6fa",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/lite-fallback",
+      "profile": "ads-unwanted",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/lite-fallback.ini",
+      "sha256": "12ed87d0434aaa2afacfc933751216d5de68c7025a7fea70c52fa43966b7b857",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/lite",
+      "profile": "ads-unwanted",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/lite.ini",
+      "sha256": "c364063a7998413d3736b5a30915e2237dc7c99bb13e30a59a270653f35838c1",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/standard-fallback",
+      "profile": "ads-unwanted",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/standard-fallback.ini",
+      "sha256": "9dfc34ec8c9d7fe1282618c1ef3f1c910cab5794a48f8ad2e0f5acbf06decb6e",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "ads-unwanted/clash/standard",
+      "profile": "ads-unwanted",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "ads-unwanted/subconverter/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-unwanted/subconverter/standard.ini",
+      "sha256": "e74cf4b81ef45b25933aa8caede452a8a3f1acc1b2baf7a8753b4b776e149fbd",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/full-fallback",
+      "profile": "custom-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/full-fallback.yaml",
+      "sha256": "e096d4a7ff81160dcbb512dbe14afd93fbfb738f351bb76587fd71d8e80e83c8",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/full",
+      "profile": "custom-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/full.yaml",
+      "sha256": "866f273223f429c1bd9715593ff0e17b9c25a8746d9e3a13505e7246fcb220db",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/gfw-fallback",
+      "profile": "custom-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/gfw-fallback.yaml",
+      "sha256": "b075ffa1d519544a04b7f5cc28d849d7f33f7cad6f83a5e21b19e83fe2b1e6e6",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/gfw",
+      "profile": "custom-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/gfw.yaml",
+      "sha256": "acf85fb0af3997a0b655cd43fd36c0ffe421ba560e2a6f477653ff0054cf37fe",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/lite-fallback",
+      "profile": "custom-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/lite-fallback.yaml",
+      "sha256": "b085f38ab40091fce2b681d0bab93c908cd078f4bdc12067400078bfc28daa7d",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/lite",
+      "profile": "custom-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/lite.yaml",
+      "sha256": "c0d53345aa8441507c1d579967b442aab88d62a07fb5e39452b75eb3d59071da",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/selfhosted-manual-fallback",
+      "profile": "custom-only",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/selfhosted-manual-fallback.yaml",
+      "sha256": "f052079ce837545142d5513fd25193988779797053a33ff0bfb70183deba311f",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/selfhosted-provider-fallback",
+      "profile": "custom-only",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/selfhosted-provider-fallback.yaml",
+      "sha256": "23d096213f90244d05266e7262bab1fda16de215299910e04daacdc6575b2d24",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/standard-fallback",
+      "profile": "custom-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/standard-fallback.yaml",
+      "sha256": "107af5665160273f5bafb4d5cf0eafafb434f0359b9571f2fc63bba1e298dd55",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/mihomo/standard",
+      "profile": "custom-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "custom-only/mihomo/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/mihomo/standard.yaml",
+      "sha256": "0022fd89d2da8e97daaa9cfce4c6b7e054885d227249e77b59518ab87c070f99",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/full-fallback",
+      "profile": "custom-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/full-fallback.yaml",
+      "sha256": "028deeb45b6c10fcbe228f3865b4759d4a6665353ecd984d8be451e8db350bf7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/full",
+      "profile": "custom-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/full.yaml",
+      "sha256": "a80114dc164cbdff0b309a62d109cc2d8e145ad379a9950d69e0ba45f2b7cb25",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/gfw-fallback",
+      "profile": "custom-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/gfw-fallback.yaml",
+      "sha256": "c9be719d41aadf9a4466b160140da917d3165dd43ae5e3b1c739cc1b714d9eb7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/gfw",
+      "profile": "custom-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/gfw.yaml",
+      "sha256": "547b797aadd2937e0b8a18439429a379ef07083cb41261b3e3f8061727f904ce",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/lite-fallback",
+      "profile": "custom-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/lite-fallback.yaml",
+      "sha256": "519adc391b51806b8a7e100f7119a69ba71d17905513b0bbd04bcf4a215d8899",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/lite",
+      "profile": "custom-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/lite.yaml",
+      "sha256": "507c23801091991b2981aab83b2978ade171787c56508cb8ef0e98eb5ea1fa4d",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/selfhosted-manual-fallback",
+      "profile": "custom-only",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/selfhosted-manual-fallback.yaml",
+      "sha256": "0519eb25627d957d8e64e22180b7005ad8312169dad5d94cfcb15dc98396110e",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/selfhosted-provider-fallback",
+      "profile": "custom-only",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/selfhosted-provider-fallback.yaml",
+      "sha256": "86f840dea127b3110263204ab451366fa44453fccea2978a44b8d2961ce1a70e",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/standard-fallback",
+      "profile": "custom-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/standard-fallback.yaml",
+      "sha256": "dfd5d94f3cb117cffdc6b153532401308b910b356891ff24f07e698923a33d2b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/openclash/standard",
+      "profile": "custom-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "custom-only/openclash/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/openclash/standard.yaml",
+      "sha256": "7c492f3d60fcbdef52e8cadffddec90a36719c47de28e1b87df6e70c344d397a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/stash/full-fallback",
+      "profile": "custom-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/full-fallback.ini",
+      "sha256": "f4f3fc9cf7bfe8d6f353badda86d859a3d7cebd1d03c7d4f98d48872865b5304",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/stash/full",
+      "profile": "custom-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/full.ini",
+      "sha256": "ab5da524f4b7b6bcc6dc255f2c6a961e8c25925bde5ce56dfe9a5f5738ca51a0",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/stash/gfw-fallback",
+      "profile": "custom-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/gfw-fallback.ini",
+      "sha256": "0be073be981df67f5a005c85b6967eff9af3b0a1b8129c85d4c9defd7824da03",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/stash/gfw",
+      "profile": "custom-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/gfw.ini",
+      "sha256": "a9500de832e2caab948f23320ea2f18955de5f6fdd05dda3a686cbcae10f0025",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/stash/lite-fallback",
+      "profile": "custom-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/lite-fallback.ini",
+      "sha256": "1cf307b44b05a8db93b52040104e254f115296fdf134e08058c5ceb611234ace",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/stash/lite",
+      "profile": "custom-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/lite.ini",
+      "sha256": "1e9fd2391448f0ccb2ca73110f6b118efd07ce7c40d8ec801c98905f8c95d45c",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/stash/standard-fallback",
+      "profile": "custom-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/standard-fallback.ini",
+      "sha256": "84ab3e5aea94bda44c5b21109b98ea484d9c839300c9211c3615588ec0cf5454",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/stash/standard",
+      "profile": "custom-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "custom-only/subconverter-stash/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter-stash/standard.ini",
+      "sha256": "b7666c9585efd84a48d9a3827ef1125ffb79e050251c7eda830f9ceca526f04a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "custom-only/clash/full-fallback",
+      "profile": "custom-only",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/full-fallback.ini",
+      "sha256": "e79d702938af0f630415216c1353ff4b92bdb2b0feaa88844a6190ef0b85142d",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/clash/full",
+      "profile": "custom-only",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/full.ini",
+      "sha256": "de72d81f68365eefeb1f89a3391640faf23b5ca826fe4633d2e5beb8683dc357",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/clash/gfw-fallback",
+      "profile": "custom-only",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/gfw-fallback.ini",
+      "sha256": "44ed7908b39a450819f5381c7f442f605c4e930d60601a862c90d1bf2775cb01",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/clash/gfw",
+      "profile": "custom-only",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/gfw.ini",
+      "sha256": "b877a3ec232cc64571760bbdc05055229bc7e3619268d02b7af3aeb9c9d12795",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/clash/lite-fallback",
+      "profile": "custom-only",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/lite-fallback.ini",
+      "sha256": "498e4239eb504b61faaac53cbfd4a7970b484a6cb92cc7538de115802b5aa19a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/clash/lite",
+      "profile": "custom-only",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/lite.ini",
+      "sha256": "3025f924528004a19dfe01d8318f02bd47f13171a2071caf7a4ca978d1572a59",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/clash/standard-fallback",
+      "profile": "custom-only",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/standard-fallback.ini",
+      "sha256": "aeabf4274a439751e5c87622e5205f073778e4143187383f6d69f3d8ec29670b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "custom-only/clash/standard",
+      "profile": "custom-only",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "custom-only/subconverter/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/standard.ini",
+      "sha256": "dcb6cce03b51b136c85671f347d5d679bd03a77d5b4e760802f69f1a1db4531e",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/full-fallback",
+      "profile": "full-protection",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/full-fallback.yaml",
+      "sha256": "4fd9819e4ca4a5e7010799b9fa0418324ec68abbad092be5843c208ab3f0ffae",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/full",
+      "profile": "full-protection",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/full.yaml",
+      "sha256": "cb8331b833dec0cc98950cd2ef77e94cc7f38fa073e63466cb0b4eb40ab6e309",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/gfw-fallback",
+      "profile": "full-protection",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/gfw-fallback.yaml",
+      "sha256": "f138ba0ee9e383ac92652f4db499f7dfb19b2cde89995916d9bfa7d4ae19923a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/gfw",
+      "profile": "full-protection",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/gfw.yaml",
+      "sha256": "75c5c5791e65a6d4ad1b910aed54d8d4ddc3a599ee6beecee7197a63fd9d3055",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/lite-fallback",
+      "profile": "full-protection",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/lite-fallback.yaml",
+      "sha256": "841bf1c85d2b3ff5bbcb7d0295c5d5c7df6ab400b39ba0f492a42b0dbe29f32b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/lite",
+      "profile": "full-protection",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/lite.yaml",
+      "sha256": "c75a168593641dcba1209838e5a897176d050d99336c7120c49d9cc7480d5af2",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/selfhosted-manual-fallback",
+      "profile": "full-protection",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/selfhosted-manual-fallback.yaml",
+      "sha256": "42969d04079225e3176823c102556ba4a2997b78a209296d8da37b1aadc48c39",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/selfhosted-provider-fallback",
+      "profile": "full-protection",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/selfhosted-provider-fallback.yaml",
+      "sha256": "e37895448444b256b3a81973b0e11ee317fde1de56223e6ce047e34df79d5888",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/standard-fallback",
+      "profile": "full-protection",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/standard-fallback.yaml",
+      "sha256": "8a7f06ecef9652a78f2369fdce2c4376ad2bbfaba7a47a11a43011fc4a1d1a0b",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/mihomo/standard",
+      "profile": "full-protection",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "mihomo",
+      "path": "full-protection/mihomo/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/mihomo/standard.yaml",
+      "sha256": "ffd14281fbea9c0068d8d969c00fc66aa9457521f063d94c9f13c2688bee7af4",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/full-fallback",
+      "profile": "full-protection",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/full-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/full-fallback.yaml",
+      "sha256": "3f6f562f9b7328e0b8defb193f1bccf13a1325ff10dd431c4dc580921bbd4bf8",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/full",
+      "profile": "full-protection",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/full.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/full.yaml",
+      "sha256": "e1e4cc404d7226f97044398365790e824b22db15c17a35a348c40da8c6ac7c18",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/gfw-fallback",
+      "profile": "full-protection",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/gfw-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/gfw-fallback.yaml",
+      "sha256": "65f671bd2a5ffbb88550e550e7394d239aef796ef449152a799b9a16c9a021ab",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/gfw",
+      "profile": "full-protection",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/gfw.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/gfw.yaml",
+      "sha256": "682dd42586eb240a0fc4eeae01abd175f7305b80c7a9549bb796f41ace2067ea",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/lite-fallback",
+      "profile": "full-protection",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/lite-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/lite-fallback.yaml",
+      "sha256": "f39b95592ad70121dd4a7c4acafc74bd7cb65111b32dcdbef0c5320f02218a9a",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/lite",
+      "profile": "full-protection",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/lite.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/lite.yaml",
+      "sha256": "261706e668b2c252e57093689ef37cf8ff9db2a7a4286f0224b723110708b3a5",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/selfhosted-manual-fallback",
+      "profile": "full-protection",
+      "name": "自托管节点故障转移",
+      "variant": "selfhosted-manual-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/selfhosted-manual-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/selfhosted-manual-fallback.yaml",
+      "sha256": "2b6c50b562d2e10a1a976cdce0935e823f96619cd9d5fc521186e9217cdde5a7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/selfhosted-provider-fallback",
+      "profile": "full-protection",
+      "name": "自托管订阅故障转移",
+      "variant": "selfhosted-provider-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/selfhosted-provider-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/selfhosted-provider-fallback.yaml",
+      "sha256": "9ac6b782ddbcf1cc5dd496c6acca22d6a0aeb7cd56a37e2c4269c15bb246c257",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/standard-fallback",
+      "profile": "full-protection",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/standard-fallback.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/standard-fallback.yaml",
+      "sha256": "04a674450280b8147bf3cbc625dc4692390cc7a483c5d8c10841539ecc6a801f",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/openclash/standard",
+      "profile": "full-protection",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "runtime-template",
+      "target": "openclash",
+      "path": "full-protection/openclash/standard.yaml",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/openclash/standard.yaml",
+      "sha256": "36d019e03654bf937551045d9e075e994f0df722dac2a7ac151cb684266ee9e8",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {},
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/stash/full-fallback",
+      "profile": "full-protection",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/full-fallback.ini",
+      "sha256": "1efefda95b875d0f516637a549ad54a6e4dd014f5a12a00047dc21796ce13faa",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/stash/full",
+      "profile": "full-protection",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/full.ini",
+      "sha256": "82b97ccebea5a5bbd1705b37d5777bedde3d58a801ed33051c1e22e9c502edc4",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/stash/gfw-fallback",
+      "profile": "full-protection",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/gfw-fallback.ini",
+      "sha256": "9bc5dded96cd19025330e81095eeb5ce9f916ffb95d368457f642fb4370655bc",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/stash/gfw",
+      "profile": "full-protection",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/gfw.ini",
+      "sha256": "089d64269d7b33a54cc25f412a229f7d8f67a21469e5714bebd6eebc3b6ac012",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/stash/lite-fallback",
+      "profile": "full-protection",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/lite-fallback.ini",
+      "sha256": "b7c4cc03dbe708e7698fd1d1a9ef8dbd693ef4123ed3790c24e1a377210349ea",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/stash/lite",
+      "profile": "full-protection",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/lite.ini",
+      "sha256": "a39fd37d00d0f38c4741f0cfdaee845dc6c665d37b78adde923ed0cc176314dc",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/stash/standard-fallback",
+      "profile": "full-protection",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/standard-fallback.ini",
+      "sha256": "fde5a7f33955425ee958e7a4382cc3d9c1a87b2a8216e4d59f952aa2a0d14bea",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/stash/standard",
+      "profile": "full-protection",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "stash",
+      "path": "full-protection/subconverter-stash/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/standard.ini",
+      "sha256": "3fce17254584ddc8ea9bfa0a403a0305d85a69af71216ca34941a45316da2656",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false
+      },
+      "capabilities": [
+        "mrs"
+      ]
+    },
+    {
+      "id": "full-protection/clash/full-fallback",
+      "profile": "full-protection",
+      "name": "完整故障转移",
+      "variant": "full-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/full-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/full-fallback.ini",
+      "sha256": "91f77ddbbdab41c1ca7e3f765aeba8b4c561e10f0321bca7fe686faef5e4b6d8",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/clash/full",
+      "profile": "full-protection",
+      "name": "完整分流",
+      "variant": "full",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/full.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/full.ini",
+      "sha256": "a5e4bbf7f1373bde3b546f8b4fac5efb40e85792d3f3407120582cb885af6cd7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/clash/gfw-fallback",
+      "profile": "full-protection",
+      "name": "GFW 故障转移",
+      "variant": "gfw-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/gfw-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/gfw-fallback.ini",
+      "sha256": "ed06195dd1015eeb9fd0a69296df67b237de4dec1be553215f3b84adea0959f3",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/clash/gfw",
+      "profile": "full-protection",
+      "name": "极简 GFW",
+      "variant": "gfw",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/gfw.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/gfw.ini",
+      "sha256": "967801d536359e9c7d5f52e94baaaee25fc3ac8f5dd4bdaea9c3a1261183f5c7",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/clash/lite-fallback",
+      "profile": "full-protection",
+      "name": "轻量故障转移",
+      "variant": "lite-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/lite-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/lite-fallback.ini",
+      "sha256": "c6b692edf028fe0afbb8d707e67b149d2ea229b74821789e4ba6b2ceb86d08dd",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/clash/lite",
+      "profile": "full-protection",
+      "name": "轻量版",
+      "variant": "lite",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/lite.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/lite.ini",
+      "sha256": "ddad1451dc9c24594d83cb5020e0294b79d1572784ac9877c22f7d57fe3400ee",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/clash/standard-fallback",
+      "profile": "full-protection",
+      "name": "标准故障转移",
+      "variant": "standard-fallback",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/standard-fallback.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/standard-fallback.ini",
+      "sha256": "cff5947fdcb227e73576af398c7c594778b2a11341854023df627751273522a4",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    },
+    {
+      "id": "full-protection/clash/standard",
+      "profile": "full-protection",
+      "name": "标准版",
+      "variant": "standard",
+      "kind": "conversion-template",
+      "target": "clash",
+      "path": "full-protection/subconverter/standard.ini",
+      "url": "https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter/standard.ini",
+      "sha256": "930e9f2529426a3614d943548b67bb6cae784abb59b1f21e83724a90b5b65a87",
+      "upstreamCommit": "b46497aecf9d9c84043be3b52abfacbe687ed872",
+      "requiredFlags": {
+        "expand": false,
+        "list": false,
+        "new_name": true
+      },
+      "capabilities": [
+        "mrs",
+        "geosite"
+      ]
+    }
+  ]
+}

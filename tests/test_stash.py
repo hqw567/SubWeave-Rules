@@ -14,7 +14,7 @@ from rules import STASH_INI_VARIANTS
 PRIMARY = "🚀 手动选择"
 AD_GROUP = "🛡️ 广告过滤"
 AD_URL = "https://rules.example/pure-ads.yaml"
-SETTINGS = {"ads": {"enabled": True, "name": "ads-only", "group": AD_GROUP, "url": AD_URL, "interval": 86400}}
+SETTINGS = {"filter": {"enabled": True, "name": "ads-only", "group": AD_GROUP, "url": AD_URL, "interval": 86400}}
 DIRECT = "DOMAIN-SUFFIX,direct.example\nIP-CIDR,192.0.2.0/24,no-resolve\nDST-PORT,7844\nSRC-PORT,41641\n"
 SOURCE_BASE = "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/"
 META_BASE = "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/"
@@ -66,7 +66,7 @@ class StashProjectionTests(unittest.TestCase):
             "DOMAIN,personal.example,PASS", "AND,((NETWORK,udp),(DST-PORT,443)),@reject",
         ):
             with self.subTest(rule=rule), self.assertRaises(ValueError):
-                build_stash_ini(source(), {"before_ads": [rule]}, SETTINGS, PRIMARY, DIRECT)
+                build_stash_ini(source(), {"before_filter": [rule]}, SETTINGS, PRIMARY, DIRECT)
 
     def test_unknown_upstream_classical_provider_or_direct_rule_requires_mapping(self):
         for template, direct in (
@@ -104,7 +104,7 @@ class StashProjectionTests(unittest.TestCase):
                 with (vendor / f"{stem}.ini").open(encoding="utf-8", newline="") as handle:
                     template = handle.read()
                 primary = "🚀 故障转移" if slug.endswith("fallback") else PRIMARY
-                personal = {"before_ads": ["DOMAIN,personal.example,@direct"], "after_ads": []}
+                personal = {"before_filter": ["DOMAIN,personal.example,@direct"], "after_filter": []}
                 result = build_stash_ini(template, personal, SETTINGS, primary, direct)
                 rules = [line for line in result.splitlines() if line.startswith("ruleset=")]
                 self.assertEqual(rules[0], "ruleset=DIRECT,[]DOMAIN,personal.example")
