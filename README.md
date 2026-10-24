@@ -1,4 +1,4 @@
-# SubRule 扩展规则
+# SubWeave-Rules
 
 基于 Aethersailor 的公开扩展规则生成器，为 Mihomo、OpenClash、Stash 提供可定制分流。自定义规则、过滤方案与基础模板分别维护，GitHub Actions 自动同步和验证。
 
@@ -42,7 +42,7 @@ dist/
   catalog.json
 ```
 
-[纯广告标准 INI](https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/ads-only/subconverter/standard.ini) · [纯自定义标准 INI](https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/custom-only/subconverter/standard.ini) · [Stash 完整防护标准 INI](https://raw.githubusercontent.com/hqw567/personal-clash-rules/main/dist/full-protection/subconverter-stash/standard.ini)
+[纯广告标准 INI](https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/standard.ini) · [纯自定义标准 INI](https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/standard.ini) · [Stash 完整防护标准 INI](https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/standard.ini)
 
 ## 构建与同步
 
@@ -101,7 +101,7 @@ Actions 每天约北京时间 06:15 同步，也支持手动触发。代码变�
 
 检查仅用合成节点与公开数据，不启动代理隧道，不读取真实订阅。已知 jsDelivr GitHub 别名下载失败时，校验器可回退到同一仓库路径的 GitHub Raw 原始资源；配置中的规则 URL 保持原始定义。转换与解析通过不等于 Stash 实机、连通性或拦截效果验证。
 
-## 接入 SubRule
+## 接入 SubWeave
 
 `dist/catalog.json` 是 **schemaVersion 2**：包含五种方案、180 项产物、用途、客户端、参数约束、哈希和上游来源。前端据此统一展示模板系列和方案选择，不重复生成规则。
 

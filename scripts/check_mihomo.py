@@ -77,7 +77,7 @@ def fetch_public(url: str) -> bytes:
     for attempt in range(3):
         for candidate in candidates:
             try:
-                with urlopen(Request(candidate, headers={'User-Agent': 'personal-clash-rules-native-check/2'}), timeout=60) as response:
+                with urlopen(Request(candidate, headers={'User-Agent': 'SubWeave-Rules-native-check/2'}), timeout=60) as response:
                     data = response.read(LIMIT + 1)
             except (OSError, HTTPError):
                 continue
