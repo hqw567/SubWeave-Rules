@@ -252,8 +252,6 @@ rules:
 - RULE-SET,Custom_Direct_Domain,🎯 全球直连
 - RULE-SET,Custom_Direct_IP,🎯 全球直连,no-resolve
 - RULE-SET,Custom_Direct_Port,🎯 全球直连
-- GEOSITE,cn,🎯 全球直连
-- GEOIP,cn,🎯 全球直连
 - RULE-SET,Custom_Proxy_Domain,🚀 手动选择
 - RULE-SET,Custom_Proxy_IP,🚀 手动选择,no-resolve
 - GEOSITE,category-games@cn,🎯 全球直连
@@ -271,6 +269,8 @@ rules:
 - GEOSITE,category-games,🎮 游戏平台
 - GEOIP,google,🇬 谷歌服务,no-resolve
 - RULE-SET,Nonstandard_Port_Direct,🔀 非标端口
+- GEOSITE,cn,🎯 全球直连
+- GEOIP,cn,🎯 全球直连
 - MATCH,🐟 漏网之鱼
 rule-providers:
   Nonstandard_Port_Direct:

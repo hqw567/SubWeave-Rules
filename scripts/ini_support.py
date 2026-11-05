@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-from china_direct import prioritize_china_ini
+from china_direct import china_fallback_ini
 
 
 _SECTION = re.compile(r"^[ \t]*\[([^\]\r\n]+)\][ \t]*$")
@@ -59,7 +59,7 @@ def _convert_rule(rule: object, policies: set[str], proxy_group: str) -> str:
 def build_ini(source_text: str, personal: dict, settings: dict, proxy_group: str) -> str:
     """Prepend personal/advertising rules and an ad selector to an upstream INI.
 
-    China routing is promoted before upstream proxy policies; other original
+    China routing is checked immediately before the final fallback; other
     text and line endings are preserved. This function does not fetch sources,
     process credentials, or write files.
     """
@@ -67,7 +67,7 @@ def build_ini(source_text: str, personal: dict, settings: dict, proxy_group: str
         raise ValueError("The upstream INI must be text.")
     if not isinstance(personal, dict) or not isinstance(settings, dict):
         raise ValueError("Personal rules and settings must be mappings.")
-    source_text = prioritize_china_ini(source_text)
+    source_text = china_fallback_ini(source_text)
     lines = source_text.splitlines(keepends=True)
     offsets: list[int] = []
     position = 0

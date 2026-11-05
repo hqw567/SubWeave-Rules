@@ -50,9 +50,7 @@ class FilterProfileTests(unittest.TestCase):
                 self.assertLess(routing.index(domain_rule), routing.index(ip_rule))
                 for host in ('qlxft.ourduda.com', 'www.wellcee.com', 'bilalipay.com'):
                     self.assertFalse(any(host in rule for rule in routing), 'Domestic sites must not depend on individual whitelist rules')
-                for index, rule in enumerate(routing):
-                    if any(marker in rule for marker in (',Custom_Proxy_', '/Custom_Proxy_', ',gfw,', '/geosite/gfw.mrs')):
-                        self.assertLess(routing.index(ip_rule), index)
+                self.assertEqual(routing[-3:-1], [domain_rule, ip_rule], 'Other routing rules must retain priority over the CN fallback')
 
     def test_category_mapping_matches_the_official_four_subscriptions(self):
         self.assertEqual(FILTER_PROFILES['ads-only']['categories'], ['ads'])

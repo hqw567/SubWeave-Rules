@@ -21,7 +21,7 @@ from urllib.request import Request, urlopen
 
 import yaml
 from catalog_support import catalog_text
-from china_direct import DIRECT_GROUP, prioritize_china_rules
+from china_direct import DIRECT_GROUP, china_fallback_rules
 from filter_profiles import DEFAULT_PROFILE, FILTER_PROFILES, select_profiles, profile_settings
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -182,7 +182,7 @@ def build_config(upstream: dict, personal: dict, settings: dict, runtime: dict |
         added = [f"RULE-SET,{ads['name']},{ads['group']}"]
     upstream_rules = base['rules']
     if DIRECT_GROUP in {group['name'] for group in base['proxy-groups']}:
-        upstream_rules = prioritize_china_rules(upstream_rules)
+        upstream_rules = china_fallback_rules(upstream_rules)
     base['rules'] = before + added + after + upstream_rules
     validate_config(base)
     return base

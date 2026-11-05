@@ -49,10 +49,10 @@ rules:
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
 - RULE-SET,awavenue-ads-privacy,🛡️ 秋风过滤
-- GEOSITE,cn,🎯 全球直连
-- GEOIP,cn,🎯 全球直连
 - GEOSITE,gfw,🚀 故障转移
 - GEOIP,telegram,🚀 故障转移,no-resolve
 - GEOIP,facebook,🚀 故障转移,no-resolve
 - GEOIP,twitter,🚀 故障转移,no-resolve
+- GEOSITE,cn,🎯 全球直连
+- GEOIP,cn,🎯 全球直连
 - MATCH,🎯 全球直连
