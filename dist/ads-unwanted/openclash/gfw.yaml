@@ -53,14 +53,13 @@ rule-providers:
     path: ./rule_provider/awavenue-ads-unwanted.yaml
     interval: 86400
 rules:
-- DOMAIN,qlxft.ourduda.com,DIRECT
 - DOMAIN-SUFFIX,neolive.kr,DIRECT
 - DOMAIN-SUFFIX,pandalive.co.kr,DIRECT
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
-- DOMAIN,www.wellcee.com,DIRECT
-- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - RULE-SET,awavenue-ads-unwanted,🛡️ 秋风过滤
+- GEOSITE,cn,🎯 全球直连
+- GEOIP,cn,🎯 全球直连
 - GEOSITE,gfw,🚀 手动选择
 - GEOIP,telegram,🚀 手动选择,no-resolve
 - GEOIP,facebook,🚀 手动选择,no-resolve

@@ -4,14 +4,12 @@
 
 # 明确的误杀白名单/强制例外：优先于秋风过滤。
 before_filter:
-  # 具体服务域名精确匹配；站点根域同时覆盖其子域名。
-  - DOMAIN,qlxft.ourduda.com,@direct
+  # 国内域名和中国大陆 IP 由通用规则自动直连，无需逐个添加。
+  # 这里只保留额外的直连例外；站点根域同时覆盖其子域名。
   - DOMAIN-SUFFIX,neolive.kr,@direct
   - DOMAIN-SUFFIX,pandalive.co.kr,@direct
   - DOMAIN,time.windows.com,@direct
   - DOMAIN,codexapp.agentsmirror.com,@direct
-  - DOMAIN,www.wellcee.com,@direct
-  - DOMAIN-SUFFIX,bilalipay.com,@direct
 
 # 一般个人分流：先应用所选过滤方案，再应用自定义扩展规则，最后进入 Aethersailor。
 after_filter: []

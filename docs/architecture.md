@@ -6,6 +6,7 @@
 - `rules/custom.yaml`：全局、格式、模板专属扩展。
 - `config/settings.yaml`：过滤组与缓存名称前缀、更新间隔。
 - `scripts/filter_profiles.py`：五种方案的统一定义。
+- `scripts/china_direct.py`：在上游代理规则前检查国内域名和允许解析的中国大陆 IP，YAML 与 INI 共用分流策略。
 - `scripts/rules.py`：组合、完整/部分构建、同步及私有渲染。
 - `scripts/ini_support.py`：在原始 INI 上合并扩展。
 - `scripts/stash_support.py`：对固定转换器的 Stash 目标进行必要映射。

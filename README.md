@@ -79,6 +79,10 @@ after_filter:
 
 顺序为：强制例外 → 所选秋风方案（如启用）→ 一般自定义规则 → Aethersailor。`@proxy` 随模板解析为主策略组，`@direct` 为 DIRECT，`@reject` 为 REJECT。支持按 `formats.yaml / ini / stash` 和 `variants.<版本>` 扩展。
 
+全部模板都会在上游代理分流前匹配 `GEOSITE,cn,🎯 全球直连` 与 `GEOIP,cn,🎯 全球直连`，保留更早的内网及上游直连例外。IP 规则允许 DNS 解析：即使域名不在国内域名库，只要解析出的目标地址命中中国大陆 IP 库，也会进入「🎯 全球直连」，无需为每个站点加白名单。国内广告仍先经过所选过滤方案，自定义强制例外仍有更高优先级。
+
+该策略会为部分未命中域名规则的连接提前解析 DNS；实际分流以客户端收到的域名、目标 IP 和已加载的 GeoSite/GeoIP 数据为准。更新模板后需更新客户端订阅并重新建立连接。
+
 `config/settings.yaml` 只配置过滤组名称、Provider 名称前缀和更新间隔；规则 URL 由方案统一决定。旧 `ads` 配置块及 `before_ads / after_ads` 字段不再接受。
 
 ## 私有订阅

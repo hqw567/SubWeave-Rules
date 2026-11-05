@@ -350,7 +350,8 @@ class ProjectOutputTests(unittest.TestCase):
                 slug = Path(filename).stem
                 original = sources[slug]
                 counts[slug] += 1
-                self.assertEqual(config["rules"][-len(original["rules"]):], original["rules"])
+                expected_rules = generator.prioritize_china_rules(original["rules"])
+                self.assertEqual(config["rules"][-len(expected_rules):], expected_rules)
                 self.assertEqual(config["proxy-groups"][:-1], original["proxy-groups"])
                 primary = "🚀 故障转移" if slug.endswith("fallback") else "🚀 手动选择"
                 self.assertEqual(config["proxy-groups"][-1], {

@@ -1,8 +1,10 @@
-"""Compose portable subconverter rules without rewriting an upstream INI."""
+"""Compose portable subconverter templates with project routing and filters."""
 
 from __future__ import annotations
 
 import re
+
+from china_direct import prioritize_china_ini
 
 
 _SECTION = re.compile(r"^[ \t]*\[([^\]\r\n]+)\][ \t]*$")
@@ -57,14 +59,15 @@ def _convert_rule(rule: object, policies: set[str], proxy_group: str) -> str:
 def build_ini(source_text: str, personal: dict, settings: dict, proxy_group: str) -> str:
     """Prepend personal/advertising rules and an ad selector to an upstream INI.
 
-    Every original character, line ending, comment, option and group stays in
-    place. Only additions to the existing [custom] section are made. This
-    function does not fetch sources, process credentials, or write files.
+    China routing is promoted before upstream proxy policies; other original
+    text and line endings are preserved. This function does not fetch sources,
+    process credentials, or write files.
     """
     if not isinstance(source_text, str):
         raise ValueError("The upstream INI must be text.")
     if not isinstance(personal, dict) or not isinstance(settings, dict):
         raise ValueError("Personal rules and settings must be mappings.")
+    source_text = prioritize_china_ini(source_text)
     lines = source_text.splitlines(keepends=True)
     offsets: list[int] = []
     position = 0

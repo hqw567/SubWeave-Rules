@@ -29,13 +29,30 @@ class FilterProfileTests(unittest.TestCase):
                             self.assertNotIn(other['ruleUrl'], text)
                 if path.endswith('.yaml'):
                     config = yaml.safe_load(text)
-                    self.assertEqual(config['rules'][0], 'DOMAIN,qlxft.ourduda.com,DIRECT')
+                    self.assertEqual(config['rules'][0], 'DOMAIN-SUFFIX,neolive.kr,DIRECT')
                     if rule_url:
                         self.assertEqual(config['proxy-groups'][-1]['name'], settings['group'])
                         self.assertEqual(config['rule-providers'][settings['name'] + '-' + profile]['url'], rule_url)
                 else:
                     routing = [line for line in text.splitlines() if line.startswith('ruleset=')]
-                    self.assertEqual(routing[0], 'ruleset=DIRECT,[]DOMAIN,qlxft.ourduda.com')
+                    self.assertEqual(routing[0], 'ruleset=DIRECT,[]DOMAIN-SUFFIX,neolive.kr')
+                if path.endswith('.yaml'):
+                    routing = config['rules']
+                    domain_rule = 'GEOSITE,cn,🎯 全球直连'
+                    ip_rule = 'GEOIP,cn,🎯 全球直连'
+                else:
+                    domain_rule = ('ruleset=🎯 全球直连,clash-domain:https://raw.githubusercontent.com/'
+                                   'MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs,28800'
+                                   if '/subconverter-stash/' in path else 'ruleset=🎯 全球直连,[]GEOSITE,cn')
+                    ip_rule = 'ruleset=🎯 全球直连,[]GEOIP,cn'
+                self.assertEqual(routing.count(domain_rule), 1)
+                self.assertEqual(routing.count(ip_rule), 1)
+                self.assertLess(routing.index(domain_rule), routing.index(ip_rule))
+                for host in ('qlxft.ourduda.com', 'www.wellcee.com', 'bilalipay.com'):
+                    self.assertFalse(any(host in rule for rule in routing), 'Domestic sites must not depend on individual whitelist rules')
+                for index, rule in enumerate(routing):
+                    if any(marker in rule for marker in (',Custom_Proxy_', '/Custom_Proxy_', ',gfw,', '/geosite/gfw.mrs')):
+                        self.assertLess(routing.index(ip_rule), index)
 
     def test_category_mapping_matches_the_official_four_subscriptions(self):
         self.assertEqual(FILTER_PROFILES['ads-only']['categories'], ['ads'])
