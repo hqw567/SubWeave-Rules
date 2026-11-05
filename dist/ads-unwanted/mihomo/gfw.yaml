@@ -108,6 +108,7 @@ rules:
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
 - DOMAIN,www.wellcee.com,DIRECT
+- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - RULE-SET,awavenue-ads-unwanted,🛡️ 秋风过滤
 - GEOSITE,gfw,🚀 手动选择
 - GEOIP,telegram,🚀 手动选择,no-resolve

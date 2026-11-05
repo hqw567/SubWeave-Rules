@@ -50,6 +50,7 @@ rules:
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
 - DOMAIN,www.wellcee.com,DIRECT
+- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - RULE-SET,awavenue-full-protection,🛡️ 秋风过滤
 - GEOSITE,gfw,🚀 故障转移
 - GEOIP,telegram,🚀 故障转移,no-resolve

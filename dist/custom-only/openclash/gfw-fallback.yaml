@@ -38,6 +38,7 @@ rules:
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
 - DOMAIN,www.wellcee.com,DIRECT
+- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - GEOSITE,gfw,🚀 故障转移
 - GEOIP,telegram,🚀 故障转移,no-resolve
 - GEOIP,facebook,🚀 故障转移,no-resolve

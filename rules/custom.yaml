@@ -11,6 +11,7 @@ before_filter:
   - DOMAIN,time.windows.com,@direct
   - DOMAIN,codexapp.agentsmirror.com,@direct
   - DOMAIN,www.wellcee.com,@direct
+  - DOMAIN-SUFFIX,bilalipay.com,@direct
 
 # 一般个人分流：先应用所选过滤方案，再应用自定义扩展规则，最后进入 Aethersailor。
 after_filter: []
