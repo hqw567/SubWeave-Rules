@@ -1328,10 +1328,13 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_IP.mrs
     format: mrs
 rules:
+- DOMAIN,qlxft.ourduda.com,DIRECT
 - DOMAIN-SUFFIX,neolive.kr,DIRECT
 - DOMAIN-SUFFIX,pandalive.co.kr,DIRECT
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
+- DOMAIN,www.wellcee.com,DIRECT
+- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - GEOSITE,private,🎯 全球直连
 - GEOIP,private,🎯 全球直连,no-resolve
 - RULE-SET,Custom_Direct_Domain,🎯 全球直连
@@ -1393,7 +1396,7 @@ rules:
 - GEOIP,google,🇬 谷歌服务,no-resolve
 - GEOIP,netflix,🎥 Netflix,no-resolve
 - GEOSITE,geolocation-!cn,🌍 国外域名
-- RULE-SET,Nonstandard_Port_Direct,🔀 非标端口
 - GEOSITE,cn,🎯 全球直连
-- GEOIP,cn,🎯 全球直连
+- GEOIP,cn,🎯 全球直连,no-resolve
+- RULE-SET,Nonstandard_Port_Direct,🔀 非标端口
 - MATCH,🐟 漏网之鱼

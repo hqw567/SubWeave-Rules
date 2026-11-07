@@ -90,14 +90,15 @@ proxy-groups:
   - DIRECT
 rule-providers: {}
 rules:
+- DOMAIN,qlxft.ourduda.com,DIRECT
 - DOMAIN-SUFFIX,neolive.kr,DIRECT
 - DOMAIN-SUFFIX,pandalive.co.kr,DIRECT
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
+- DOMAIN,www.wellcee.com,DIRECT
+- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - GEOSITE,gfw,🚀 手动选择
 - GEOIP,telegram,🚀 手动选择,no-resolve
 - GEOIP,facebook,🚀 手动选择,no-resolve
 - GEOIP,twitter,🚀 手动选择,no-resolve
-- GEOSITE,cn,🎯 全球直连
-- GEOIP,cn,🎯 全球直连
 - MATCH,🎯 全球直连

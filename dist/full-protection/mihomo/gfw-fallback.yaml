@@ -93,15 +93,16 @@ rule-providers:
     path: ./rule_provider/awavenue-full-protection.yaml
     interval: 86400
 rules:
+- DOMAIN,qlxft.ourduda.com,DIRECT
 - DOMAIN-SUFFIX,neolive.kr,DIRECT
 - DOMAIN-SUFFIX,pandalive.co.kr,DIRECT
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
+- DOMAIN,www.wellcee.com,DIRECT
+- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - RULE-SET,awavenue-full-protection,🛡️ 秋风过滤
 - GEOSITE,gfw,🚀 故障转移
 - GEOIP,telegram,🚀 故障转移,no-resolve
 - GEOIP,facebook,🚀 故障转移,no-resolve
 - GEOIP,twitter,🚀 故障转移,no-resolve
-- GEOSITE,cn,🎯 全球直连
-- GEOIP,cn,🎯 全球直连
 - MATCH,🎯 全球直连

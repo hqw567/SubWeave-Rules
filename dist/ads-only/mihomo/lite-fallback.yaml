@@ -378,10 +378,13 @@ rule-providers:
     path: ./rule_provider/awavenue-ads-only.yaml
     interval: 86400
 rules:
+- DOMAIN,qlxft.ourduda.com,DIRECT
 - DOMAIN-SUFFIX,neolive.kr,DIRECT
 - DOMAIN-SUFFIX,pandalive.co.kr,DIRECT
 - DOMAIN,time.windows.com,DIRECT
 - DOMAIN,codexapp.agentsmirror.com,DIRECT
+- DOMAIN,www.wellcee.com,DIRECT
+- DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - RULE-SET,awavenue-ads-only,🛡️ 秋风过滤
 - GEOSITE,private,🎯 全球直连
 - GEOIP,private,🎯 全球直连,no-resolve
@@ -404,7 +407,7 @@ rules:
 - GEOSITE,gfw,🚀 故障转移
 - GEOSITE,category-games,🎮 游戏平台
 - GEOIP,google,🇬 谷歌服务,no-resolve
-- RULE-SET,Nonstandard_Port_Direct,🔀 非标端口
 - GEOSITE,cn,🎯 全球直连
-- GEOIP,cn,🎯 全球直连
+- GEOIP,cn,🎯 全球直连,no-resolve
+- RULE-SET,Nonstandard_Port_Direct,🔀 非标端口
 - MATCH,🐟 漏网之鱼

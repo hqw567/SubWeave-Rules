@@ -68,7 +68,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/full-fallback.yaml",
-      "sha256": "eebddef3cfccfdbcfd615864f4c5bcb5a37ead02eae46758ebc05e3ca12081cd",
+      "sha256": "b2663bba2c6010a54e3a41fceb2a7657a120b0f79065ca361f857f3e7b152a64",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -85,7 +85,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/full.yaml",
-      "sha256": "7680db39208799c1200140e50e9cf8d27f8bc19514552d2fcbe937294ec6a91a",
+      "sha256": "7a3d4267a2c3002bba17cdb825650e4e6dd419dfc9f1984f3c5f2bac3b222b47",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -102,7 +102,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/gfw-fallback.yaml",
-      "sha256": "ff364ceff9db3c6b4aa49944687b27873555f821e7d95366818e4543dc865522",
+      "sha256": "4d724ce170d13aec8cee65d22e2a8ce2b337b2a7c809665cc9010862dab6ce56",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -118,7 +118,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/gfw.yaml",
-      "sha256": "08ac0ed8e7bf1123ceed8e2162ddfe28ca8546a575593758a94e0303cc2e3abc",
+      "sha256": "b2e6b81321c716de681e9c57402f64f0884fc2a78cd479c70288bbc4fe62f3b2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -134,7 +134,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/lite-fallback.yaml",
-      "sha256": "8e8fe8db437b039a98e3c59dd1ac833d02afc6fb91d022a68efaa487c7c61e7a",
+      "sha256": "fcc467ed457ae0a6f71c0f47ceb0e463b9f87ddda7ec4bd522a3f24ab483fa96",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -151,7 +151,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/lite.yaml",
-      "sha256": "1e1486fe0d94afbebd40e56b5f32e4d788d6e3fdc37cc1e6bcc5602a8e9fb3be",
+      "sha256": "ce33e520a364a1644da470c91055d85ca37fcd7ec2e08a210ad79c9ee51e82b2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -168,7 +168,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/selfhosted-manual-fallback.yaml",
-      "sha256": "12d7ffeeafdadc928caa2bf286de53e3436adbc68dbe77723c206dc1b50c7465",
+      "sha256": "d42a734682703de39e03cef4dbca6e3bc151bc01b938072c89a642112bf5383d",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -185,7 +185,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/selfhosted-provider-fallback.yaml",
-      "sha256": "a96d2a87bde85eb3114b7bb71852e4cc9bb71ffabb33cceb15e0ef6b9b8e4f29",
+      "sha256": "2b519512623c72bd4294a34a191f1cb229bdeb15eb6eea4108661558ea5e18a5",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -202,7 +202,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/standard-fallback.yaml",
-      "sha256": "fece97f179c8eb508f3e0d8cf28e9de2fb80a12e9215627c135700bd1946f916",
+      "sha256": "2bb7da74fe07ea8271009841ee9d458bcd5b1f2f70d9b7b986b3e9f588c1809e",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -219,7 +219,7 @@
       "target": "mihomo",
       "path": "ads-only/mihomo/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/mihomo/standard.yaml",
-      "sha256": "66698ee6b9790b7717e2ebaa9d5da50d94e37cb310fe4559916e6e30a174e66c",
+      "sha256": "6a250d28d65f74cc80ae651e9833e564d87c7c79be7bbb862777b9bf4b742a67",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -236,7 +236,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/full-fallback.yaml",
-      "sha256": "7182b51ae375d9a90bcf5f2a589fe623af21ff8b88d9fa0ac56e8cac6045fa37",
+      "sha256": "47db1bb78f647dd98d51dc04bc071d59eafe82903e7b6a3d0abfdbf3b8e37039",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -253,7 +253,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/full.yaml",
-      "sha256": "43b007a716f80e03181b585f350ef76438247645cf7b747bdde83e337c4ff78e",
+      "sha256": "8774f6b37e16687e87cfc3878fb5dba854b5c3787579e18ec1d33769930c4e38",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -270,7 +270,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/gfw-fallback.yaml",
-      "sha256": "5f4d0784fcbe9617f1b9ebce8d32747d0b3d4cdac402516e09508f78dd660603",
+      "sha256": "3562b7fc6eb519a1347daa5d2deba8c51e5a65eef8d4a451ed07ceb2c2aea840",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -286,7 +286,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/gfw.yaml",
-      "sha256": "4ab2be382c330df61694e94613a4d829d46b0aacf083bf1671dba73e3eb19adc",
+      "sha256": "818c21dd8c786d4a7c8d6627a7d9be67da2e8c4010dfef13509707dedeec9dd6",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -302,7 +302,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/lite-fallback.yaml",
-      "sha256": "b7afcbbe1d77238de56354b620ac47ae41a68944b746ce0679b2da9c15d92db9",
+      "sha256": "9fd1979c8657c4444567d434f3e1cf626385687840af9875df049aaf944affbc",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -319,7 +319,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/lite.yaml",
-      "sha256": "e6121e8a6602a360197bbb94f316be091afdba280bce3892b22dce2964ff08f3",
+      "sha256": "034bc1f0200dfc00a3cbfa7fb102ff1f8f85d4bbc1db4be06ee20df5d0c54b7f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -336,7 +336,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/selfhosted-manual-fallback.yaml",
-      "sha256": "d09a8100da7bdad12fa3c1fd7c9cdfe1b7cb6f3c6e53d78a1527d3df050cab60",
+      "sha256": "981261c520067df6fc7606bb4ac9eed163029631d6e488190ab054ccc176fa2a",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -353,7 +353,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/selfhosted-provider-fallback.yaml",
-      "sha256": "c2d5881440fa275a0aeeb917663ea3106667015287f68cedf4dd8558870910d2",
+      "sha256": "f93992594534ceb2bff1bfb6a152c34f69c1a80ff796f0eb8ef15bc9c4594852",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -370,7 +370,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/standard-fallback.yaml",
-      "sha256": "995716b7b8ff1f05ae026023d3a86140ba7bb6017669e28771741f22f316a24e",
+      "sha256": "dbb5130d44238409e4d560b2c6552b2f21c3c324ef6748102060972283a1174b",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -387,7 +387,7 @@
       "target": "openclash",
       "path": "ads-only/openclash/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/openclash/standard.yaml",
-      "sha256": "d47286ea859051e9687048493b674046afd5581707abe2256350e1d89e997923",
+      "sha256": "e1a9b6dfb0e97c75ce50069428864740b14a0ed8744a77dfc302d027e3f0c42c",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -404,7 +404,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/full-fallback.ini",
-      "sha256": "4bae5cf68a02956e2ea4e32c99ef9e192bd36587a4e0e2e58f9c603e153ff633",
+      "sha256": "15e98f38071fd741649e4b8c97f0775821ea90d615181e346ddb711b74d73d59",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -423,7 +423,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/full.ini",
-      "sha256": "bee09a512392eea843f30508fd96b4d996c6fe6d389102e6e23d79374b6a7872",
+      "sha256": "da2db6b61ed1dda65513ec0f063da08b843cfefbf2d56c7e5e070b335eba70ad",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -442,7 +442,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/gfw-fallback.ini",
-      "sha256": "a2f22f7660563fc22d08a056c7bbfc177b7c25536a7bbcbdec27e156b3f39cb4",
+      "sha256": "751085dba884732f0a1acab8d2aa0229f1d86c65367c659a14fb7de3b7356a0b",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -461,7 +461,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/gfw.ini",
-      "sha256": "aae08dca9f28d28a4ee5436b2367a3511e1e2503fb3f803f04738d073aceeea3",
+      "sha256": "9dad9c4a841b982e14f0682334a35ef614763a3663ff186cf1d9f1c2e07066af",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -480,7 +480,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/lite-fallback.ini",
-      "sha256": "ffed5828db38e7e6a393165139366d83ca787b4d16d11ac2c7b85c71a68a93fc",
+      "sha256": "cd2354585178282bf8eec5a114ef0bd8711fb6982fe26d9819d774c4725630c9",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -499,7 +499,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/lite.ini",
-      "sha256": "40f46ac4faff06811aba7612943aba61f8abee6d4b3c4ebc94c2601e1724624a",
+      "sha256": "3d202771b64f47afbcfb137b5ee1cf4b2c904fa33646f68774fc05467ba78c68",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -518,7 +518,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/standard-fallback.ini",
-      "sha256": "0016edfe7fe7ef01f224b844c9fe9da6369a9c53a640104cc01fdef7a5c103a4",
+      "sha256": "945f72cb51ddaee71ef75190c3b9dfd3de495f3a3237da55a34141aa86232682",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -537,7 +537,7 @@
       "target": "stash",
       "path": "ads-only/subconverter-stash/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter-stash/standard.ini",
-      "sha256": "12d4b771ffa5a96f52e596d7d36129d7c1c884075c5f0e0d5170a2d16de146aa",
+      "sha256": "8ade0fe65a3a0f57f2be92e3af5ee61cb20193d7cce6203cc364c6d5065a3a06",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -556,7 +556,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/full-fallback.ini",
-      "sha256": "044abbe779462b9111a2693e9be52a8d1aa821fe7c416b2c3481812a87dc462a",
+      "sha256": "09de39921cd550eb5a8ce07fdb25753639fed88e19293c09a88cb8ff30905c58",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -577,7 +577,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/full.ini",
-      "sha256": "ab2281c95d0d311f4df2c793c81af7ce73c1e290973459d4fcb577cf225b52f8",
+      "sha256": "35ef30ec14a0f7f95ce581e0c14327582e3bc345f38ae5c26fe1c0e6d8c9ac8d",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -598,7 +598,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/gfw-fallback.ini",
-      "sha256": "428d0280e0d63ba84d35e7ddb11bccf68ba7b90569f559a8e0ebabb958f1fb90",
+      "sha256": "621f91343a2e4cae189343f4089208e2785e560dcf8a1bfd9d7566ebda0a0309",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -618,7 +618,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/gfw.ini",
-      "sha256": "714f56172137e0578ceeba35d261bafcd72b55f95cab923d4ea364302c90630d",
+      "sha256": "32fb64c94e13bc52b1cb7f21ef6d691462e793b03b77ca0a50654cc96cd72b28",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -638,7 +638,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/lite-fallback.ini",
-      "sha256": "c476098ba54ef66cd6707388b65eafca3f287316d2a6ebf9dec625dd989e4721",
+      "sha256": "1563a81d9d37986dc2d7f34802bc048018aa69b617fa9126dfb8c39bc628150b",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -659,7 +659,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/lite.ini",
-      "sha256": "99a34a4746c0ccc9ed6266bcf9b4a1a83ee678829ac9595542a463acb86c1bfa",
+      "sha256": "7a4ec4d9a01ccbdde50718bf10e8c0b361333bdfca1dfeef7db82ca8376c5690",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -680,7 +680,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/standard-fallback.ini",
-      "sha256": "b753d9a43b0699ccab81492ba8f0eda4bcee3001543f31e2a711a3bd5560cc28",
+      "sha256": "22af8e31d16928b13dfd598abdaf3f0863adffdce16d6edf58498326cd2305d0",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -701,7 +701,7 @@
       "target": "clash",
       "path": "ads-only/subconverter/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-only/subconverter/standard.ini",
-      "sha256": "14267a8010834b28f1949cd2a5304d81a5ef0217efc4f371f8ee406919f9b5b4",
+      "sha256": "faad02b160ed802be3043a644c5fbee5fc8ee70f53431a525e34228ed914e990",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -722,7 +722,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/full-fallback.yaml",
-      "sha256": "2c376f8b74dcee34c9f3bcb8bc34f9c3a135fdaef50a7396c5e5c36777e43b55",
+      "sha256": "1a31268ccf18dc0a8f4720d2027fef7c07bbdc768e141a42a466337a89491f34",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -739,7 +739,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/full.yaml",
-      "sha256": "b61cf4862a5b19f3372d62717cc6c823f7faac1417621410aa0964d6e3406305",
+      "sha256": "8c87d4fcb814d329eafb266372bfe559fe2fbce4e54dfdb137a5fabf8f4c728c",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -756,7 +756,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/gfw-fallback.yaml",
-      "sha256": "ad78a2926e5d9577bf7a8797d9cc15f7b050c4392a5179f7d3a62a844d2d6098",
+      "sha256": "c03a1d4f833eff26a471eb50e1428e9158da982221526a94fac14ce9920da209",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -772,7 +772,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/gfw.yaml",
-      "sha256": "1c0081277febf55d9b975322f10e9ab1f1e0fc8a74ca094bcb90244e2149939d",
+      "sha256": "6639ef8c897cf69f6647ca6c61535f2fe6198d787fd8fed1394853c56ccb2f14",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -788,7 +788,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/lite-fallback.yaml",
-      "sha256": "ab729d72238c27cafb4a67c23b96aff8a41dcf9c17def66ec1c41a9b420dfe0e",
+      "sha256": "84823629ee4ea2cddf1c238663c752bd2710dd4b6d2d1f9b165f14fb0003719f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -805,7 +805,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/lite.yaml",
-      "sha256": "9135ede4f4ad2ce106e75160af9e9d9fd22df8d237ff0c1a3430ed34fee63696",
+      "sha256": "734dd9fad05ab259193fdb3b8aca95ff02f73421ae3601f6961657821186e592",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -822,7 +822,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/selfhosted-manual-fallback.yaml",
-      "sha256": "d3cc03f0a49aab1778c8e876ec68ebf6013e89151bb3df13c16842ab72a4b2ff",
+      "sha256": "bfeab23875263219bc5acc41539103be19c22164fb50cb784dd45d477758b9a4",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -839,7 +839,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/selfhosted-provider-fallback.yaml",
-      "sha256": "aaab5c330d92395e4b37df3bb915ee235ca380a86ee67960c218304c378884f0",
+      "sha256": "4f34ab9fe80bd9e5c9d5797de25c7b15ff41b6b0d0f293725f0ee5a906d624d5",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -856,7 +856,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/standard-fallback.yaml",
-      "sha256": "445e0b00fab428e077ba4ca6d03ac07c8c172cd219d27dc001154b34098cd9f3",
+      "sha256": "201a35da440c5d879db689845a6044f908ceb72148e057dafad8bd56427aecd6",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -873,7 +873,7 @@
       "target": "mihomo",
       "path": "ads-privacy/mihomo/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/mihomo/standard.yaml",
-      "sha256": "acd9461be8e8a6ad1e75242ce023d8cf190cbb2dd543155f787ef6cf3e48dc9b",
+      "sha256": "195d2820658bd97f07faa785967bde1deed50228e5eb932775a697e972c0ae71",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -890,7 +890,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/full-fallback.yaml",
-      "sha256": "a2752264a14a367f577a31ac32fed3e90811f97a90b90079a0b1d4939ad468c0",
+      "sha256": "e508fa626909c804df19d0cebd2de8e1b410834dff750dda611d14b80580cba0",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -907,7 +907,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/full.yaml",
-      "sha256": "73d05f4e2996f5e4f0c06c2de787601121df205c919e26201c8f9943fa23f38b",
+      "sha256": "e64f346d414b09702a596ced00a324fcfa501d2872c4f8c1a9db37b823be02f3",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -924,7 +924,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/gfw-fallback.yaml",
-      "sha256": "bd6a8178d4dd5244f387f46b121d0464e3105e272d749d963179735e0567d8fb",
+      "sha256": "a14a256fd0c05f45cd6545884c1c6921e5724dd389f6dbe0d539975792e2c56f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -940,7 +940,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/gfw.yaml",
-      "sha256": "2e35c5886dda1801305458988021962648c94c9ea8a5868e16d5c4fd8a6f8aea",
+      "sha256": "09e555bf88859f88abdb141d043166c84192e1d654d2ef6c28f0aedf81736550",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -956,7 +956,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/lite-fallback.yaml",
-      "sha256": "c1121520dce4faf5620b43ec1b84e2cdb666a22e5651f11974db331954909093",
+      "sha256": "d8cd52643ad60441bd6515d748c7187e1fce75441d87959320f122fba6333f24",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -973,7 +973,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/lite.yaml",
-      "sha256": "b00bf96d0d1cde718d39a498ea05a0080172007e7bcbe6d4ac3ffcd14086cf3d",
+      "sha256": "bfdc59ca5c4af22c34a509234e4a884b78ba634c810b94d8f589cc055ab12bc6",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -990,7 +990,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/selfhosted-manual-fallback.yaml",
-      "sha256": "fb7362fe68dcc974a1803fdf9ace05b8018befc516d88f9e9f23f5390586b17e",
+      "sha256": "1c263ba3de32fc927a022b2be83b1d369aef5a51377a603f6ef479f1e14d8dfb",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1007,7 +1007,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/selfhosted-provider-fallback.yaml",
-      "sha256": "eaa93f27bdb63135a927caef645095d9d43a080b556a10613e5126a5aa6d4a98",
+      "sha256": "68a0f20567692ed7dcc5005d786daf1a7071ace51497c52765458bf87f6a8f54",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1024,7 +1024,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/standard-fallback.yaml",
-      "sha256": "7531ded2d79f1685a249dcb9aa4fad1af9ddacfb99487ba57a63a77e71c53b7b",
+      "sha256": "1e11a9fa812dc7c4ec04e60d2485d7c9cf9fed86be201b2589eada77b96375d5",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1041,7 +1041,7 @@
       "target": "openclash",
       "path": "ads-privacy/openclash/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/openclash/standard.yaml",
-      "sha256": "0adc5cfaf891562f656d1444524e15ccfb25d839d5ae3d1afc643e704b4eae87",
+      "sha256": "738ec3aa8712884699c23e4a3acdfd1a72ddbb85365b63bf60194dbd655d8ff8",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1058,7 +1058,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/full-fallback.ini",
-      "sha256": "6fcb25cb2e571f7d19a9fb045c7dbb2b56674d39f0d855a6004bf02cdc7578c1",
+      "sha256": "440cca6a3f9da219fa92875ad55b4146f20074c5861d21769d01f35ac1ae3dbf",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1077,7 +1077,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/full.ini",
-      "sha256": "126c864a155906959fa938efedfd7174561e0ec546643642c41c1c415db802f9",
+      "sha256": "596f279bc31438b402903c7dec3f8310cc5f2dce3c6d627e9a3e7451314143ce",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1096,7 +1096,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/gfw-fallback.ini",
-      "sha256": "83b717ca3ab2842071407036ecdd657a2899dc59787aca11a1dfe610715080ca",
+      "sha256": "157e35f961b78306689c71498db3f29120c4a306fe2e6f5f5fe635d54395f6d9",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1115,7 +1115,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/gfw.ini",
-      "sha256": "929cdc63b22f2ad243a5963818f541be08854ff0c11edd14bcfacab1204fa513",
+      "sha256": "fee96ad72918d9704c2e130a093e25e48f88fa03ab3ba9b1fd483d0f4c1c171b",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1134,7 +1134,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/lite-fallback.ini",
-      "sha256": "41c32053b20534b14a9f1783b495ff750fd1dab6bc230fe7230426971e0664c5",
+      "sha256": "a2f10ad3aacd6c1849afef4a6669de3207c9f6d20c8432813e6c66c70996dfaf",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1153,7 +1153,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/lite.ini",
-      "sha256": "d9663f6e124778df42071ce470514b13b15e8b151d6ae4b13eb1e73c722a8f2c",
+      "sha256": "8a6a97c6c8512e7548e6ae0ab3036a1624f7e3b396a322b372eab3593822239c",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1172,7 +1172,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/standard-fallback.ini",
-      "sha256": "45667fdb27f14b954286c1a7310d1b29a5dd894c17239c80cc9e423a260e62d4",
+      "sha256": "768930dd1e0ad1434eb3b91a2cd0b3c4eb484ab7d80715cc734a356d55350681",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1191,7 +1191,7 @@
       "target": "stash",
       "path": "ads-privacy/subconverter-stash/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter-stash/standard.ini",
-      "sha256": "87d9e3ba7826241a4585d786993333c8ca7d31f68d5a88cf0810b352be06d3a9",
+      "sha256": "50d0db686d4680185b2016fb151176f25752b075e8b4cad8c9c5f2257f59d8c2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1210,7 +1210,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/full-fallback.ini",
-      "sha256": "63d2364466c1026393e30ec96694f39d07a8af37817902015e71b380d1de1cfb",
+      "sha256": "2f81f5b1c5c2fbdcf44c4140ebb91096053fbf3f9258dc22f1e146dc29e449bf",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1231,7 +1231,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/full.ini",
-      "sha256": "9fd718f464275dcee76c788abba53dbe462179fea295c78f7a8fbd5a85732c03",
+      "sha256": "c82ebd25e2c9f638bf49e98874f98f3a3b077b3e8eb13ca8e85d5424fd64e1de",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1252,7 +1252,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/gfw-fallback.ini",
-      "sha256": "e3d12b51e1db67e69e8bf51a034a45d0e78bb33baad03684acc723631e97b8b2",
+      "sha256": "dc0d4713a389e064aa1417089fef56e837b14464791c3b0d32bb82d7afa8a121",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1272,7 +1272,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/gfw.ini",
-      "sha256": "723b54af38ccaf7c9d3fd6462a98810d03e708799acbc7950e0417020750447b",
+      "sha256": "d853fc8344b10dc043e4a0710bee40e0b719a1ef023636612d7bf9359661983f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1292,7 +1292,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/lite-fallback.ini",
-      "sha256": "d3f6331642034798d5298b2c260196d9fc0bb4c3c583b41216e605cebed3f3a3",
+      "sha256": "1e760cc2410b740d15f1f97287ee43b248940732e9a6719323d64a4d794f9f3d",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1313,7 +1313,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/lite.ini",
-      "sha256": "b575b1059a227cce234abc754fe268ab6bf467cb8546bfcc4b87d321b860b0ac",
+      "sha256": "bdba0b3a688f5bdf16720284be9ba86c3bd2018929829be7329d8213fbab9498",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1334,7 +1334,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/standard-fallback.ini",
-      "sha256": "4d649f1d8e5d2b913862300172ae65dd94339cdfc398fe0a44f2f489b7db50eb",
+      "sha256": "d2392c13b951c0954e873641bd13c85e8662687024f60cdebf5c2500170dea90",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1355,7 +1355,7 @@
       "target": "clash",
       "path": "ads-privacy/subconverter/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-privacy/subconverter/standard.ini",
-      "sha256": "3b6d000bb3b1d86dfca5847a6d1b64b3d93fee79ba50b89bdcc5dad1902239fa",
+      "sha256": "2d8dee3deab17a795d1c1546258632d226f7dcb0d63b6986322d937e542f0c1c",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1376,7 +1376,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/full-fallback.yaml",
-      "sha256": "bff1230d6e4de9e144d1250266c1d201f2cc2e01797bb653afc8a7546e0cadd4",
+      "sha256": "3737fbdc1b8da58bd31fb1db3161c59b62146f24e71f366cddcb303a4722ff58",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1393,7 +1393,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/full.yaml",
-      "sha256": "2d3ff2a2df7e3803baff7096303eec084d604abbb90b766ada7da6e60eca472b",
+      "sha256": "dff8c004ba141e767938ff97f26e97879718c3093727b2d993aa2a206916e753",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1410,7 +1410,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/gfw-fallback.yaml",
-      "sha256": "c76fdc95bc690cac2f44ff760edb4ee368578792ec9f0690963d63cca82b438b",
+      "sha256": "58d7761540b1d0cd61196b2f29b718404672ab6c5726afd9c65d7872d1a72604",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1426,7 +1426,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/gfw.yaml",
-      "sha256": "3578d6b6dbd1673b70223330e7464aca56a9da67be2f513d58faa8fe68aaf817",
+      "sha256": "3bb91e52522f70e227b5fa820ba701f61120cb4bca34b06beaa5376838012b9a",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1442,7 +1442,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/lite-fallback.yaml",
-      "sha256": "d0ffcaed2c585b7c70013f8f229f88c4417cdc9bda74651e9c599455d1e19983",
+      "sha256": "59de144f3acfad2618d30444194c17c7b0c52a5fd2982a62a33549d0b78a1709",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1459,7 +1459,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/lite.yaml",
-      "sha256": "a6b638b9887943bb48c4929be34e6ce4081ef2311f619fff00cd63cb64940c3b",
+      "sha256": "ab2082b6274014851346cf44aee284ff53bd8c6b3d9084427f93300403ffba44",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1476,7 +1476,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/selfhosted-manual-fallback.yaml",
-      "sha256": "557370430c163d2cbc07b1ad4d119599ae1b7136bda567438c27ed9de0c422d8",
+      "sha256": "fccbb7dd3470f299f74cd037ec0990d336e7debc6e00862a25c796d755a1ab82",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1493,7 +1493,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/selfhosted-provider-fallback.yaml",
-      "sha256": "a9e48997523c2ff6e88562435e305975d493025f7c3739162dbfbced5d956e22",
+      "sha256": "e267fccd88981640f193441aad0a5d22834298cd17229504889070fd93c2be7f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1510,7 +1510,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/standard-fallback.yaml",
-      "sha256": "d05fbfe80204b7632e751a9da9a8c29ed378799ebd2d29f41538b12cc02a3aff",
+      "sha256": "08b14db3c8b27b2e1b6a987352c0860ed0e9cc2cb62f8a76bf87750e65d4e704",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1527,7 +1527,7 @@
       "target": "mihomo",
       "path": "ads-unwanted/mihomo/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/mihomo/standard.yaml",
-      "sha256": "6ac1ff3a1ccc61a94d7954fc8ad831d4ffdf44e6a43a7877b0c3edc18b1875d2",
+      "sha256": "dc759f0dc53377b9a4d3a9209e24916ccf1fcceb24bc2704594c97131d318969",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1544,7 +1544,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/full-fallback.yaml",
-      "sha256": "6752201ffc616660d7b9ff4bcd73b2c2ca06fd48925a20d1f30c773c3214b7b8",
+      "sha256": "9207d800ccfdd534bd45724b128043229a392509eb49a620e46304746e9d5143",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1561,7 +1561,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/full.yaml",
-      "sha256": "6334396d491f0a0de52a77b7fd88eb1b20c85f699b6a19b140edaf7f156fb160",
+      "sha256": "b34b55bdef04936e0be6196bce8f4b8a6fd59ec6314ac61f0e0c3fec35da0026",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1578,7 +1578,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/gfw-fallback.yaml",
-      "sha256": "e803c5e87a550c7c239a5a74e9ec68bc0e2c2c0ca33a7b1f1b6bf386d4f3e45b",
+      "sha256": "3ca04d35d76391054b778e1380fda6fd5507a28c0d1f94032ba61671e72ca17e",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1594,7 +1594,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/gfw.yaml",
-      "sha256": "5dd226e527ec2169774d163beb259bb6d13a743f59876c8303ee755cf007ed5a",
+      "sha256": "f70fa6903b5b4b4b153cd8c0b01fa38cb446e5e9d67e965302d8643812cc0df2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1610,7 +1610,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/lite-fallback.yaml",
-      "sha256": "20e1c89cb70f5d969847cda04cff39a77f5d33e43629e632766975c9edd45e8e",
+      "sha256": "932056b2d4da0faa18880376ec43fabe4863c2af0676d55690c2c771cbc76a78",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1627,7 +1627,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/lite.yaml",
-      "sha256": "02bcb1c55b9d016e68927cb244ef627fc45ebcbb792f7378e138b4850e5781ec",
+      "sha256": "2d600e27aaae34e79e0dc91b638bb90a84c9da268cce2a9155fa989543b0476b",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1644,7 +1644,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/selfhosted-manual-fallback.yaml",
-      "sha256": "53c98d051c93dfff814ceed5fce186cadffb03e59758ed6e636517b5e8bbe319",
+      "sha256": "df1d8734ffd7e87c6aa087600f4fad54c8f1bef20d053aa4fb259ae23edbb7c1",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1661,7 +1661,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/selfhosted-provider-fallback.yaml",
-      "sha256": "64d1081206dbe2b30a96cabb1f26965ffd110d65bca1b176c08b8e54ba8fd455",
+      "sha256": "85b5ea708c6f0be3fd524735c391cfdbe836c72e3e3a2404834937d3f50d328e",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1678,7 +1678,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/standard-fallback.yaml",
-      "sha256": "758d9b56b90fecb1d965d292770b9d4e64b14837c197330c2d3fa62608ab78c5",
+      "sha256": "d29af8fcf1e5381bdf7c4d2fc6fad9680a98ce69f75293f9b0fc764c4f37ab49",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1695,7 +1695,7 @@
       "target": "openclash",
       "path": "ads-unwanted/openclash/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/openclash/standard.yaml",
-      "sha256": "9be181e8d221412be90b81732d9fe97b772f060f1af8c4c5c0ea99f2e8c1af57",
+      "sha256": "7a2cb5f56517ada249f4a0a67f897f0c23c7802b72fdb0572afb94c90907e553",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -1712,7 +1712,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/full-fallback.ini",
-      "sha256": "48525e1b0df04824405c036c662c6ffd22e8666b4109340acee2b7b8eae871a8",
+      "sha256": "6d64feb9d3b257bd12075c49d2c8f7bfc66b47eee67ca77047e4ce71831b32e5",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1731,7 +1731,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/full.ini",
-      "sha256": "9527d0166d8f94ba7243a2949ff1ae392d57d64a201fb03e30cbf809df0d3660",
+      "sha256": "bb0a35bcbe905952b9024986fc297b20c1c4a1f43bdc0271dc04ec450f026662",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1750,7 +1750,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/gfw-fallback.ini",
-      "sha256": "1cfc51b75d8086e8b6e9987e7ca100b2f59ad999fdb0b321e38194e5ab7b9173",
+      "sha256": "5f7accfd1d081884577f573786a662b2ff61fbfc519fa9bd6b1a0f0f7469eae0",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1769,7 +1769,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/gfw.ini",
-      "sha256": "6a5451aa3bf608efbb1f711433a72c3b059791692843a95fce380c871dd1f04e",
+      "sha256": "4e8519b5c43a42c57a7a7376d2d5f75c8124302b717a6439aef3fd431e987dbc",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1788,7 +1788,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/lite-fallback.ini",
-      "sha256": "111d5a2a62d234024e454d3202f4c4b1b602e21e0f9e63bae11cdebbfaeb0f6f",
+      "sha256": "38d07e0dd52ab2f242f248deac53512faf9b9c8225da2ee32f6423e99ca5522f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1807,7 +1807,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/lite.ini",
-      "sha256": "9c26ea1f037b879810dc5c67ba763e423dd282fd486d47a99aa67abb84fcd83e",
+      "sha256": "2e7e3c5e31e0ad14ab63acdac9b2d722fbbfe600669a593e268ae3a20b36218c",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1826,7 +1826,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/standard-fallback.ini",
-      "sha256": "00dd2c6047dc12c00e54e14d18aa2aac6841cb707276c66ac92ecd4186f41044",
+      "sha256": "1363e39fbd953725f034ced40763d374eeb2bae671e422af0803aa683d72fc28",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1845,7 +1845,7 @@
       "target": "stash",
       "path": "ads-unwanted/subconverter-stash/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter-stash/standard.ini",
-      "sha256": "dd57034c4b618b9e65f39947c0b633b2d431aea87613fbf2fcf2b2b6e691aa59",
+      "sha256": "9dad181cc47c3b9c6af0d129c706a787ed79f56db26b07cb7b61b7c35b519c59",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1864,7 +1864,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/full-fallback.ini",
-      "sha256": "526356956dd8131a7b0297da710fdf2ed9e638c0480a018be0a6f5563206ea21",
+      "sha256": "f40b9fdad0df43971b709425211bf4e4446365191d2335eddc89b75872b14757",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1885,7 +1885,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/full.ini",
-      "sha256": "2ff34c7b14b39a15a27210d3a0941861847522249c92006a6205bbb85758ee25",
+      "sha256": "dc4236aca7c0a1a21e72b195f9b1fd5e70deabd0f2a71431d27840428aff772b",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1906,7 +1906,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/gfw-fallback.ini",
-      "sha256": "352228c2659e49eac66545735cae1f5cb2ac60ab75fbe3b0376824f5141a1c6b",
+      "sha256": "394d6ff4ea3dbb7b170a9bc3ccba7e8d9e0bde0c0113cc0053e08e80e72092d3",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1926,7 +1926,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/gfw.ini",
-      "sha256": "f557ee063117102ad5c36be118daa825fa29a9d0b48420b8d6916d97d6417b21",
+      "sha256": "db5308358f08fd59ee22f62e5923b2fc4aa09054590cfb1f6e9871e219caef74",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1946,7 +1946,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/lite-fallback.ini",
-      "sha256": "6aa4e1b96d125dfe4e74e31a83daad479ca3fe8fc882884f9ab01cab12045c4d",
+      "sha256": "b7f4564b442a1f32c07067ab39604c32fa43c0123fd2f769fc8f38722c7730e5",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1967,7 +1967,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/lite.ini",
-      "sha256": "985e702a0432b41ac0f28b6305a03ccff1606f038d1d97efff1a5e292d3b4c9b",
+      "sha256": "3ff19c9101fb23fb90d567d890a3aac1f3e831c6b53541395d016580ac07c5cb",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -1988,7 +1988,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/standard-fallback.ini",
-      "sha256": "67b2bec2e4423a549d51f81c1097ab958908ca17f94c7f341e0724f1b8f5e266",
+      "sha256": "73f8594fc1262af220eaf37bf5e432ba8ef51a6178fce5da44a6bf5365dd0122",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2009,7 +2009,7 @@
       "target": "clash",
       "path": "ads-unwanted/subconverter/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/ads-unwanted/subconverter/standard.ini",
-      "sha256": "221fd3724a8e6e883a91ae73d1c6988da527e9716d8ed866b75c2b78e6ece11b",
+      "sha256": "e92903c5f8d94df95d858bff02ff505619aa4c1fde5b4bf96e19f1cea2888871",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2030,7 +2030,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/full-fallback.yaml",
-      "sha256": "fc22bd9b73d6bc70f0ab78e04c7bf95da97b09a37b378567b37bf73d390afdc8",
+      "sha256": "0cfe16b8dca269666d582bb006a478dec08a7829f2793f248f93b7c4812b5cad",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2047,7 +2047,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/full.yaml",
-      "sha256": "4df1e7b2fd9538a0d0d053268569f8360124a00499907ad3de5e01f9add23512",
+      "sha256": "0c17ba531177ad1607697b3343d3a4c0b2e9e6464f24163879f063fcde22a4e5",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2064,7 +2064,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/gfw-fallback.yaml",
-      "sha256": "5e4a45ba0ad7a5c4e5640613e036a86e794f80b738287895ecd6126f3004efe7",
+      "sha256": "8751faf9599161ee689a6807357ebe1b0f8a3f4476e3893c2e3a708ba7d95634",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2080,7 +2080,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/gfw.yaml",
-      "sha256": "2d423a34cc02aa13c036e6bf09c2622c776f1f00a148779bedcb62ba39556a66",
+      "sha256": "3dbc0daa8e409f5dcab692ef0501485dd59bf5c91ff4a6b26e9d54c081c2f2a1",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2096,7 +2096,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/lite-fallback.yaml",
-      "sha256": "9075d1f75b8baae0a6ba215cec3c93a2cc90436aecdb846485ed9ccb61be47db",
+      "sha256": "7b2de4c21867ea23370a9d5d993f3937396a1531e01a4c070da6914169eb3252",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2113,7 +2113,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/lite.yaml",
-      "sha256": "f65414c5d0f9fa31d5117db4c9ebe5451a7c7022c32859fca1e64ee36f174341",
+      "sha256": "14279fe6591044720bd9b64885b3f18dd7c422bc3974f7b719cb578d43b931e5",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2130,7 +2130,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/selfhosted-manual-fallback.yaml",
-      "sha256": "61cd534c2976d0c37daac6281bc985080b11d131da18bf528b4892dc98ef494b",
+      "sha256": "d696a214df6ee9081913d5e6ca1ede4a4f92d1332b2bb0d5f250b53acce5bc3a",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2147,7 +2147,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/selfhosted-provider-fallback.yaml",
-      "sha256": "1c64493f12343df36815c2820c6cf635233fa73d626684dda2c9729605366a4c",
+      "sha256": "c129be76c09237d5a6fd6eb78c25910259417e06172f5ce81efe088a3c8b66d6",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2164,7 +2164,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/standard-fallback.yaml",
-      "sha256": "73f18ea856f5f7bc45e0024a615af79f155ddfc5284e51e7d9452a700217cb0e",
+      "sha256": "81fc93c4a8504d4938d0c381affee023bd44a3c6c858798483d414396d641619",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2181,7 +2181,7 @@
       "target": "mihomo",
       "path": "custom-only/mihomo/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/mihomo/standard.yaml",
-      "sha256": "3b6075eae7908f7e451798e7896ef9a8d16e2c4ed6b78155f2ecdeff9abf8644",
+      "sha256": "170f0929a40e0b26deeed4ae41f77139dba4fe0406a91e001ebb033de9411544",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2198,7 +2198,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/full-fallback.yaml",
-      "sha256": "1938268e277c7ba94a698d214b37f852dba2b7336af6f691408fdbf6eb10fd4a",
+      "sha256": "c836679f5321a161beca651d3435a03eeb076db1c7aa5a89c070b9de81466156",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2215,7 +2215,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/full.yaml",
-      "sha256": "0b9a28cd89943d5b93d512181c22a2c066cffa3ad2eebfb652b215472e8f5986",
+      "sha256": "b750fcda532193fe7022a3fa94a99c2c5c6382197e493f72dd959488755027b6",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2232,7 +2232,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/gfw-fallback.yaml",
-      "sha256": "1b7f9329d2fe158904f952a035ccff0e759f5550f02a6d755499db5a9618546c",
+      "sha256": "ec2254f3f696a91556038c1c8049d78bb8bca769a1c3bedd49854aa8a725c621",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2248,7 +2248,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/gfw.yaml",
-      "sha256": "01c878a823cac8feab1e6f5127fc351b2f40c5344948c9cb96797ce3edceae87",
+      "sha256": "789d949b8c1b2062da58d86438b4eaf456f9fbf3645cb798d8e84feff3565990",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2264,7 +2264,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/lite-fallback.yaml",
-      "sha256": "2436c338e586a85a38333b88e4cf4ab20920d73d697f79c7e1a322886bfd7173",
+      "sha256": "0bc2be5a7b1e34f9839c8cf4f7c03915eb53dbcc4144f790c4e993bfa97eb7a1",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2281,7 +2281,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/lite.yaml",
-      "sha256": "3408e6eb661eb7c72bb091844b0d8ead0a17ec7fe7e66a287ebced653fc4ca2b",
+      "sha256": "a11ab546e2b0b6994b298343dca3550be9fadebc43313cb305c4f71aafdc4b72",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2298,7 +2298,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/selfhosted-manual-fallback.yaml",
-      "sha256": "16fb49ce793b905a3e28c482c945a2b3aa7d34ced31ec6f5d6072b4cbbaa3790",
+      "sha256": "1228884e52bff9054e4ffa087722b2c0f0ca9831f66035af81e37d93c3aea629",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2315,7 +2315,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/selfhosted-provider-fallback.yaml",
-      "sha256": "6c2c3ca6266a2dda003fc3c6313eb39561917248afa17c32c4a54d397f049296",
+      "sha256": "d7db8a2dbeecc0cc2afe8f731f7b5d398ee1be19cf7d21b5f560350e6a8cacd0",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2332,7 +2332,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/standard-fallback.yaml",
-      "sha256": "ca00344817b9190d3b67f11b6fc0d785642558632b4d3c643e6032cb629b8753",
+      "sha256": "024e63d2b7ce90ffbc71cdee41a719ac9f8e98ad684937a5f4205e45463ea387",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2349,7 +2349,7 @@
       "target": "openclash",
       "path": "custom-only/openclash/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/openclash/standard.yaml",
-      "sha256": "388e0096754a6d4069ecc19ea6ef29524e9ad094a7263a3d2f1584308b54ef98",
+      "sha256": "198d3d4a89a60d6ca9939dd93a48cad3bd8e5a474a4d08a518c34d65a0149722",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2366,7 +2366,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/full-fallback.ini",
-      "sha256": "92d1192c29cf8014dc9ea1d2f95b1acd245b2ebb76b280d87b8323efd78c033f",
+      "sha256": "62495f116d0428865386cc586ca8214757b0fd2e95ba3cd215190736f9cba60f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2385,7 +2385,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/full.ini",
-      "sha256": "f568bbd74bf9daaa4fbcb225967c7d3c2ffec195ef14cb2f38d9e886dbb16857",
+      "sha256": "bc396278f9357fe7e14fe64d2112aafafce2a4f408f37839eb0efb0a8fa4e477",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2404,7 +2404,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/gfw-fallback.ini",
-      "sha256": "2f8df93a70c49ddfd76e8e9634c298ac5bf18dcc27ad9039c8d337a44c056da0",
+      "sha256": "b84fee1845e1429b23f16c5c7add896844c472182b0358aa462c0bebac781f34",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2423,7 +2423,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/gfw.ini",
-      "sha256": "d96a0aa4f5e1314683b851958184ba89ec86200746e5bb1acf1b8b9376b246b6",
+      "sha256": "0de1b38f3a8fd1d43ca21c045fa5c5bad83fc3a8daa3cda47fed319485763b08",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2442,7 +2442,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/lite-fallback.ini",
-      "sha256": "08027035bdefb5dff479c39635a899029fd39b868e1631e2190594672632eca7",
+      "sha256": "43423b45168073956d48089e376409a55c69f12d6a9eb94528fd4acda0582f0f",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2461,7 +2461,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/lite.ini",
-      "sha256": "7904e8b0aaf9a5da2c9ca299c2881eebba0df50bd7c1faa9c01440ee83481a12",
+      "sha256": "b0c0999bc56cd37eebafa1498d7d4f7ec29513b9a486acebb6f4a77c82359d10",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2480,7 +2480,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/standard-fallback.ini",
-      "sha256": "a162ec6d5dc7c45eb5f3c379879be8e164db5bb4ab26fcffab237d82256a6ead",
+      "sha256": "cbd619c349a3d71f03a7cf7259cfdb9bc3e06c36e5df7c812f4b0ba26c3e3a3d",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2499,7 +2499,7 @@
       "target": "stash",
       "path": "custom-only/subconverter-stash/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter-stash/standard.ini",
-      "sha256": "0a986d545339d1279b7115024d6b63af299e2c1b99f2173cbff2b271d14fd684",
+      "sha256": "09e20208a183acff10c9d6e66de571e4b86ef35c47353e6d06623c417967b560",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2518,7 +2518,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/full-fallback.ini",
-      "sha256": "7066c8614ba0c251ba74049be94aca7f38ccaf36669aac8f69d3d55d277af954",
+      "sha256": "70478733f38bd21ceeda38228990b82723bbbbf4a973b16b8931c99dd8ec7088",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2539,7 +2539,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/full.ini",
-      "sha256": "73dd0ea5d440611dc98ca74acd7bf7e4e3872c4a4e4085da9b7b1f305aa4d921",
+      "sha256": "1246e18efe21e8eab3c440138e13681e043dd7be1d70ab9eac67f2b54389896c",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2560,7 +2560,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/gfw-fallback.ini",
-      "sha256": "13a825dd9062b9dc67fb964adfeb14f46527c11b08340f1174fa90e1e4e4250b",
+      "sha256": "2a13b6dd99e76bfe31992828605021f77d7ccd609c61ec892e1e668baa6b4c28",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2580,7 +2580,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/gfw.ini",
-      "sha256": "f1b8e5a7a83267b1593d5ba5363b0d06f82933302de0f0bb5059ef172e5fe02a",
+      "sha256": "fd5f9e7b4378619cc72dd4b6aa7c8950354716d55c7970adf1f0ef08bbc931a9",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2600,7 +2600,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/lite-fallback.ini",
-      "sha256": "09769d9d3832d2f8f54360ea6f5bc8dd2c9ecba03491f62db4ef995310905af6",
+      "sha256": "3eb10a968bd8027752ff90e2b89272e2ec4fef3121cb21545d804c963f7b6f06",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2621,7 +2621,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/lite.ini",
-      "sha256": "a00240ceef6f3f7e73f2dd5dcef19203ec44f79e0a6516e97124f602f60ed115",
+      "sha256": "355fdfd36a5df23657c71b579430543e2103d1bf165edab09bc5b98452884468",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2642,7 +2642,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/standard-fallback.ini",
-      "sha256": "eefde862f7d5ae922b01ec821bfb02c17a8ad380c403d9296b20b54c9c108438",
+      "sha256": "5337b52782e89aa5e7c78fa5a2049a826c5778e1d25b26c7808b745caea60812",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2663,7 +2663,7 @@
       "target": "clash",
       "path": "custom-only/subconverter/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/custom-only/subconverter/standard.ini",
-      "sha256": "96e77fa5ef50fe5186d806aaf07c2b9d18233ef263976eb4b9010111fd78ff20",
+      "sha256": "f7168c2ef0b58399d95fe26f19c378b96f6311d9001e8d99b115db166be8db44",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -2684,7 +2684,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/full-fallback.yaml",
-      "sha256": "5be303fc485b18207f94180e90e97931db85274c5cfc27922719b45ec4c26ada",
+      "sha256": "6e793d3ec0639603924e6ba1899b61432b2ba97f66a72fdbb04041675dcc4522",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2701,7 +2701,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/full.yaml",
-      "sha256": "7959041ca5ece7d089ad600022bb62e92f9bccc33f9ae226c5ec8db1d23eb963",
+      "sha256": "6058dcd99b4f2cff58070f52d5c9a16464842e0a055ad8d9fd6cb5b1d20271dd",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2718,7 +2718,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/gfw-fallback.yaml",
-      "sha256": "c2c3570eb0ddfa20b5bf7f8a1ea529b6e89cb973e86850e06c770e4fe4de561f",
+      "sha256": "aca5faca775fc9a0d25caf5bac211f57b2aa86914cd8c939c6e397ecf62a9c1a",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2734,7 +2734,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/gfw.yaml",
-      "sha256": "6a4f9e22791d988119917cebe489afc69c7a84115d5accf3f240798f2ca2ffa7",
+      "sha256": "f95c0c43d6bb202933a0d118bbe78b9b3eb296f09927063b0527ea1c71fc62a2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2750,7 +2750,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/lite-fallback.yaml",
-      "sha256": "456bed5086577adac1bf2299701ba9bbccb122ca6bb8fbac75330bfaae9072da",
+      "sha256": "a23597269dbc6be0bc57e36b80ff88f124b8891f09f1c66b4ad61877a985cca2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2767,7 +2767,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/lite.yaml",
-      "sha256": "14616ea3b95c92466117a7783af57ffc0ef6186eab1e13c475ba5981f0c56bc0",
+      "sha256": "36ad6a636999ab6e6657ced0fbd2926ae3d1c9dc76f5e710145e85ee995328b7",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2784,7 +2784,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/selfhosted-manual-fallback.yaml",
-      "sha256": "46aa0bbe49c23bb675b7a29dd9f174b58fc435e4e069f7672080e8266347c550",
+      "sha256": "b761b6174a71d028a10ff124e28fec98c5be0813875581318f6449d09ccb75a3",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2801,7 +2801,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/selfhosted-provider-fallback.yaml",
-      "sha256": "da7e3e9fc04fffd512f61c7ace2b4177c236810975d50e50a2e6dd65aa87fcbb",
+      "sha256": "91083aa6ffc510d0376a9bf9ea7d8ad99e20a2359567d00c37437d9d3afce753",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2818,7 +2818,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/standard-fallback.yaml",
-      "sha256": "d866ae524146770981feee2e03ddee62f7f83f02f7f636287e0c711c90efff70",
+      "sha256": "cd895787d47f70a1caffaf067c23d86dd60136b1707970895d0642696a7352b6",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2835,7 +2835,7 @@
       "target": "mihomo",
       "path": "full-protection/mihomo/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/mihomo/standard.yaml",
-      "sha256": "079ce5030132cbab9215283f149273b156676e9522f7a7cf357af50109b12878",
+      "sha256": "52bd59824770ea09b214f0ac535abfd56d4f554ca55d12e87aa3fabe04ce544d",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2852,7 +2852,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/full-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/full-fallback.yaml",
-      "sha256": "d95a16e90476c06e6a1ab33fb553289b6cd547243024033bbcef6ff39d68f53c",
+      "sha256": "cfae56f3ec9775b0a22e944c459d5cb54736e8fe7c0331863ec7a022390f1ad3",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2869,7 +2869,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/full.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/full.yaml",
-      "sha256": "41ba4004609c1c717078e0645a8e59f3e99a48af1c33ed544c3f22230afc2f10",
+      "sha256": "29ba6db622bae56fa308ddab6a3fca692da47ff811b9be7dbf803311e767d0e8",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2886,7 +2886,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/gfw-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/gfw-fallback.yaml",
-      "sha256": "7dfe6ddfb8c9b54ab6c8b82380b85b24dbb34b0f1f8fa18d8c63452a2df33aad",
+      "sha256": "571ef5930c2976bd8f973e2486c9055b342fd4f954b59ffe1ebcf5e48a0b4802",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2902,7 +2902,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/gfw.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/gfw.yaml",
-      "sha256": "073abdbe3e756f2c05b7d07c2c2e2a4c6027149d60d8e56835098f8ed5a863be",
+      "sha256": "f80240efec0905d198c66e89ae08efc32679739ba77feaa5db1e1687a6d13ce2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2918,7 +2918,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/lite-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/lite-fallback.yaml",
-      "sha256": "d49699bf3de3b5760475c74827bc0a52bd08f7dcdbc9cd491b6d66cd2f769b76",
+      "sha256": "94caa22c9f2a87a5244fad32ad8b5b6f2a999a9a724c30b8ba5840835edf3eca",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2935,7 +2935,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/lite.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/lite.yaml",
-      "sha256": "768dda9fff0b60f18b7c76c57329db6e084f1722991e38d7d1831981fedb8674",
+      "sha256": "8a6d39a83504972321e01ac387f83732c4aa56ee433caf3cd32a429398aa1b1e",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2952,7 +2952,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/selfhosted-manual-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/selfhosted-manual-fallback.yaml",
-      "sha256": "3ee2159657b5337e5ba080224d50ba7f2e4f394fefcb52022e7036e34daf13de",
+      "sha256": "82e719e4fb840e6ba29eb9bb206972b3d248b277c1e29c84f8479c54b6073b3a",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2969,7 +2969,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/selfhosted-provider-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/selfhosted-provider-fallback.yaml",
-      "sha256": "5042075a13d14f6cac0b9e41308cae800876adb6f777cd7a17c7a87f6f889545",
+      "sha256": "ce85dbe0a574a8b89866e8062e759a663bc21ca29bdf89331bda635cb847bdb7",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -2986,7 +2986,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/standard-fallback.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/standard-fallback.yaml",
-      "sha256": "5dd275d4e288c1507a0ec4edc9599c781a6acad817050b21216a63b6f23069cd",
+      "sha256": "004cd05621ce7f8fc8a6ab5578d1e8a0c4031355d8fc6428e47c75ee3c972dea",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -3003,7 +3003,7 @@
       "target": "openclash",
       "path": "full-protection/openclash/standard.yaml",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/openclash/standard.yaml",
-      "sha256": "85aabd4b6d24f51654e663d9d7c51c4771abd300e087897ab60d01939302aa33",
+      "sha256": "fb789f22a4bd0977fd789b1803a312381888b629873bb0be8b0e072824573327",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {},
       "capabilities": [
@@ -3020,7 +3020,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/full-fallback.ini",
-      "sha256": "c438d122a4d13cc23f616cc7a790ce8cf90c78559ae490745e6abb99949c0eab",
+      "sha256": "419ef310909199b5209dfce008724d9dc5ce70b7431378627e20920388ed0a22",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3039,7 +3039,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/full.ini",
-      "sha256": "641b6607bf7e89a4a5a6827e3d089e382a3c2efe0ade8be1faf646afaa0fa1c7",
+      "sha256": "2bbca316bc66ef7df5f3737bda8226cb5fbcb0b17bc66ae39fa74384b05710ca",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3058,7 +3058,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/gfw-fallback.ini",
-      "sha256": "a277743d4c0ab48c4d4ad8c67f3a5aa613224505be41a07392238e4fbe27b56d",
+      "sha256": "ae4354117d5fe4f6ba2049c758092e38ab0d91063ab342a25ec9886449d1a448",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3077,7 +3077,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/gfw.ini",
-      "sha256": "e47f50842f7a63a85341eb8c427b7d09d540fb8cfdeabb70a8200ef60993d196",
+      "sha256": "077452832a4eba01a068105422ebe653a7bf38e3bcf4aefa8fec6d6a67925373",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3096,7 +3096,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/lite-fallback.ini",
-      "sha256": "04e282cfb8ee7ff2768f46cc48d471090fafd08d7c54aff113d2e9a8ec2e40ee",
+      "sha256": "5c8398d365bc2bfe9105f39bd0bc437fe29e323d0db49b409b0d42b2b5f33b9c",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3115,7 +3115,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/lite.ini",
-      "sha256": "80afec41f4ec58266bbf04796c5311b039c3eae43ef432c5103ed8cd599f109f",
+      "sha256": "a3d4a61f75c2422e16616f604d282fe473656aa8e993c8ab139023b2b6616cfd",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3134,7 +3134,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/standard-fallback.ini",
-      "sha256": "48077363a961f266958f6905c4624b218de599ebab1f16dbc8b381346be71acc",
+      "sha256": "7c406ef779a5f1883b077c328185f7d072976811698f6d3f125ec510f42f2b6a",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3153,7 +3153,7 @@
       "target": "stash",
       "path": "full-protection/subconverter-stash/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter-stash/standard.ini",
-      "sha256": "f7e05fdd563633f109cf8245b5b7ec98c62b494825c137514f147c2dcd47e763",
+      "sha256": "b61d9c01938443b222cd7506881089a58e16d3549474909f6e740ae4d248b97a",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3172,7 +3172,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/full-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/full-fallback.ini",
-      "sha256": "c38d559a4488e5265d563352232664f37e7b6b6e6293125b37df47075386cd14",
+      "sha256": "fad65c2e2168613c09ca28741c7da78e18d7261db8baa2c95ab2ff0034035dd2",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3193,7 +3193,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/full.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/full.ini",
-      "sha256": "dd82fdcf8822c31de8bbe1f4567aa31a3f017bc02c13e60fe134d10f064c1bbf",
+      "sha256": "7a9d7f9dc42bf25f5c1ca103f12f69f8aaa54f4cc39ab0628038bcc28df1e4a9",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3214,7 +3214,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/gfw-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/gfw-fallback.ini",
-      "sha256": "16c9b08abff01a042e3433f44944d4dab6db875444606ef1177e7b8fdfe73174",
+      "sha256": "60e07070d9c66911d9dc313746fe322fb4b0c2ed285f54014dfb5124ceee1fd1",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3234,7 +3234,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/gfw.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/gfw.ini",
-      "sha256": "6ae52498fd6cb31d013ecd9f0fe1968f670b6afd5941b6e0518d84eeaa18438e",
+      "sha256": "faf5cd7f601ae969dd5658fadb6157827bf62729018717e230c8d1f70fe35551",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3254,7 +3254,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/lite-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/lite-fallback.ini",
-      "sha256": "777c07b5d9ca745c7b9a91f3fa6985e7fbb300e78747ad38325811663daacb02",
+      "sha256": "f257de9b11ce0b02cb799ff3def37d1c9ccfdc343c63c33e231d3c7457b2ac64",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3275,7 +3275,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/lite.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/lite.ini",
-      "sha256": "480ca42809ad27b992337dd60505c2b568f4e8a2ccf9597b4a5e9483a2f8a5ba",
+      "sha256": "b0a6b5b7a8f5a5aeabbd883e5feebeb664ced438d33465fd3dda6892dfb9f2d3",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3296,7 +3296,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/standard-fallback.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/standard-fallback.ini",
-      "sha256": "53bda3463070a945ae6401ac16aad983d9602c53e3ceb9b3675354f77b121c5f",
+      "sha256": "7d128ea5569068f0f815fc000cefebaa5bf1f86c2105ad2ed2e1ee81959a5b3d",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
@@ -3317,7 +3317,7 @@
       "target": "clash",
       "path": "full-protection/subconverter/standard.ini",
       "url": "https://raw.githubusercontent.com/hqw567/SubWeave-Rules/main/dist/full-protection/subconverter/standard.ini",
-      "sha256": "870ea11a6172e4745461b94f56180538256dbf4c32f2924410af02b3868f8322",
+      "sha256": "619acd025dd45366c6795747e9f04207d482cfbf5f5c4f712f3b9b50b74ba2ad",
       "upstreamCommit": "f6fe097061122a9edf0d576607364a1f099fceaf",
       "requiredFlags": {
         "expand": false,
