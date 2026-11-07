@@ -9,7 +9,7 @@ before_filter:
   - DOMAIN-SUFFIX,neolive.kr,@direct
   - DOMAIN-SUFFIX,pandalive.co.kr,@direct
   - DOMAIN,time.windows.com,@direct
-  - DOMAIN,codexapp.agentsmirror.com,@direct
+  - DOMAIN-SUFFIX,agentsmirror.com,@direct
   - DOMAIN,www.wellcee.com,@direct
   - DOMAIN-SUFFIX,bilalipay.com,@direct
 

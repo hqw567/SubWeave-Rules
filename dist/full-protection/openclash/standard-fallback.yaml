@@ -626,7 +626,7 @@ rules:
 - DOMAIN-SUFFIX,neolive.kr,DIRECT
 - DOMAIN-SUFFIX,pandalive.co.kr,DIRECT
 - DOMAIN,time.windows.com,DIRECT
-- DOMAIN,codexapp.agentsmirror.com,DIRECT
+- DOMAIN-SUFFIX,agentsmirror.com,DIRECT
 - DOMAIN,www.wellcee.com,DIRECT
 - DOMAIN-SUFFIX,bilalipay.com,DIRECT
 - RULE-SET,awavenue-full-protection,🛡️ 秋风过滤
