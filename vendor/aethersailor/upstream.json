@@ -1,10 +1,10 @@
 {
   "repository": "Aethersailor/Custom_OpenClash_Rules",
-  "commit": "29c3712753c799b3a6c7b4cbcdb51c262bc9717a",
+  "commit": "511aa53855564120005b8bf33680034edf663fa8",
   "files": {
-    "Custom_Clash.ini": "a87e426833221b759e1c71fe96c413ae54127db44b58a8ceae71f46c968bc969",
+    "Custom_Clash.ini": "55b820aa2d21d067315d5b5631f52a8f94f5123dba7b8fa1320c10774ad4016e",
     "Custom_Clash.yaml": "d58c4a5ce8bf325bd9f7787204dd92aa7b7085dd86433b23d2a20b4ed3e1f69e",
-    "Custom_Clash_Fallback.ini": "fb9dc1a0199aa548dc0a4f69956be85deb4233311ee072af362244273149d6ae",
+    "Custom_Clash_Fallback.ini": "750ec07fce12290f56bc98e9385126ebee8ca47c0498c6e2cd252b590f68fbd5",
     "Custom_Clash_Fallback.yaml": "7c03219b47a661f9230e90582e954471058f0ecdffe94077257556393bd06b51",
     "Custom_Clash_Full.ini": "3f61425e77301f712061e658de8c11c8fea7de89b0bc6cc1495b8061b3687624",
     "Custom_Clash_Full.yaml": "954efb7df4910509509abcb0399000f1af0b46936093ffd8738c398f83cef9ff",
@@ -20,7 +20,7 @@
     "Custom_Clash_Lite_Fallback.yaml": "9edb1a75fba85699f2d05d69d03814b8ecc9faf1c0f53709dda25e48c1d5f83d",
     "Custom_Clash_Selfhosted_Manual_Fallback.yaml": "11984e3824e83f92f4a602a76fccd37f5e8462e8df128db0c825eb5f90319617",
     "Custom_Clash_Selfhosted_Provider_Fallback.yaml": "e7f9d5c1f5765ff80569f8bcc32784b5ecd73e77e61876cf88d5ccb5077c78d0",
-    "Custom_Direct.list": "c48ac67a34835588955989174b5d5a1fedd9e11524583d6add3974e98b6d2e4a",
+    "Custom_Direct.list": "3ae25a0efefd9a2912c426ebe7f2c7a808a32ab1e0dc7c6d2f78fa1f708d0669",
     "LICENSE": "da89f9867822be4b8adb1e601d9e9226c195016c6508015eb7593e68ead0c98a"
   }
 }
